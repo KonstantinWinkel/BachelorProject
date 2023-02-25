@@ -1,3 +1,0 @@
-/home/fyreman/bachelorarbeit/cppProjekt/CMakeFiles/rebuild_cache.dir
-/home/fyreman/bachelorarbeit/cppProjekt/CMakeFiles/edit_cache.dir
-/home/fyreman/bachelorarbeit/cppProjekt/CMakeFiles/FindAngles.dir
