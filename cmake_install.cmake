@@ -1,4 +1,4 @@
-# Install script for directory: /home/fyreman/bachelorarbeit/cppProjekt
+# Install script for directory: /home/fyreman/bachelorarbeit/BachelorProject
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/fyreman/bachelorarbeit/cppProjekt/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/fyreman/bachelorarbeit/BachelorProject/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

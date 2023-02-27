@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/fyreman/bachelorarbeit/cppProjekt
+CMAKE_SOURCE_DIR = /home/fyreman/bachelorarbeit/BachelorProject
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/fyreman/bachelorarbeit/cppProjekt
+CMAKE_BINARY_DIR = /home/fyreman/bachelorarbeit/BachelorProject
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fyreman/bachelorarbeit/cppProjekt/CMakeFiles /home/fyreman/bachelorarbeit/cppProjekt/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fyreman/bachelorarbeit/BachelorProject/CMakeFiles /home/fyreman/bachelorarbeit/BachelorProject/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fyreman/bachelorarbeit/cppProjekt/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fyreman/bachelorarbeit/BachelorProject/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -123,32 +123,32 @@ FindAngles/fast:
 	$(MAKE) -f CMakeFiles/FindAngles.dir/build.make CMakeFiles/FindAngles.dir/build
 .PHONY : FindAngles/fast
 
-FindAngles.o: FindAngles.cpp.o
+linux_src/FindAngles.o: linux_src/FindAngles.cpp.o
 
-.PHONY : FindAngles.o
+.PHONY : linux_src/FindAngles.o
 
 # target to build an object file
-FindAngles.cpp.o:
-	$(MAKE) -f CMakeFiles/FindAngles.dir/build.make CMakeFiles/FindAngles.dir/FindAngles.cpp.o
-.PHONY : FindAngles.cpp.o
+linux_src/FindAngles.cpp.o:
+	$(MAKE) -f CMakeFiles/FindAngles.dir/build.make CMakeFiles/FindAngles.dir/linux_src/FindAngles.cpp.o
+.PHONY : linux_src/FindAngles.cpp.o
 
-FindAngles.i: FindAngles.cpp.i
+linux_src/FindAngles.i: linux_src/FindAngles.cpp.i
 
-.PHONY : FindAngles.i
+.PHONY : linux_src/FindAngles.i
 
 # target to preprocess a source file
-FindAngles.cpp.i:
-	$(MAKE) -f CMakeFiles/FindAngles.dir/build.make CMakeFiles/FindAngles.dir/FindAngles.cpp.i
-.PHONY : FindAngles.cpp.i
+linux_src/FindAngles.cpp.i:
+	$(MAKE) -f CMakeFiles/FindAngles.dir/build.make CMakeFiles/FindAngles.dir/linux_src/FindAngles.cpp.i
+.PHONY : linux_src/FindAngles.cpp.i
 
-FindAngles.s: FindAngles.cpp.s
+linux_src/FindAngles.s: linux_src/FindAngles.cpp.s
 
-.PHONY : FindAngles.s
+.PHONY : linux_src/FindAngles.s
 
 # target to generate assembly for a file
-FindAngles.cpp.s:
-	$(MAKE) -f CMakeFiles/FindAngles.dir/build.make CMakeFiles/FindAngles.dir/FindAngles.cpp.s
-.PHONY : FindAngles.cpp.s
+linux_src/FindAngles.cpp.s:
+	$(MAKE) -f CMakeFiles/FindAngles.dir/build.make CMakeFiles/FindAngles.dir/linux_src/FindAngles.cpp.s
+.PHONY : linux_src/FindAngles.cpp.s
 
 # Help Target
 help:
@@ -159,9 +159,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... FindAngles"
-	@echo "... FindAngles.o"
-	@echo "... FindAngles.i"
-	@echo "... FindAngles.s"
+	@echo "... linux_src/FindAngles.o"
+	@echo "... linux_src/FindAngles.i"
+	@echo "... linux_src/FindAngles.s"
 .PHONY : help
 
 

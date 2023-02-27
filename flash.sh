@@ -8,30 +8,20 @@
 PARAM1="A"
 ORIGINAL_DIR=$(pwd)
 
-#assign Parameters to local variables for future use
-if [ "$#" = 1 ];then
-	PARAM1=$1
-else
-	echo "Only one parameter at a time is permitted, use the parameter '-help' for more information"
-	exit 1
-fi
-
 #defines the funtion for compiling and flashing the code onto the STM board, also does lots of error handling
 function executeFunction {
 
-	#i would like to use this to check if RODOS has been sourced, but it doesn't work because it is an alias :(
-	#cdrodos 2> /dev/null || COMPILER_NOT_EXISTS=true
-
+	cd rodos_src
 
 	echo "Compiling code..."
-	rodos-executable.sh discovery $PARAM1 2> /dev/null || COMPILER_NOT_FOUND=true
+	rodos-executable.sh discovery *.cpp 2> CompilationLog 
 
 
-	if [ "$COMPILER_NOT_FOUND" = true ]; then
+	if grep -q "command not found" "CompilationLog" ; then
     	echo "Compiler not found, trying to source RODOS..."
-		cd rodos
-		source setenvs.sh 1> /dev/null 	2> /dev/null || RODOS_NOT_FOUND=true
-		cd $ORIGINAL_DIR
+		cd ../rodos
+		source setenvs.sh 1> /dev/null 	2> /dev/null || RODOS_NOT_FOUND=true #this should work, be careful though
+		cd $ORIGINAL_DIR/rodos_src
 
 		if [ "$RODOS_NOT_FOUND" = true ];then
 			echo "RODOS was not found, aborting..."
@@ -40,10 +30,10 @@ function executeFunction {
 			echo "RODOS successfully sourced."
 			echo "Retrying compilation..."
 			COMPILER_NOT_FOUND=false
-			rodos-executable.sh discovery $PARAM1 2> /dev/null || COMPILER_NOT_FOUND=true
+			rodos-executable.sh discovery *.cpp 2> /dev/null || COMPILER_NOT_FOUND=true
 
 			if [ "$COMPILER_NOT_FOUND" = true ]; then
-				echo "Unknown error"
+				echo "Unknown error, check CompilationLog for more information"
 				exit 127
 			fi
 		fi
@@ -51,7 +41,7 @@ function executeFunction {
 
 	CHECK_FOR_FILE=$(ls -1)
 	if [[ $CHECK_FOR_FILE != *"tst"* ]]; then
-  		echo "Compilation error, check compiler output for more information"
+  		echo "Compilation error, check CompilationLog for more information"
 		exit 2
 	fi
 
@@ -65,30 +55,41 @@ function executeFunction {
 	echo "Removing temporary files..."
 	rm myExe.bin
 	rm tst
+	rm CompilationLog
+	cd .. #also return to original directory
 
 	exit 0
 }
 
 #defines the help function
 function helpFunction {
+
 	echo "Prerequisits:"
 	echo "1. Make sure RODOS is in its correct location"
 	echo "2. Make sure that RODOS is build for the STM32F4 Discovery Board"
-	echo -e "3. Make sure RODOS is sourced by going into the RODOS directory and running 'source setenvs.sh'. \n"
+	echo "3. Move all files you want to compile and flash into the 'rodos_src' directory"
+	echo -e "4. Make sure RODOS is sourced by going into the RODOS directory and running 'source setenvs.sh'. \n"
 
-	echo -e "Note: \nStep 3 is not necessary, as the script will try and source RODOS itself if it doesnt find the compiler. \nHowever, sourcing RODOS once manually is far more efficient. \n"
+	echo -e "Note: \nStep 4 is not necessary, as the script will try and source RODOS itself if it doesnt find the compiler. \nHowever, sourcing RODOS once manually is far more efficient. \n"
 
 	echo "How to use:"
-	echo "Run './falsh.sh' followed by the cpp file you want to flash onto the Discovery Board."
-	echo "Example: './flash.sh testFile.cpp' flashes the file 'testFile.cpp' onto the Board."
-	echo "To flash all cpp files in the current directory onto the Board, use *.cpp."
+	echo "Run './falsh.sh' to flash all .cpp files in the directory 'rodos_src' onto the Discovery Board."
+	echo "If you have certain files you don't want to compile and flash, move them into the 'ignore' directory"
 
 	exit 0
 }
 
 #decide which method to execute based on entered parameter
-if [ "$PARAM1" = "-help" ];then
-	helpFunction
-else
+if [ "$#" = 0 ];then
 	executeFunction
+elif [ "$#" = 1 ];then
+	if [ "$1" = "-help" ];then
+		helpFunction
+	else
+		echo "If ./flash.sh is used with a parameter, only '-help' is permitted. Use this parameter for more information"
+		exit 1
+	fi
+else
+	echo "No parameters are permitted appart from '-help', use this parameter for more information"
+	exit 1
 fi

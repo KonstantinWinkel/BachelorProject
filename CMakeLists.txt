@@ -5,5 +5,5 @@ include_directories( ${OpenCV_INCLUDE_DIRS})
 #add_executable(DisplayImage DisplayImage.cpp)
 #target_link_libraries(DisplayImage ${OpenCV_LIBS})
 
-add_executable(FindAngles FindAngles.cpp)
+add_executable(FindAngles linux_src/FindAngles.cpp)
 target_link_libraries(FindAngles ${OpenCV_LIBS} pthread)
