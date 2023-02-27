@@ -6,6 +6,7 @@
 #include "rodos.h"
 #include "hal/hal_gpio.h"
 #include "hal/hal_pwm.h"
+#include "hal/hal_uart.h"
 
 HAL_GPIO green(GPIO_060);
 HAL_GPIO orange(GPIO_061);
@@ -14,6 +15,7 @@ HAL_GPIO blue(GPIO_063);
 
 HAL_PWM motor1(PWM_IDX00);
 
+//HAL_UART testUART(UART_IDX2);
 
 class Test: public StaticThread<>
 {
@@ -27,7 +29,9 @@ public:
 		red.init(1,1,0);
 		blue.init(1,1,0);
 
-		motor1.init(5000, 1000);
+		motor1.init(1000, 1000);
+
+		//testUART.init(115200U);
 	 }
 
 
@@ -44,7 +48,8 @@ void run()
 		motor1.write(temp);
 
 		AT(NOW() + 1*SECONDS);		
-		PRINTF("dinge geschehen");
+		//PRINTF("dinge geschehen");
+		//testUART.write("abcd\n", 5);
 	}
 }
 
