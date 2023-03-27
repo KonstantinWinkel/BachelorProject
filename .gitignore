@@ -4,3 +4,7 @@ cmake_install.cmaake
 Makefile
 DisplayImage
 FindAngles
+ImageProcessing
+Main
+output.csv
+.vscode/

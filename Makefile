@@ -111,6 +111,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named Main
+
+# Build rule for target.
+Main: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Main
+.PHONY : Main
+
+# fast build rule for target.
+Main/fast:
+	$(MAKE) -f CMakeFiles/Main.dir/build.make CMakeFiles/Main.dir/build
+.PHONY : Main/fast
+
+#=============================================================================
 # Target rules for targets named FindAngles
 
 # Build rule for target.
@@ -122,6 +135,33 @@ FindAngles: cmake_check_build_system
 FindAngles/fast:
 	$(MAKE) -f CMakeFiles/FindAngles.dir/build.make CMakeFiles/FindAngles.dir/build
 .PHONY : FindAngles/fast
+
+linux_src/FileWriter.o: linux_src/FileWriter.cpp.o
+
+.PHONY : linux_src/FileWriter.o
+
+# target to build an object file
+linux_src/FileWriter.cpp.o:
+	$(MAKE) -f CMakeFiles/Main.dir/build.make CMakeFiles/Main.dir/linux_src/FileWriter.cpp.o
+.PHONY : linux_src/FileWriter.cpp.o
+
+linux_src/FileWriter.i: linux_src/FileWriter.cpp.i
+
+.PHONY : linux_src/FileWriter.i
+
+# target to preprocess a source file
+linux_src/FileWriter.cpp.i:
+	$(MAKE) -f CMakeFiles/Main.dir/build.make CMakeFiles/Main.dir/linux_src/FileWriter.cpp.i
+.PHONY : linux_src/FileWriter.cpp.i
+
+linux_src/FileWriter.s: linux_src/FileWriter.cpp.s
+
+.PHONY : linux_src/FileWriter.s
+
+# target to generate assembly for a file
+linux_src/FileWriter.cpp.s:
+	$(MAKE) -f CMakeFiles/Main.dir/build.make CMakeFiles/Main.dir/linux_src/FileWriter.cpp.s
+.PHONY : linux_src/FileWriter.cpp.s
 
 linux_src/FindAngles.o: linux_src/FindAngles.cpp.o
 
@@ -150,6 +190,60 @@ linux_src/FindAngles.cpp.s:
 	$(MAKE) -f CMakeFiles/FindAngles.dir/build.make CMakeFiles/FindAngles.dir/linux_src/FindAngles.cpp.s
 .PHONY : linux_src/FindAngles.cpp.s
 
+linux_src/ImageProcessing.o: linux_src/ImageProcessing.cpp.o
+
+.PHONY : linux_src/ImageProcessing.o
+
+# target to build an object file
+linux_src/ImageProcessing.cpp.o:
+	$(MAKE) -f CMakeFiles/Main.dir/build.make CMakeFiles/Main.dir/linux_src/ImageProcessing.cpp.o
+.PHONY : linux_src/ImageProcessing.cpp.o
+
+linux_src/ImageProcessing.i: linux_src/ImageProcessing.cpp.i
+
+.PHONY : linux_src/ImageProcessing.i
+
+# target to preprocess a source file
+linux_src/ImageProcessing.cpp.i:
+	$(MAKE) -f CMakeFiles/Main.dir/build.make CMakeFiles/Main.dir/linux_src/ImageProcessing.cpp.i
+.PHONY : linux_src/ImageProcessing.cpp.i
+
+linux_src/ImageProcessing.s: linux_src/ImageProcessing.cpp.s
+
+.PHONY : linux_src/ImageProcessing.s
+
+# target to generate assembly for a file
+linux_src/ImageProcessing.cpp.s:
+	$(MAKE) -f CMakeFiles/Main.dir/build.make CMakeFiles/Main.dir/linux_src/ImageProcessing.cpp.s
+.PHONY : linux_src/ImageProcessing.cpp.s
+
+linux_src/main.o: linux_src/main.cpp.o
+
+.PHONY : linux_src/main.o
+
+# target to build an object file
+linux_src/main.cpp.o:
+	$(MAKE) -f CMakeFiles/Main.dir/build.make CMakeFiles/Main.dir/linux_src/main.cpp.o
+.PHONY : linux_src/main.cpp.o
+
+linux_src/main.i: linux_src/main.cpp.i
+
+.PHONY : linux_src/main.i
+
+# target to preprocess a source file
+linux_src/main.cpp.i:
+	$(MAKE) -f CMakeFiles/Main.dir/build.make CMakeFiles/Main.dir/linux_src/main.cpp.i
+.PHONY : linux_src/main.cpp.i
+
+linux_src/main.s: linux_src/main.cpp.s
+
+.PHONY : linux_src/main.s
+
+# target to generate assembly for a file
+linux_src/main.cpp.s:
+	$(MAKE) -f CMakeFiles/Main.dir/build.make CMakeFiles/Main.dir/linux_src/main.cpp.s
+.PHONY : linux_src/main.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -158,10 +252,20 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
+	@echo "... Main"
 	@echo "... FindAngles"
+	@echo "... linux_src/FileWriter.o"
+	@echo "... linux_src/FileWriter.i"
+	@echo "... linux_src/FileWriter.s"
 	@echo "... linux_src/FindAngles.o"
 	@echo "... linux_src/FindAngles.i"
 	@echo "... linux_src/FindAngles.s"
+	@echo "... linux_src/ImageProcessing.o"
+	@echo "... linux_src/ImageProcessing.i"
+	@echo "... linux_src/ImageProcessing.s"
+	@echo "... linux_src/main.o"
+	@echo "... linux_src/main.i"
+	@echo "... linux_src/main.s"
 .PHONY : help
 
 
