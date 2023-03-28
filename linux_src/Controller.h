@@ -9,17 +9,17 @@
 #include "UARTInterface.h"
 
 class Controller{
-    protected:
-        FileWriter * filewriter;
-        UARTInterface * uartinterface;
+	protected:
+		FileWriter * filewriter;
+		UARTInterface * uartinterface;
 
-    public:
-        Controller(FileWriter * filewriter, UARTInterface * uartinterface);
-        ~Controller();
+	public:
+		Controller(FileWriter * filewriter, UARTInterface * uartinterface);
+		~Controller();
 
-        virtual void PublishValues();
+		virtual void PublishValues();
 
-        virtual void run();
+		virtual void run();
 };
 
 #endif

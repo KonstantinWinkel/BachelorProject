@@ -5,16 +5,16 @@
 #include "FileWriter.h"
 
 class UARTInterface{
-    protected:
-        FileWriter * filewriter;
+	protected:
+		FileWriter * filewriter;
 
-    public:
-        UARTInterface(FileWriter * filewriter);
-        ~UARTInterface();
+	public:
+		UARTInterface(FileWriter * filewriter);
+		~UARTInterface();
 
-        virtual void PublishValues();
+		virtual void PublishValues();
 
-        virtual void run();
+		virtual void run();
 };
 
 #endif

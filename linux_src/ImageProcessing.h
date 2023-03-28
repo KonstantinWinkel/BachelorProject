@@ -13,37 +13,37 @@
 #include "FileWriter.h"
 
 class ImageProcessing{
-    protected:
-        FileWriter * filewriter;
-        Identifier angleIdentifier;
-        Identifier velocityIdentifier;
+	protected:
+		FileWriter * filewriter;
+		Identifier angleIdentifier;
+		Identifier velocityIdentifier;
 
-        int cameraID;
-        std::string name;
+		int cameraID;
+		std::string name;
 
-        bool firstIteration;
-        bool skipFrame;
+		bool firstIteration;
+		bool skipFrame;
 
-        std::vector<cv::Point> points;
-        double angle;
-        double velocity;
-        std::chrono::_V2::system_clock::time_point lastIteration;
+		std::vector<cv::Point> points;
+		double angle;
+		double velocity;
+		std::chrono::_V2::system_clock::time_point lastIteration;
 
-        cv::VideoCapture camera;
-        cv::Mat videoFrame;
-        cv::Mat detectionFrame;
+		cv::VideoCapture camera;
+		cv::Mat videoFrame;
+		cv::Mat detectionFrame;
 
-        std::string videoWindowName;
-        std::string detectionWindowName;
+		std::string videoWindowName;
+		std::string detectionWindowName;
 
-    public:
-        ImageProcessing(int cameraID, std::string name, FileWriter * filewriter, Identifier angleIdentifier, Identifier velocityIdentifier);
-        ~ImageProcessing();
-        virtual void ReadAndProcessImage();
-        virtual void CalculatePositionAndVelocity();
-        virtual void PublishValues();
+	public:
+		ImageProcessing(int cameraID, std::string name, FileWriter * filewriter, Identifier angleIdentifier, Identifier velocityIdentifier);
+		~ImageProcessing();
+		virtual void ReadAndProcessImage();
+		virtual void CalculatePositionAndVelocity();
+		virtual void PublishValues();
 
-        virtual void run();
+		virtual void run();
 
 };
 

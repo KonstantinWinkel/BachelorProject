@@ -7,14 +7,14 @@
 
 int main(int argc, char** argv){
 
-    FileWriter filewriter; 
+	FileWriter filewriter; 
 
 	ImageProcessing x(2, "X", &filewriter, Identifier::xAngle, Identifier::xVelocity);
-    ImageProcessing y(4, "Y", &filewriter, Identifier::yAngle, Identifier::yVelocity);
+	ImageProcessing y(4, "Y", &filewriter, Identifier::yAngle, Identifier::yVelocity);
 	
 	std::thread xThread(&ImageProcessing::run, x);
-    std::thread yThread(&ImageProcessing::run, y);
+	std::thread yThread(&ImageProcessing::run, y);
 
 	xThread.join();
-    yThread.join();
+	yThread.join();
 }
