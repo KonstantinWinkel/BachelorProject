@@ -22,8 +22,8 @@ ImageProcessing::ImageProcessing(int cameraID, std::string name, FileWriter * fi
 	ImageProcessing::angleIdentifier = angleIdentifier;
 	ImageProcessing::velocityIdentifier = velocityIdentifier;
 
-	videoWindowName = "Video" + cameraID;
-	detectionWindowName = "Detection" + cameraID;
+	videoWindowName = "V" + name;
+	detectionWindowName = "D" + name;
 
 	cv::VideoCapture localCamera(cameraID);
 	camera = localCamera;

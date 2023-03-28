@@ -1,8 +1,9 @@
 //required header files
 #include "Controller.h"
 
-Controller::Controller(FileWriter * filewriter){
+Controller::Controller(FileWriter * filewriter, UARTInterface * uartinterface){
     Controller::filewriter = filewriter;
+    Controller::uartinterface = uartinterface;
 }
 
 Controller::~Controller(){

@@ -9,15 +9,12 @@ int main(int argc, char** argv){
 
     FileWriter filewriter; 
 
-	ImageProcessing x(0, "X", &filewriter, Identifier::xAngle, Identifier::xVelocity);
-
-
-    //x.run();
-    //ImageProcessing y(3, "Y");
+	ImageProcessing x(2, "X", &filewriter, Identifier::xAngle, Identifier::xVelocity);
+    ImageProcessing y(4, "Y", &filewriter, Identifier::yAngle, Identifier::yVelocity);
 	
 	std::thread xThread(&ImageProcessing::run, x);
-    //std::thread yThread(&ImageProcessing::run, y);
+    std::thread yThread(&ImageProcessing::run, y);
 
 	xThread.join();
-    //yThread.join();
+    yThread.join();
 }

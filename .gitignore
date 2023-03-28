@@ -8,3 +8,4 @@ ImageProcessing
 Main
 output.csv
 .vscode/
+cmake_install.cmake
