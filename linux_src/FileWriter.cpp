@@ -63,3 +63,17 @@ void FileWriter:: write(Identifier identifier, double value){
 	file.close();
 
 }
+
+double FileWriter::read(Identifier identifier){
+	switch(identifier){
+		case Identifier::xAngle: return xAngle;
+		case Identifier::yAngle: return yAngle;
+		case Identifier::xVelocity: return xVelocity;
+		case Identifier::yVelocity: return yVelocity;
+		case Identifier::xPosition: return xPosition;
+		case Identifier::yPosition: return yPosition;
+		case Identifier::xForce: return xForce;
+		case Identifier::yForce: return yForce;
+	}
+	return -1;
+}

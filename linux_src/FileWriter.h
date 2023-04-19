@@ -42,6 +42,7 @@ class FileWriter{
 		FileWriter();
 		~FileWriter();
 		virtual void write(Identifier identifier, double value);
+		virtual double read(Identifier identifier);
 };
 
 #endif
