@@ -9,3 +9,5 @@ main
 output.csv
 .vscode/
 cmake_install.cmake
+libserial.a
+CompilationLog
