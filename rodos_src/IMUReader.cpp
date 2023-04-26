@@ -4,10 +4,17 @@
 #include "hal/hal_gpio.h"
 #include "hal/hal_i2c.h"
 
-HAL_GPIO red(GPIO_062); //reserved for calculations
+HAL_GPIO redIMU(GPIO_062); //reserved for calculations
 HAL_GPIO blue(GPIO_063); //this threads "Controll LED"
 
 HAL_I2C IMU(I2C_IDX2);
+
+//IMU wirering:
+//IMU    STM
+//GND -> GND
+//3.3 -> 3V
+//SCL -> PB10 
+//SDA -> PB11
 
 //stripped down version of the IMU excercise from the LuRI Lab. Only accelerometer is needed.
 class IMUReader : public StaticThread <>
@@ -31,14 +38,14 @@ class IMUReader : public StaticThread <>
 
         void init()
         {
-            red.init(1,1,0);
+            redIMU.init(1,1,0);
 		    blue.init(1,1,0);
 
-            red.setPins(1); //begin of setup
+            redIMU.setPins(1); //begin of setup
             IMU.init(400000);
             uint8_t INIT_REG[2] = {0x20, 0b10000011}; //Address: 0x20, value 0b10000011 - see LuRI Lab for more info
             IMU.write(AccADDR, INIT_REG, 2);
-            red.setPins(0); //end of setup
+            redIMU.setPins(0); //end of setup
         }
 
         void run()
@@ -68,9 +75,9 @@ class IMUReader : public StaticThread <>
                 }
 
                 //send real accerlation values via UART back
-                PRINTF("-X%f-Y%f-Z%f", realValues[0], realValues[1], realValues[2]);
+                PRINTF("-X %.3f -Y %.3f -Z %.3f\n", realValues[0], realValues[1], realValues[2]); //12 + 3*4 = 26 warum auch immer
 
-                AT(NOW() + 10*MILLISECONDS);	
+                AT(NOW() + 100*MILLISECONDS);	
             }
         }
 };

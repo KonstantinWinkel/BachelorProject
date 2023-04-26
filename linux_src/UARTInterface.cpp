@@ -24,14 +24,15 @@ void UARTInterface::PublishValues(){
 
 void UARTInterface::run(){
 	while(1){
-		ReceiveIMUValues();
-		//SendControllerValues();
+		//ReceiveIMUValues();
+		SendControllerValues();
 		PublishValues();
 	}
 }
 
 void UARTInterface::SetControllerValues(double xValue, double yValue){
-
+	UARTInterface::xValue = xValue;
+	UARTInterface::yValue = yValue;
 }
 
 void UARTInterface::ReceiveIMUValues(){
@@ -67,30 +68,18 @@ void UARTInterface::ReceiveIMUValues(){
 void UARTInterface::SendControllerValues(){
 	serial::Serial serial(deviceName, baudRate, serial::Timeout::simpleTimeout(3000));
 	if (!serial.isOpen()) printf("Port failed to open \n");	
-	
-}
-
-void tempmethod(){
-	serial::Serial serial("/dev/ttyACM0", 115200, serial::Timeout::simpleTimeout(3000));
-
-	if (serial.isOpen())
-    {
-        printf("Port opened succesfully \n");
-    }
-    else
-    {
-        printf("Port failed to open \n");
-    }
 	serial.flushOutput();
 
-	while(true){
-		std::string response = "";
-		std::cout << "String before read 1: " << response << std::endl; 
-		//std::this_thread::sleep_for(std::chrono::milliseconds(20));
-		serial.flushInput();
-		response = serial.read(24);
-		std::cout << response << std::endl;
-		//std::cout << "String after read: " << response << std::endl;
+	char * outputString;
 
-	}
+	asprintf(&outputString, "-X %.3f -Y %.3f", xValue, yValue);
+
+	size_t bytesWritten = serial.write(outputString);
+	std::cout << "Bytes sent: " << bytesWritten << std::endl;
+    //for (int i = 0; i < 3; i++)
+    //{
+
+		//std::string result = my_serial.read(test_string.length() + 1);
+		std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+    //}
 }
