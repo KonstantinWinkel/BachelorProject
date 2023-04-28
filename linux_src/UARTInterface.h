@@ -16,8 +16,8 @@ class UARTInterface{
 		double yForce;
 		double zForce;
 
-		double xValue;
-		double yValue;
+		float xValue; // currently changed to float, was double
+		float yValue; // maybe float is enough accuarcy?
 
 	public:
 		UARTInterface(FileWriter * filewriter, std::string deviceName, int baudRate);
@@ -31,6 +31,10 @@ class UARTInterface{
 		virtual void SendControllerValues();
 
 		virtual void SetControllerValues(double xValue, double yValue);
+
+		//utility methods
+		virtual float toFloat(char* c);
+		virtual void toChars(float f, char * result);
 };
 
 #endif

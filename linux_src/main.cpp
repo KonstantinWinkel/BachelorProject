@@ -10,6 +10,11 @@
 
 int main(int argc, char** argv){
 
+	//Setup
+	//std::string deviceName = argv[0]; // for example "/dev/ttyACM0"
+
+
+	//Object Creation
 	FileWriter filewriter;
 
 	UARTInterface uartinterface(&filewriter, "/dev/ttyACM0", 115200);
@@ -19,6 +24,8 @@ int main(int argc, char** argv){
 	//ImageProcessing x(2, "X", &filewriter, Identifier::xAngle, Identifier::xVelocity);
 	//ImageProcessing y(4, "Y", &filewriter, Identifier::yAngle, Identifier::yVelocity);
 	
+
+	//Program Flow
 	//std::thread xThread(&ImageProcessing::run, x);
 	//std::thread yThread(&ImageProcessing::run, y);
 	std::thread uartThread(&UARTInterface::run, uartinterface);
@@ -28,6 +35,4 @@ int main(int argc, char** argv){
 	//yThread.join();
 	uartThread.join();
 	//controllerThread.join();
-
-	//uartinterface.run();
 }

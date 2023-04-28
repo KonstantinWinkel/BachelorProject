@@ -10,6 +10,9 @@ UARTInterface::UARTInterface(FileWriter * filewriter, std::string deviceName, in
 	UARTInterface::filewriter = filewriter;
 	UARTInterface::deviceName = deviceName;
 	UARTInterface::baudRate = baudRate;
+
+	UARTInterface::xValue = 0;
+	UARTInterface::yValue = 0;
 }
 
 UARTInterface::~UARTInterface(){
@@ -22,11 +25,14 @@ void UARTInterface::PublishValues(){
 	filewriter->write(Identifier::yForce, yForce);
 }
 
+//
 void UARTInterface::run(){
 	while(1){
-		//ReceiveIMUValues();
+		ReceiveIMUValues();
 		SendControllerValues();
 		PublishValues();
+
+		std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 	}
 }
 
@@ -50,8 +56,6 @@ void UARTInterface::ReceiveIMUValues(){
 	//std::cout << response << std::endl;
 	
 	//check if the string has right format
-	//example: -X 0.921 -Y 3.987 -Z 3.571
-	//future problem: what to do with negative numbers: HIER MUSS NOCH GEDENKT WERDEN
 	int xpos = response.find("-X ");
 	int ypos = response.find("-Y ");
 	int zpos = response.find("-Z ");
@@ -71,15 +75,46 @@ void UARTInterface::SendControllerValues(){
 	serial.flushOutput();
 
 	char * outputString;
+	char xString[9] = ""; 
+	char yString[9] = "";
+	toChars(xValue, xString);
+	toChars(yValue, yString); 
 
-	asprintf(&outputString, "-X %.3f -Y %.3f", xValue, yValue);
+	asprintf(&outputString, "X%sY%s#", xString, yString);
 
 	size_t bytesWritten = serial.write(outputString);
-	std::cout << "Bytes sent: " << bytesWritten << std::endl;
-    //for (int i = 0; i < 3; i++)
-    //{
+	std::cout << "Bytes sent: " << bytesWritten << " Message: " << outputString << std::endl;
+}
 
-		//std::string result = my_serial.read(test_string.length() + 1);
-		std::this_thread::sleep_for(std::chrono::milliseconds(2000));
-    //}
+float UARTInterface::toFloat(char* c){
+	long floatBits = 0;
+
+	for(int i = 0; i < 8; i++){
+		long currentNumber = 0;
+		currentNumber = c[i];
+		currentNumber -= 97;
+
+		floatBits += currentNumber << i*4;
+	}
+	
+	float result = *(float*)&floatBits;
+    return result;
+}
+
+void UARTInterface::toChars(float f, char * result){
+	long floatBits = *(long*)&f;
+	for(int i = 0; i < 8; i++){
+		int currentNumber = 0; // from 0 to 16;
+
+		for(int j = 0; j < 4; j++){
+			if((floatBits >> (j + i*4))& 1U){
+				currentNumber |= 1U << j;
+			}
+		}	
+		currentNumber += 97;
+
+		result[i] = currentNumber;
+	}
+
+	result[8] = '\0';
 }
