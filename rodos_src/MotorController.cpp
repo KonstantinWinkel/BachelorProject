@@ -28,7 +28,6 @@ namespace RODOS {
 class MotorController : public StaticThread<>
 {
     private:
-        
 
     public:
         void init(){
@@ -38,11 +37,6 @@ class MotorController : public StaticThread<>
 
 			orange.init(1,1,0);
         }
-
-		unsigned int ServoSet(float percentage) //0% = -60° , 100% = 60°
-    	{
-        	return (unsigned int)(1820 - 2 * (-60+6/5*percentage));
-    	}
 
 		float P2A(float percentage){
 			return percentage * 120 - 60;
