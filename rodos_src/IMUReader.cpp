@@ -4,6 +4,8 @@
 #include "hal/hal_gpio.h"
 #include "hal/hal_i2c.h"
 
+#include "util.h" //converting flote to char* and vice versa
+
 HAL_GPIO redIMU(GPIO_062); //reserved for calculations
 HAL_GPIO blue(GPIO_063); //this threads "Controll LED"
 
@@ -48,6 +50,14 @@ class IMUReader : public StaticThread <>
             redIMU.setPins(0); //end of setup
         }
 
+        float adjust(float realValue){
+            if(realValue > 1) return realValue-4;
+        }
+
+        float squareSum(float x,float y,float z){
+            return x*x+y*y+z*z;
+        }
+
         void run()
         {
             while(1){
@@ -75,7 +85,11 @@ class IMUReader : public StaticThread <>
                 }
 
                 //send real accerlation values via UART back
-                PRINTF("-X %.3f -Y %.3f -Z %.3f\n", realValues[0], realValues[1], realValues[2]); //12 + 3*4 = 26 warum auch immer
+                char xChar[9],yChar[9],zChar[9];
+                toChars(adjust(realValues[0]),xChar);
+                toChars(adjust(realValues[1]),yChar);
+                toChars(adjust(realValues[2]),zChar);
+                PRINTF("%sG%sG%s#", xChar, yChar, zChar); //12 + 3*4 = 26 warum auch immer
 
                 AT(NOW() + 100*MILLISECONDS);	
             }

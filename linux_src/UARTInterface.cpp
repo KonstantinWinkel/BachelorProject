@@ -29,10 +29,10 @@ void UARTInterface::PublishValues(){
 void UARTInterface::run(){
 	while(1){
 		ReceiveIMUValues();
-		SendControllerValues();
+		//SendControllerValues();
 		PublishValues();
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+		std::this_thread::sleep_for(std::chrono::milliseconds(100));
 	}
 }
 
@@ -52,21 +52,18 @@ void UARTInterface::ReceiveIMUValues(){
 	//read string from UART stream
 	std::string response = "";
 	serial.flushInput();
-	response = serial.read(26);
-	//std::cout << response << std::endl;
-	
-	//check if the string has right format
-	int xpos = response.find("-X ");
-	int ypos = response.find("-Y ");
-	int zpos = response.find("-Z ");
-	
-	if(xpos == 0 && ypos == 9 && zpos == 18){
-		xForce = std::stod(response.substr(3, 5));
-		yForce = std::stod(response.substr(12, 5));
+	response = serial.read(27);
+	if(response[26] != '#'){
+		std::cout << response << " - sth went wrong!" << '\n';
 	}
-	else{
-		std::cout << "UART Message not in right format - skipping cycle" << std::endl;
-	}
+	char xChar[8],yChar[8],zChar[8];
+	for(int i = 0;i<8;i++) xChar[i] = response[i];
+	for(int i = 9;i<17;i++) yChar[i-9] =response[i];
+	for(int i = 18;i<26;i++) zChar[i-18]=response[i];
+	xForce = toFloat(xChar); //mb substr will work
+	yForce = toFloat(yChar);
+	zForce = toFloat(zChar);
+	std::cout << xForce <<" " << yForce << " " <<zForce << '\n';
 }
 
 void UARTInterface::SendControllerValues(){

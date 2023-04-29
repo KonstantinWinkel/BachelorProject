@@ -33,4 +33,26 @@ static void toChars(float f, char * result){
 
 	result[8] = '\0';
 }
+
+
+/*
+static char* toChars(float f){
+	char* result;
+	long floatBits = *(long*)&f;
+	for(int i = 0; i < 8; i++){
+		int currentNumber = 0; // from 0 to 16;
+
+		for(int j = 0; j < 4; j++){
+			if((floatBits >> (j + i*4))& 1U){
+				currentNumber |= 1U << j;
+			}
+		}	
+		currentNumber += 97;
+
+		result[i] = currentNumber;
+	}
+
+	result[8] = '\0';
+	return result;
+}*/
 #endif
