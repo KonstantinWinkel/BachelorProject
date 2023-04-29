@@ -1,9 +1,10 @@
 //required header files
 #include "Controller.h"
 
-Controller::Controller(FileWriter * filewriter, UARTInterface * uartinterface){
+//removed UARTInterface reference, grab newest values from Filewriter using filewriter->read(Identifier::<WHATEVER>)
+
+Controller::Controller(FileWriter * filewriter){
 	Controller::filewriter = filewriter;
-	Controller::uartinterface = uartinterface;
 }
 
 Controller::~Controller(){

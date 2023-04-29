@@ -12,9 +12,9 @@ class UARTInterface{
 		std::string deviceName;
 		int baudRate;
 
-		double xForce;
-		double yForce;
-		double zForce;
+		float xForce;
+		float yForce;
+		float zForce;
 
 		float xValue; // currently changed to float, was double
 		float yValue; // maybe float is enough accuarcy?
@@ -30,7 +30,7 @@ class UARTInterface{
 		virtual void ReceiveIMUValues();
 		virtual void SendControllerValues();
 
-		virtual void SetControllerValues(double xValue, double yValue);
+		virtual void SetControllerValues();
 
 		//utility methods
 		//virtual float toFloat(char* c);

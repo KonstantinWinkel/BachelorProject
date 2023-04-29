@@ -50,14 +50,48 @@ class MotorController : public StaticThread<>
         }
 
         void run(){
+			
 			while(1){
 				orange.setPins(~orange.readPins());
-				servo1.write(calculatePWM(P2A(servoX)));
-				servo2.write(calculatePWM(P2A(servoX)));
-				servo3.write(calculatePWM(P2A(servoY)));
+				servo1.write(calculatePWM(servoX));
+				servo2.write(calculatePWM(servoX));
+				servo3.write(calculatePWM(servoY));
 
 				AT(NOW() + 10*MILLISECONDS);
 			}
+
+			
+
+			/*
+
+			//SERVO TEST CODE - PLEASE IGNORE
+
+			while(1){
+				servo1.write(calculatePWM(0));
+				servo2.write(calculatePWM(0));
+				servo3.write(calculatePWM(0));
+				orange.setPins(~orange.readPins());
+				AT(NOW() + 1*SECONDS);
+
+				servo1.write(calculatePWM(60));
+				servo2.write(calculatePWM(60));
+				servo3.write(calculatePWM(60));
+				orange.setPins(~orange.readPins());
+				AT(NOW() + 1*SECONDS);
+
+				servo1.write(calculatePWM(0));
+				servo2.write(calculatePWM(0));
+				servo3.write(calculatePWM(0));
+				orange.setPins(~orange.readPins());
+				AT(NOW() + 1*SECONDS);
+
+				servo1.write(calculatePWM(-60));
+				servo2.write(calculatePWM(-60));
+				servo3.write(calculatePWM(-60));
+				orange.setPins(~orange.readPins());
+				AT(NOW() + 1*SECONDS);
+			}
+			*/
         }
 };
 
@@ -100,7 +134,7 @@ class UartTransmitter: public Thread {
 		void run() {
 			while (1) {
 				if(all[0] == 'k'){
-					PRINTF("Message Timeout\n");
+					//PRINTF("Message Timeout\n");
 				}
 				else{
 					//PRINTF("%s\n", all);
@@ -159,7 +193,7 @@ class UartReceiver: public Thread{
 				}
 
 				if(all[pos-1] == '#'){
-					PRINTF("Response Length: %d Message: %s\n", strlen(all), all);
+					//PRINTF("Response Length: %d Message: %s\n", strlen(all), all);
 					uartTX.resume();
 				}
 

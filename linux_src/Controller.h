@@ -11,10 +11,9 @@
 class Controller{
 	protected:
 		FileWriter * filewriter;
-		UARTInterface * uartinterface;
 
 	public:
-		Controller(FileWriter * filewriter, UARTInterface * uartinterface);
+		Controller(FileWriter * filewriter);
 		~Controller();
 
 		virtual void PublishValues();

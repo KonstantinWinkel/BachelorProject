@@ -31,20 +31,23 @@ void UARTInterface::PublishValues(){
 //
 void UARTInterface::run(){
 	while(1){
+		SetControllerValues();
+
 		ReceiveIMUValues();
-		//SendControllerValues();
+		SendControllerValues();
 		PublishValues();
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(10));
 	}
 }
 
-void UARTInterface::SetControllerValues(double xValue, double yValue){
-	UARTInterface::xValue = xValue;
-	UARTInterface::yValue = yValue;
+void UARTInterface::SetControllerValues(){
+	UARTInterface::xValue = filewriter->read(Identifier::xPosition);
+	UARTInterface::yValue = filewriter->read(Identifier::yPosition);
 }
 
 void UARTInterface::ReceiveIMUValues(){
+
 	//open port to STM Board
 	serial::Serial serial(deviceName, baudRate, serial::Timeout::simpleTimeout(3000));
 	if (!serial.isOpen()){
@@ -66,7 +69,9 @@ void UARTInterface::ReceiveIMUValues(){
 	xForce = toFloat(xChar); //mb substr will work
 	yForce = toFloat(yChar);
 	zForce = toFloat(zChar);
-	std::cout << xForce <<" " << yForce << " " <<zForce << '\n';
+
+	//DEBUG COUT
+	//std::cout << xForce <<" " << yForce << " " <<zForce << '\n';
 }
 
 void UARTInterface::SendControllerValues(){
@@ -83,5 +88,7 @@ void UARTInterface::SendControllerValues(){
 	asprintf(&outputString, "X%sY%s#", xString, yString);
 
 	size_t bytesWritten = serial.write(outputString);
-	std::cout << "Bytes sent: " << bytesWritten << " Message: " << outputString << std::endl;
+
+	//DEBUG COUT
+	//std::cout << "Bytes sent: " << bytesWritten << " Message: " << outputString << std::endl;
 }
