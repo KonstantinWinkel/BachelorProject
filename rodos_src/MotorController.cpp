@@ -9,6 +9,8 @@
 
 #include "util.h"
 
+using namespace twoChars;
+
 #define MessageLength 19
 
 HAL_PWM servo1(PWM_IDX00); //PE9
