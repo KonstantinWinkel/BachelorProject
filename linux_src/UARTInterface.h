@@ -33,8 +33,8 @@ class UARTInterface{
 		virtual void SetControllerValues(double xValue, double yValue);
 
 		//utility methods
-		virtual float toFloat(char* c);
-		virtual void toChars(float f, char * result);
+		//virtual float toFloat(char* c);
+		//virtual void toChars(float f, char * result);
 };
 
 #endif

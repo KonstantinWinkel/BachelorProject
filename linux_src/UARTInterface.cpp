@@ -2,6 +2,9 @@
 #include <stdio.h>
 #include <iostream>
 #include "thread"
+#include "../rodos_src/util.h"
+
+using namespace twoChars;
 
 //required header files
 #include "UARTInterface.h"
@@ -32,7 +35,7 @@ void UARTInterface::run(){
 		//SendControllerValues();
 		PublishValues();
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(100));
+		std::this_thread::sleep_for(std::chrono::milliseconds(10));
 	}
 }
 
@@ -52,14 +55,14 @@ void UARTInterface::ReceiveIMUValues(){
 	//read string from UART stream
 	std::string response = "";
 	serial.flushInput();
-	response = serial.read(27);
-	if(response[26] != '#'){
-		std::cout << response << " - sth went wrong!" << '\n';
-	}
+	response = serial.read(24);
+	/*if(response[26] != '#'){
+		std::cout << response << " - sth went wrong!" << '\n'; //checks if the message is shifted (can happen if the reading Frequency is too low)
+	}*/
 	char xChar[8],yChar[8],zChar[8];
 	for(int i = 0;i<8;i++) xChar[i] = response[i];
-	for(int i = 9;i<17;i++) yChar[i-9] =response[i];
-	for(int i = 18;i<26;i++) zChar[i-18]=response[i];
+	for(int i = 8;i<16;i++) yChar[i-8] =response[i];
+	for(int i = 16;i<24;i++) zChar[i-16]=response[i];
 	xForce = toFloat(xChar); //mb substr will work
 	yForce = toFloat(yChar);
 	zForce = toFloat(zChar);
@@ -81,37 +84,4 @@ void UARTInterface::SendControllerValues(){
 
 	size_t bytesWritten = serial.write(outputString);
 	std::cout << "Bytes sent: " << bytesWritten << " Message: " << outputString << std::endl;
-}
-
-float UARTInterface::toFloat(char* c){
-	long floatBits = 0;
-
-	for(int i = 0; i < 8; i++){
-		long currentNumber = 0;
-		currentNumber = c[i];
-		currentNumber -= 97;
-
-		floatBits += currentNumber << i*4;
-	}
-	
-	float result = *(float*)&floatBits;
-    return result;
-}
-
-void UARTInterface::toChars(float f, char * result){
-	long floatBits = *(long*)&f;
-	for(int i = 0; i < 8; i++){
-		int currentNumber = 0; // from 0 to 16;
-
-		for(int j = 0; j < 4; j++){
-			if((floatBits >> (j + i*4))& 1U){
-				currentNumber |= 1U << j;
-			}
-		}	
-		currentNumber += 97;
-
-		result[i] = currentNumber;
-	}
-
-	result[8] = '\0';
 }

@@ -1,6 +1,6 @@
-#ifndef __UTIL_H__
-#define __UTIL_H__
-
+#ifndef UTIL_H
+#define UTIL_H
+namespace twoChars{
 static float toFloat(char* c){
 	unsigned long floatBits = 0;
 
@@ -33,7 +33,7 @@ static void toChars(float f, char * result){
 
 	result[8] = '\0';
 }
-
+}
 
 /*
 static char* toChars(float f){
