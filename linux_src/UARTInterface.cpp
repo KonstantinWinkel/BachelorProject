@@ -37,7 +37,7 @@ void UARTInterface::run(){
 		SendControllerValues();
 		PublishValues();
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(10));
+		std::this_thread::sleep_for(std::chrono::milliseconds(5));
 	}
 }
 
@@ -59,10 +59,8 @@ void UARTInterface::ReceiveIMUValues(){
 	std::string response = "";
 	serial.flushInput();
 	response = serial.read(24);
-	/*if(response[26] != '#'){
-		std::cout << response << " - sth went wrong!" << '\n'; //checks if the message is shifted (can happen if the reading Frequency is too low)
-	}*/
-	char xChar[8],yChar[8],zChar[8];
+
+	char xChar[8], yChar[8], zChar[8];
 	for(int i = 0;i<8;i++) xChar[i] = response[i];
 	for(int i = 8;i<16;i++) yChar[i-8] =response[i];
 	for(int i = 16;i<24;i++) zChar[i-16]=response[i];

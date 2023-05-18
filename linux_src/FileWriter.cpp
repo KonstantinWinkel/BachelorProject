@@ -28,7 +28,10 @@ FileWriter::~FileWriter(){
 }
 
 //takes a new value, replaces the corosponding old value and then writes the current time plus all values into a new line
-void FileWriter:: write(Identifier identifier, double value){
+void FileWriter::write(Identifier identifier, float value){
+
+	FileWriter::mutex.lock();
+
 	switch(identifier){
 		case Identifier::xAngle: xAngle = value; break;
 		case Identifier::yAngle: yAngle = value; break;
@@ -62,9 +65,11 @@ void FileWriter:: write(Identifier identifier, double value){
 	file << line;
 	file.close();
 
+	FileWriter::mutex.unlock();
+
 }
 
-double FileWriter::read(Identifier identifier){
+float FileWriter::read(Identifier identifier){
 	switch(identifier){
 		case Identifier::xAngle: return xAngle;
 		case Identifier::yAngle: return yAngle;

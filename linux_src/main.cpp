@@ -13,8 +13,8 @@
 int main(int argc, char** argv){
 
 	//Setup
-	//std::string deviceName = argv[0]; // for example "/dev/ttyACM0" - TODO GET THIS TO WORK
-	std::string programMode = argv[1];
+	std::string deviceName = argv[1]; // for example "/dev/ttyACM0"
+	std::string programMode = argv[2];
 	std::cout << "Program Mode: " << programMode << std::endl;
 
 	if(programMode.compare("demo") != 0 && programMode.compare("exp") != 0){
@@ -25,7 +25,7 @@ int main(int argc, char** argv){
 	//Object Creation
 	FileWriter filewriter;
 
-	UARTInterface uartinterface(&filewriter, "/dev/ttyACM0", 115200);
+	UARTInterface uartinterface(&filewriter, deviceName, 115200);
 
 	Controller controller(&filewriter);
 	DemoProgram demoprogram(&filewriter);
@@ -41,8 +41,8 @@ int main(int argc, char** argv){
 
 	//conditional creation of controller and demo threads with join
 	if(programMode.compare("exp") == 0) {
-		//std::thread controllerThread(&Controller::run, controller);
-		//controllerThread.join();
+		std::thread controllerThread(&Controller::run, controller);
+		controllerThread.join();
 	}
 
 	if(programMode.compare("demo") == 0){

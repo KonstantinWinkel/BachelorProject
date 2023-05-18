@@ -5,6 +5,7 @@
 #include <string>
 #include <fstream>
 #include <chrono>
+#include <mutex>
 
 enum Identifier {
 	xAngle,
@@ -23,26 +24,28 @@ class FileWriter{
 
 		std::fstream file;
 
+		std::mutex mutex;
+
 		//ImageProcessing Values
-		double xAngle;
-		double xVelocity;
-		double yAngle;
-		double yVelocity;
+		float xAngle;
+		float xVelocity;
+		float yAngle;
+		float yVelocity;
 
 		//Controller Values
-		double xPosition;
-		double yPosition;
+		float xPosition = 0;
+		float yPosition = 0;
 
 		//IMU Values
-		double xForce;
-		double yForce;
+		float xForce;
+		float yForce;
 
 	public:
 		//FileWriter(std::string path);
 		FileWriter();
 		~FileWriter();
-		virtual void write(Identifier identifier, double value);
-		virtual double read(Identifier identifier);
+		virtual void write(Identifier identifier, float value);
+		virtual float read(Identifier identifier);
 };
 
 #endif
