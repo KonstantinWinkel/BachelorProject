@@ -4,7 +4,7 @@
 #include "hal/hal_gpio.h"
 #include "hal/hal_i2c.h"
 
-#include "util.h" //converting flote to char* and vice versa
+#include "util.h" //converting float to char* and vice versa
 
 using namespace twoChars;
 
@@ -39,6 +39,8 @@ class IMUReader : public StaticThread <>
         uint8_t Z_H[1] = {0x2D};
 
     public:
+
+        IMUReader() : StaticThread("IMU Reader", 100 ){}
 
         float adjust(float realValue){
             if(realValue > 1) return realValue-4;
@@ -91,9 +93,9 @@ class IMUReader : public StaticThread <>
             IMU.init(400000);
             uint8_t INIT_REG[2] = {0x20, 0b10000011}; //Address: 0x20, value 0b10000011 - see LuRI Lab for more info
             IMU.write(AccADDR, INIT_REG, 2);
+            calibrate(50);
             redIMU.setPins(0); //end of setup
 
-            calibrate(50);
         }
 
         void run()
@@ -127,9 +129,9 @@ class IMUReader : public StaticThread <>
                 toChars(adjust(realValues[0]),xChar);
                 toChars(adjust(realValues[1]),yChar);
                 toChars(adjust(realValues[2]),zChar);
-                PRINTF("%s%s%s", xChar, yChar, zChar); //12 + 3*4 = 26 warum auch immer
+                PRINTF("%s%s%s", xChar, yChar, zChar);
 
-                AT(NOW() + 100*MILLISECONDS);	
+                suspendCallerUntil(NOW() + 100* MILLISECONDS);
             }
         }
 };

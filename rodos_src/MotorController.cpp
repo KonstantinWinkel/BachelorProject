@@ -20,8 +20,18 @@ HAL_PWM servo3(PWM_IDX02); //PE13
 HAL_GPIO orange(GPIO_061); //this threads "Controll LED"
 HAL_GPIO redMotor(GPIO_062); //reserved for calculations
 
+//desired Angles
 float servoX = 0;
 float servoY = 0;
+
+//utility variables for smoother motion
+float curServoX = 0;
+float curServoY = 0;
+
+float xChange = 0;
+float yChange = 0;
+
+uint8_t frameCounter = 0;
 
 namespace RODOS {
 	extern HAL_UART uart_stdout;
@@ -32,10 +42,16 @@ class MotorController : public StaticThread<>
     private:
 
     public:
+
+		MotorController() : StaticThread("Motor Controller", 1000) {
+		}
+
+		int i = 0;
+
         void init(){
-            servo1.init(50, 4000);
-            servo2.init(50, 4000);
-            servo3.init(50, 4000);
+            servo1.init(50, 16000);
+            servo2.init(50, 16000);
+            servo3.init(50, 16000);
 
 			orange.init(1,1,0);
         }
@@ -44,57 +60,38 @@ class MotorController : public StaticThread<>
 			return percentage * 120 - 60;
 		}
 
+		//for 4k  inc: 1920 - 2*Angle
+		//for 8k  inc: 3840 - 4*Angle
+		//for 16k inc: 7680 - 8*Angle
 		unsigned int calculatePWM(float Angle)
         {
-            return (unsigned int)(1920 - 2 * Angle);
+            return (unsigned int)(7680 - 8 * Angle);//orig:4
         }
+
+
 
         void run(){
 			
-			while(1){
-				orange.setPins(~orange.readPins());
-				servo1.write(calculatePWM(servoX));
-				servo2.write(calculatePWM(servoX));
-				servo3.write(calculatePWM(servoY));
-
-				AT(NOW() + 10*MILLISECONDS);
-			}
-
 			
-
-			/*
-
-			//SERVO TEST CODE - PLEASE IGNORE
-
+			
 			while(1){
-				servo1.write(calculatePWM(0));
-				servo2.write(calculatePWM(0));
-				servo3.write(calculatePWM(0));
 				orange.setPins(~orange.readPins());
-				AT(NOW() + 1*SECONDS);
+				//PRINTF("MOTOR CONTROLLER %d\n", i++);
+				if(frameCounter < 50){
+					curServoX += xChange;
+					curServoY += yChange;
+					frameCounter++;
+				}
 
-				servo1.write(calculatePWM(60));
-				servo2.write(calculatePWM(60));
-				servo3.write(calculatePWM(60));
-				orange.setPins(~orange.readPins());
-				AT(NOW() + 1*SECONDS);
+				servo1.write(calculatePWM(curServoX));
+				servo2.write(calculatePWM(curServoX));
+				servo3.write(calculatePWM(curServoY));
 
-				servo1.write(calculatePWM(0));
-				servo2.write(calculatePWM(0));
-				servo3.write(calculatePWM(0));
-				orange.setPins(~orange.readPins());
-				AT(NOW() + 1*SECONDS);
-
-				servo1.write(calculatePWM(-60));
-				servo2.write(calculatePWM(-60));
-				servo3.write(calculatePWM(-60));
-				orange.setPins(~orange.readPins());
-				AT(NOW() + 1*SECONDS);
+				suspendCallerUntil(NOW() + 100 * MICROSECONDS);
 			}
-			*/
+			
         }
 };
-
 MotorController motorcontroller;
 
 
@@ -102,103 +99,68 @@ MotorController motorcontroller;
 char all[MessageLength];
 int pos = 0;
 
-char *eptr;
+char ch[MessageLength];
 
-class UartIOEventReceiver : public IOEventReceiver{
+class UartReceiver: public StaticThread<>{
 	public:
-		void onWriteFinished() {
-			static uint32_t ledLevel = 0;
-			ledLevel ^= 1;
-		}
+		UartReceiver() :	StaticThread("UART Reciever", 10) {}
 
-		void onDataReady() {
-			static uint32_t ledLevel = 0;
-			ledLevel ^= 1;
-		}
-};
-UartIOEventReceiver uartIOEventReceiver;
-
-
-class UartTransmitter: public Thread {
-
-	private:
-
-	public:
-		UartTransmitter(const char* name) : Thread(name) {
+		void clearMessage(){
+			for(int i = 0; i < MessageLength; i++){
+				all[i] = 'z';
+			}
+			//setPriority(10);
+			//PRINTF("MESSAGE CLEARED: %s\n", all);
+			pos = 0;
 		}
 
 		void init(){
 			uart_stdout.config(UART_PARAMETER_ENABLE_DMA,1);
+			clearMessage();
 		}
+
 
 		void run() {
-			while (1) {
-				if(all[0] == 'k'){
-					//PRINTF("Message Timeout\n");
-				}
-				else{
-					//PRINTF("%s\n", all);
-
-					if(all[0] != 'X' || all[9] != 'Y') continue; //XaaaaaaaaYaaaaaipd#
-
-					//get X Value
-					char xString[8] = "";
-					for(int i = 0; i < 8; i++){
-						xString[i] = all[1+i];
-					}
-					servoX = toFloat(xString);
-					
-					//get Y Value
-					char yString[8] = "";
-					for(int i = 0; i < 8; i++){
-						yString[i] = all[10+i];
-					}
-					servoY = toFloat(yString);
-
-					PRINTF("%f %f \n", servoX, servoY);
-
-				}
-
-				for(int i = 0; i < MessageLength; i++){
-					all[i] = 'k';
-				}
-				pos = 0;
-				suspendCallerUntil(NOW()+5000*MILLISECONDS);
-			}
-		}
-};
-UartTransmitter uartTX("UartTestTX");
-
-
-class UartReceiver: public Thread{
-	public:
-		UartReceiver(const char* name) :	Thread(name) {
-		}
-
-		void init(){
-			uart_stdout.setIoEventReceiver(&uartIOEventReceiver);
-			for(int i = 0; i < MessageLength; i++){
-				all[i] = 'k';
-			}
-		}
-
-		void run() {
-			char ch[MessageLength];
-
+			
 			while (1) {
 				if (uart_stdout.read(ch,MessageLength) > 0){
 					//PRINTF("%c",ch[0]);   
 					all[pos] = ch[0];
+					if(all[pos] == 'X'){
+						clearMessage();
+						all[0] = 'X';
+					}
 					pos++;
 				}
 
-				if(all[pos-1] == '#'){
-					//PRINTF("Response Length: %d Message: %s\n", strlen(all), all);
-					uartTX.resume();
+				if(all[pos-1] == '#' || pos > 18){
+					
+					if(all[0] != 'X' || all[9] != 'Y' || all[18] != '#'){
+						clearMessage();
+						continue; //XaaaaaaaaYaaaaaipd#
+					}
+
+					//get X & Y Value
+					char xString[8] = "";
+					char yString[8] = "";
+					for(int i = 0; i < 8; i++){
+						xString[i] = all[1+i];
+						yString[i] = all[10+i];
+					}
+
+					servoX = toFloat(xString);
+					servoY = toFloat(yString);
+
+					xChange = (servoX - curServoX)/50.0f;
+					yChange = (servoY - curServoY)/50.0f;
+					frameCounter = 0;
+
+					clearMessage();
 				}
 
 				uart_stdout.suspendUntilDataReady();
 			}
+			
 		}
 };
-UartReceiver uartRX("UartTestRX");
+UartReceiver uartRX;
