@@ -49,9 +49,9 @@ class MotorController : public StaticThread<>
 		int i = 0;
 
         void init(){
-            servo1.init(50, 16000);
-            servo2.init(50, 16000);
-            servo3.init(50, 16000);
+            servo1.init(50, 4000);
+            servo2.init(50, 4000);
+            servo3.init(50, 4000);
 
 			orange.init(1,1,0);
         }
@@ -65,7 +65,7 @@ class MotorController : public StaticThread<>
 		//for 16k inc: 7680 - 8*Angle
 		unsigned int calculatePWM(float Angle)
         {
-            return (unsigned int)(7680 - 8 * Angle);//orig:4
+            return (unsigned int)(1920 - 2 * Angle);//orig:4
         }
 
 
@@ -77,7 +77,7 @@ class MotorController : public StaticThread<>
 			while(1){
 				orange.setPins(~orange.readPins());
 				//PRINTF("MOTOR CONTROLLER %d\n", i++);
-				if(frameCounter < 50){
+				if(frameCounter < 5){
 					curServoX += xChange;
 					curServoY += yChange;
 					frameCounter++;
@@ -87,9 +87,8 @@ class MotorController : public StaticThread<>
 				servo2.write(calculatePWM(curServoX));
 				servo3.write(calculatePWM(curServoY));
 
-				suspendCallerUntil(NOW() + 100 * MICROSECONDS);
+				suspendCallerUntil(NOW() + 1 * MILLISECONDS);
 			}
-			
         }
 };
 MotorController motorcontroller;
@@ -151,8 +150,8 @@ class UartReceiver: public StaticThread<>{
 					servoX = toFloat(xString);
 					servoY = toFloat(yString);
 
-					xChange = (servoX - curServoX)/50.0f;
-					yChange = (servoY - curServoY)/50.0f;
+					xChange = (servoX - curServoX)/5.0f;
+					yChange = (servoY - curServoY)/5.0f;
 					frameCounter = 0;
 
 					clearMessage();
