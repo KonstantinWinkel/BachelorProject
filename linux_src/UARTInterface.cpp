@@ -2,9 +2,7 @@
 #include <stdio.h>
 #include <iostream>
 #include "thread"
-#include "../rodos_src/util.h"
-
-using namespace twoChars;
+#include "../rodos_src/include/util.h"
 
 //required header files
 #include "UARTInterface.h"

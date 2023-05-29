@@ -7,7 +7,7 @@
 #include "hal/hal_gpio.h"
 #include "hal/hal_i2c.h"
 
-#include "util.h"
+#include "../include/util.h"
 
 using namespace twoChars;
 
@@ -76,7 +76,6 @@ class MotorController : public StaticThread<>
 			
 			while(1){
 				orange.setPins(~orange.readPins());
-				//PRINTF("MOTOR CONTROLLER %d\n", i++);
 				if(frameCounter < 5){
 					curServoX += xChange;
 					curServoY += yChange;

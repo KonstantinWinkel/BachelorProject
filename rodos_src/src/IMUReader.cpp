@@ -4,20 +4,18 @@
 #include "hal/hal_gpio.h"
 #include "hal/hal_i2c.h"
 
-#include "util.h" //converting float to char* and vice versa
-
-using namespace twoChars;
+#include "../include/topics.h"
 
 HAL_GPIO redIMU(GPIO_062); //reserved for calculations
 HAL_GPIO blue(GPIO_063); //this threads "Controll LED"
 
 HAL_I2C IMU(I2C_IDX2);
 
+IMUDATA data;
+
 //IMU wirering:
 //IMU    STM
-//GND -> GND
-//3.3 -> 3V
-//SCL -> PB10 
+//SCL -> PB10
 //SDA -> PB11
 
 //stripped down version of the IMU excercise from the LuRI Lab. Only accelerometer is needed.
@@ -124,14 +122,13 @@ class IMUReader : public StaticThread <>
                     realValues[i] = (0.061/1000) * rawValues[i]  - calibrationValues[i];
                 }
 
-                //send real accerlation values via UART back
-                char xChar[9],yChar[9],zChar[9];
-                toChars(adjust(realValues[0]),xChar);
-                toChars(adjust(realValues[1]),yChar);
-                toChars(adjust(realValues[2]),zChar);
-                PRINTF("%s%s%s", xChar, yChar, zChar);
+                data.xForce = realValues[0];
+                data.yForce = realValues[1];
+                data.zForce = realValues[2];
 
-                suspendCallerUntil(NOW() + 100* MILLISECONDS);
+                IMU_Topic.publish(data);
+
+                suspendCallerUntil(NOW() + 100 * MILLISECONDS);
             }
         }
 };
