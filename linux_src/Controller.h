@@ -1,19 +1,19 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
-//c++ includes
 #include <ctime>
-
-//required header files
 #include "FileWriter.h"
-#include "UARTInterface.h"
+#include "DataPuffer.h"
+
+using namespace je;
 
 class Controller{
 	protected:
 		FileWriter * filewriter;
+		CommBuffer<std::array<double,4>> * databuffer;
 
 	public:
-		Controller(FileWriter * filewriter);
+		Controller(FileWriter * filewriter, CommBuffer<std::array<double,4>> * databuffer);
 		~Controller();
 
 		virtual void PublishValues();

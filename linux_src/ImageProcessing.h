@@ -11,10 +11,14 @@
 
 //required header files
 #include "FileWriter.h"
+#include "DataPuffer.h"
+
+using namespace je;
 
 class ImageProcessing{
 	protected:
 		FileWriter * filewriter;
+		CommBuffer<double> * ComBuf;
 		Identifier angleIdentifier;
 		Identifier velocityIdentifier;
 
@@ -37,7 +41,8 @@ class ImageProcessing{
 		std::string detectionWindowName;
 
 	public:
-		ImageProcessing(int cameraID, std::string name, FileWriter * filewriter, Identifier angleIdentifier, Identifier velocityIdentifier);
+		ImageProcessing();
+		ImageProcessing(int cameraID, std::string name, FileWriter * filewriter, CommBuffer<double> * ComBuf, Identifier angleIdentifier, Identifier velocityIdentifier);
 		~ImageProcessing();
 		virtual void ReadAndProcessImage();
 		virtual void CalculatePositionAndVelocity();

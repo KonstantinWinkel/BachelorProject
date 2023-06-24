@@ -15,17 +15,23 @@ const cv::Scalar blueLow = cv::Scalar(80, 100, 100); //110 100 100
 const cv::Scalar blueHigh = cv::Scalar(125, 255, 255); //125 255 255
 
 //constructor, creates ImageProcessing object, sets identifying variables and intializes OpenCV Camera
-ImageProcessing::ImageProcessing(int cameraID, std::string name, FileWriter * filewriter, Identifier angleIdentifier, Identifier velocityIdentifier){
+ImageProcessing::ImageProcessing(int cameraID, std::string name, FileWriter * filewriter, CommBuffer<double> * ComBuf, Identifier angleIdentifier, Identifier velocityIdentifier){
 	ImageProcessing::cameraID = cameraID;
 	ImageProcessing::name = name;
 	ImageProcessing::filewriter = filewriter;
+	ImageProcessing::ComBuf = ComBuf;
 	ImageProcessing::angleIdentifier = angleIdentifier;
 	ImageProcessing::velocityIdentifier = velocityIdentifier;
 
 	videoWindowName = "V" + name;
 	detectionWindowName = "D" + name;
 
-	cv::VideoCapture localCamera(cameraID);
+	if(cameraID < 0) throw std::invalid_argument("cameraID cannot be negative");
+	std::stringstream path_to_camera;
+	path_to_camera << "/dev/video" << cameraID;
+
+	std::cout << "Trying to access camera " << cameraID << "(path " << path_to_camera.str() <<')' << std::endl;
+	cv::VideoCapture localCamera(path_to_camera.str());
 	camera = localCamera;
 
 	cv::namedWindow(videoWindowName);
@@ -129,6 +135,7 @@ void ImageProcessing::ReadAndProcessImage(){
 void ImageProcessing::PublishValues(){
 	filewriter->writeFLOAT(angleIdentifier, angle);
 	filewriter->writeFLOAT(velocityIdentifier, velocity);
+	
 }
 
 //run method, handles programm flow

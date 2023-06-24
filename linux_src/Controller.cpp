@@ -1,10 +1,9 @@
-//required header files
+#include <thread>
 #include "Controller.h"
 
-//removed UARTInterface reference, grab newest values from Filewriter using filewriter->read(Identifier::<WHATEVER>)
-
-Controller::Controller(FileWriter * filewriter){
+Controller::Controller(FileWriter * filewriter, CommBuffer<std::array<double,4>> * databuffer){
 	Controller::filewriter = filewriter;
+	Controller::databuffer = databuffer;
 }
 
 Controller::~Controller(){
@@ -18,5 +17,5 @@ void Controller::PublishValues(){
 }
 
 void Controller::run(){
-
+	while(!databuffer->newData()) std::this_thread::yield();	
 }

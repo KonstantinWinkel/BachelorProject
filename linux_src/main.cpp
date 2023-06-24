@@ -5,6 +5,7 @@
 
 //required header files
 #include "FileWriter.h"
+#include "DataPuffer.h"
 #include "ImageProcessing.h"
 #include "UARTInterface.h"
 #include "Controller.h"
@@ -25,24 +26,27 @@ int main(int argc, char** argv){
 	//Object Creation
 	FileWriter filewriter;
 
-	UARTInterface uartinterface(&filewriter, deviceName, 115200);
+	CommBuffer<double> CommBufferx;
+	CommBuffer<double> CommBuffery;
 
-	Controller controller(&filewriter);
+	// UARTInterface uartinterface(&filewriter, deviceName, 115200);
+
+	//Controller controller(&filewriter);
 	DemoProgram demoprogram(&filewriter);
 	
-	ImageProcessing x(2, "X", &filewriter, Identifier::xAngle, Identifier::xVelocity);
-	ImageProcessing y(6, "Y", &filewriter, Identifier::yAngle, Identifier::yVelocity);
+	ImageProcessing x(0, "X", &filewriter, &CommBufferx, Identifier::xAngle, Identifier::xVelocity);
+	ImageProcessing y(0, "Y", &filewriter, &CommBuffery, Identifier::yAngle, Identifier::yVelocity);
 	
 
 	//Creation of required threads
 	std::thread xThread(&ImageProcessing::run, x);
-	std::thread yThread(&ImageProcessing::run, y);
-	std::thread uartThread(&UARTInterface::run, uartinterface);
+	//std::thread yThread(&ImageProcessing::run, y);
+	//std::thread uartThread(&UARTInterface::run, uartinterface);
 
 	//conditional creation of controller and demo threads with join
 	if(programMode.compare("exp") == 0) {
-		std::thread controllerThread(&Controller::run, controller);
-		controllerThread.join();
+		//std::thread controllerThread(&Controller::run, controller);
+		//controllerThread.join();
 	}
 
 	if(programMode.compare("demo") == 0){
@@ -52,7 +56,7 @@ int main(int argc, char** argv){
 
 
 	//join all required threads
-	uartThread.join();
 	xThread.join();
-	yThread.join();
+	//yThread.join();
+	//uartThread.join();
 }
