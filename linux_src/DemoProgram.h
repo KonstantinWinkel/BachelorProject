@@ -25,6 +25,10 @@ class DemoProgram {
 
         //utility methods
         virtual float PositionToAngle(float position);
+
+        virtual void bigDemo();
+
+        virtual void circle();
 };
 
 #endif

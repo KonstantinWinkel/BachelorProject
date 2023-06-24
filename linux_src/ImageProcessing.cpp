@@ -127,8 +127,8 @@ void ImageProcessing::ReadAndProcessImage(){
 }
 
 void ImageProcessing::PublishValues(){
-	filewriter->write(angleIdentifier, angle);
-	filewriter->write(velocityIdentifier, velocity);
+	filewriter->writeFLOAT(angleIdentifier, angle);
+	filewriter->writeFLOAT(velocityIdentifier, velocity);
 }
 
 //run method, handles programm flow

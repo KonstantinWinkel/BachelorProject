@@ -22,8 +22,10 @@ UARTInterface::~UARTInterface(){
 
 void UARTInterface::PublishValues(){
 	//pass calculated values to the filewriter
-	filewriter->write(Identifier::xForce, xForce);
-	filewriter->write(Identifier::yForce, yForce);
+	filewriter->writeFLOAT(Identifier::xForce, xForce);
+	filewriter->writeFLOAT(Identifier::yForce, yForce);
+	filewriter->writeUINT16(Identifier::xLidar, xLidar);
+	filewriter->writeUINT16(Identifier::yLidar, yLidar);
 }
 
 //
@@ -31,8 +33,8 @@ void UARTInterface::run(){
 	while(1){
 		SetControllerValues();
 
-		ReceiveIMUValues();
-		SendControllerValues();
+		ReceiveValues();
+		SendValues();
 		PublishValues();
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(5));
@@ -44,7 +46,7 @@ void UARTInterface::SetControllerValues(){
 	UARTInterface::yValue = filewriter->read(Identifier::yPosition);
 }
 
-void UARTInterface::ReceiveIMUValues(){
+void UARTInterface::ReceiveValues(){
 
 	//open port to STM Board
 	serial::Serial serial(deviceName, baudRate, serial::Timeout::simpleTimeout(3000));
@@ -56,21 +58,25 @@ void UARTInterface::ReceiveIMUValues(){
 	//read string from UART stream
 	std::string response = "";
 	serial.flushInput();
-	response = serial.read(24);
+	response = serial.read(32);
 
-	char xChar[8], yChar[8], zChar[8];
-	for(int i = 0;i<8;i++) xChar[i] = response[i];
-	for(int i = 8;i<16;i++) yChar[i-8] =response[i];
-	for(int i = 16;i<24;i++) zChar[i-16]=response[i];
-	xForce = toFloat(xChar); //mb substr will work
-	yForce = toFloat(yChar);
-	zForce = toFloat(zChar);
+	char xIMUChar[8], yIMUChar[8], zIMUChar[8], xLIDARChar[4], yLIDARChar[4];
+	for(int i = 0;i<8;i++) xIMUChar[i]=response[i-0];
+	for(int i = 8;i<16;i++) yIMUChar[i-8]=response[i];
+	for(int i = 16;i<24;i++) zIMUChar[i-16]=response[i];
+	for(int i = 24;i<28;i++) xLIDARChar[i-24]=response[i];
+	for(int i = 28;i<32;i++) yLIDARChar[i-28]=response[i];
+	xForce = toFloat(xIMUChar); //mb substr will work
+	yForce = toFloat(yIMUChar);
+	zForce = toFloat(zIMUChar);
+	xLidar = toUINT16(xLIDARChar);
+	yLidar = toUINT16(yLIDARChar);
 
 	//DEBUG COUT
-	//std::cout << xForce <<" " << yForce << " " <<zForce << '\n';
+	std::cout << xForce <<" " << yForce << " " << zForce << " " << xLidar << " " << yLidar << '\n';
 }
 
-void UARTInterface::SendControllerValues(){
+void UARTInterface::SendValues(){
 	serial::Serial serial(deviceName, baudRate, serial::Timeout::simpleTimeout(3000));
 	if (!serial.isOpen()) printf("Port failed to open \n");	
 	serial.flushOutput();

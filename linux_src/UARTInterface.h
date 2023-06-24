@@ -19,6 +19,9 @@ class UARTInterface{
 		float xValue; // currently changed to float, was double
 		float yValue; // maybe float is enough accuarcy?
 
+		uint16_t xLidar;
+		uint16_t yLidar;
+
 	public:
 		UARTInterface(FileWriter * filewriter, std::string deviceName, int baudRate);
 		~UARTInterface();
@@ -27,8 +30,8 @@ class UARTInterface{
 
 		virtual void run();
 
-		virtual void ReceiveIMUValues();
-		virtual void SendControllerValues();
+		virtual void ReceiveValues();
+		virtual void SendValues();
 
 		virtual void SetControllerValues();
 

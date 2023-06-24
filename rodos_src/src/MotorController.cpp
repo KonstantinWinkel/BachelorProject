@@ -9,7 +9,7 @@
 
 #include "../include/util.h"
 
-using namespace twoChars;
+//using namespace twoChars;
 
 #define MessageLength 19
 

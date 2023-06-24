@@ -39,8 +39,8 @@ class UARTTransmitter : public StaticThread <> {
                 toChars(lidardata.xDistance, xLIDAR);
                 toChars(lidardata.yDistance, yLIDAR);
 
-                //PRINTF("%s%s%s%s%s", xIMU, yIMU, zIMU, xLIDAR, yLIDAR);
-                PRINTF("%f %f %f %d %d\n", imudata.xForce, imudata.yForce, imudata.zForce, lidardata.xDistance, lidardata.yDistance);
+                PRINTF("%s%s%s%s%s", xIMU, yIMU, zIMU, xLIDAR, yLIDAR);
+                //PRINTF("%f %f %f %d %d\n", imudata.xForce, imudata.yForce, imudata.zForce, lidardata.xDistance, lidardata.yDistance);
 
                 suspendCallerUntil(NOW() + 100 * MILLISECONDS);
             }

@@ -17,62 +17,96 @@ DemoProgram::~DemoProgram(){
 
 void DemoProgram::PublishValues(){
     //pass calculated values to the filewriter
-	filewriter->write(Identifier::xPosition, xMotorValue );
-	filewriter->write(Identifier::yPosition, yMotorValue );
+	filewriter->writeFLOAT(Identifier::xPosition, xMotorValue );
+	filewriter->writeFLOAT(Identifier::yPosition, yMotorValue );
+    std::cout << "X: " << xMotorValue << " Y: " << yMotorValue << std::endl;
 }
 
 void DemoProgram::run(){
+   bigDemo();
+}
+
+float DemoProgram::PositionToAngle(float position){
+    //     converto to angle                       Rad2Deg        
+    //return (2.0/3.0) * (acosf32(0.5*position/5.0) * (180.0/M_PI));  // L = 5cm, reference equation (5)
+    return (position-5.0f)*(50.0f/5.0f);
+}
+
+void DemoProgram::bigDemo(){
+    float xTemp = 0;
+    float yTemp = 0;
+    //start in middle
+    xMotorValue = PositionToAngle(10);
+    yMotorValue = PositionToAngle(0);
+    PublishValues();
+    std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+
     //instant move to bottom right corner
     std::cout << "instant move to bottom right corner" << std::endl;
     xMotorValue = PositionToAngle(0);
     yMotorValue = PositionToAngle(0);
     PublishValues();
-    std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+    std::this_thread::sleep_for(std::chrono::milliseconds(5000));
 
     //instant move to top left corner
     std::cout << "instant move to top left corner" << std::endl;
     xMotorValue = PositionToAngle(10);
     yMotorValue = PositionToAngle(10);
     PublishValues();
-    std::this_thread::sleep_for(std::chrono::milliseconds(2000));
-
+    std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+    
     //slow move to bottom left corner
     std::cout << "slow move to bottom left corner" << std::endl;
-    for(float i = 10; i > 0; i -= 0.1){
-        yMotorValue = PositionToAngle(i);
+    yTemp = 10;
+    while(yTemp > 0){
+        yMotorValue = PositionToAngle(yTemp);
+        yTemp -= 0.005;
         PublishValues();
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(5));
     }
 
     yMotorValue = PositionToAngle(0);
     PublishValues();
-    std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+    std::this_thread::sleep_for(std::chrono::milliseconds(5000));
 
     //slow move to bottom left corner
     std::cout << "slow move to top right corner" << std::endl;
-    float xTemp = 10;
-    float yTemp = 0;
+    xTemp = 10;
+    yTemp = 0;
     while(xTemp > 0 && yTemp < 10){
-        xTemp -= 0.1;
-        yTemp += 0.1;
         xMotorValue = PositionToAngle(xTemp);
         yMotorValue = PositionToAngle(yTemp);
+        xTemp -= 0.005;
+        yTemp += 0.005;
         PublishValues();
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        std::this_thread::sleep_for(std::chrono::milliseconds(5));
     }
 
     xMotorValue = PositionToAngle(0);
     yMotorValue = PositionToAngle(10);
     PublishValues();
-    std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+    std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+
+    //return to middle
+    xMotorValue = PositionToAngle(10);
+    yMotorValue = PositionToAngle(0);
+    PublishValues();
+    std::this_thread::sleep_for(std::chrono::milliseconds(5000));
 
     std::cout << "END OF DEMO PROGRAM" << std::endl;
     exit(0);
 }
 
-float DemoProgram::PositionToAngle(float position){
-    //     converto to angle         Rad2Deg      map 0 - 90 to -30 - 60    
-    return acosf32(0.5*position/5) * (180.0/M_PI) - 30;  // L = 5cm, reference equation (5)
-}
+void DemoProgram::circle(){
+    float temp = 0;
 
+    while(true){
+        xMotorValue = PositionToAngle(5 + 5 * cos(temp));
+        yMotorValue = PositionToAngle(5 + 5 * sin(temp));
+        temp += 0.001;
+        PublishValues();
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+    }
+}

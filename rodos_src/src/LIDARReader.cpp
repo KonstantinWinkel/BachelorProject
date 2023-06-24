@@ -65,7 +65,7 @@ class LIDARReader : public StaticThread <> {
                 /* Read measured distance. RangeStatus = 0 means valid data */
                 VL53L4CD_GetResult( dev, &results );
                 if(results.range_status <= 2) MedianFilter(getCurrentI2C()-1, results.distance_mm);
-                PRINTF( "%d: Status = %6u, Distance = %6u\n", getCurrentI2C()-1, results.range_status, results.distance_mm);
+                //PRINTF( "%d: Status = %6u, Distance = %6u\n", getCurrentI2C()-1, results.range_status, FilteredValues.xDistance);
             }
         }
 
@@ -78,7 +78,7 @@ class LIDARReader : public StaticThread <> {
             VL53L4CD_SensorInit( dev );
             status = VL53L4CD_StartRanging( dev );
 
-	        while( 1) {
+	        while(1) {
 
                 green.setPins(~green.readPins());
 
@@ -90,7 +90,7 @@ class LIDARReader : public StaticThread <> {
 
                 LIDAR_Topic.publish(FilteredValues);
 
-                suspendCallerUntil( NOW() + 500*MILLISECONDS );
+                suspendCallerUntil( NOW() + 100*MILLISECONDS );
 	        }
         }
 

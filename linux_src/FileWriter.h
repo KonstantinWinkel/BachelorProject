@@ -15,7 +15,9 @@ enum Identifier {
 	xPosition,
 	yPosition,
 	xForce,
-	yForce
+	yForce,
+	xLidar,
+	yLidar
 };
 
 class FileWriter{
@@ -40,11 +42,16 @@ class FileWriter{
 		float xForce;
 		float yForce;
 
+		//LIDAR Values;
+		uint16_t xLidar;
+		uint16_t yLidar;
+
 	public:
 		//FileWriter(std::string path);
 		FileWriter();
 		~FileWriter();
-		virtual void write(Identifier identifier, float value);
+		virtual void writeFLOAT(Identifier identifier, float value);
+		virtual void writeUINT16(Identifier identifier, uint16_t value);
 		virtual float read(Identifier identifier);
 };
 

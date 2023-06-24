@@ -28,7 +28,7 @@ FileWriter::~FileWriter(){
 }
 
 //takes a new value, replaces the corosponding old value and then writes the current time plus all values into a new line
-void FileWriter::write(Identifier identifier, float value){
+void FileWriter::writeFLOAT(Identifier identifier, float value){
 
 	FileWriter::mutex.lock();
 
@@ -58,7 +58,9 @@ void FileWriter::write(Identifier identifier, float value){
 	//Add Positions
 	line += std::to_string(xPosition) + "," + std::to_string(yPosition) + ",";
 	//Add Force
-	line += std::to_string(xForce) + "," + std::to_string(yForce) + "\n";
+	line += std::to_string(xForce) + "," + std::to_string(yForce) + ",";
+	//Add Lidar
+	line += std::to_string(xLidar) + "," + std::to_string(yLidar) + "\n";
 	
 	//Write line to File   
 	file.open("output.csv", std::ios_base::app);
@@ -67,6 +69,42 @@ void FileWriter::write(Identifier identifier, float value){
 
 	FileWriter::mutex.unlock();
 
+}
+
+void FileWriter::writeUINT16(Identifier identifier, uint16_t value){
+	FileWriter::mutex.lock();
+
+	switch(identifier){
+		case Identifier::xLidar: xLidar = value; break;
+		case Identifier::yLidar: yLidar = value; break;
+	}
+
+	//FORMAT: csv
+	//Time - xAngle - yAngle - xVelocity - yVelocity - xPosition - yPosition - xForce - yForce
+	//Multiple files maybe?
+	std::string line = "";
+
+	//Add Time
+	std::chrono::duration<double, std::milli> ms_double = std::chrono::high_resolution_clock::now() - starttime;
+	line += std::to_string(ms_double.count()/1000) + ",";
+	//Add Angles
+	line += std::to_string(xAngle) + "," + std::to_string(yAngle) + ",";
+	//Add Velocities
+	line += std::to_string(xVelocity) + "," + std::to_string(yVelocity) + ",";
+	//Add Positions
+	line += std::to_string(xPosition) + "," + std::to_string(yPosition) + ",";
+	//Add Force
+	line += std::to_string(xForce) + "," + std::to_string(yForce) + "\n";
+	//Add Lidar
+	line += std::to_string(xLidar) + "," + std::to_string(yLidar) + "\n";
+	
+	//Write line to File   
+	file.open("output.csv", std::ios_base::app);
+	file << line;
+	file.close();
+
+	FileWriter::mutex.unlock();
+	
 }
 
 float FileWriter::read(Identifier identifier){

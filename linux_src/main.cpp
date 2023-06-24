@@ -31,7 +31,7 @@ int main(int argc, char** argv){
 	DemoProgram demoprogram(&filewriter);
 	
 	ImageProcessing x(2, "X", &filewriter, Identifier::xAngle, Identifier::xVelocity);
-	ImageProcessing y(4, "Y", &filewriter, Identifier::yAngle, Identifier::yVelocity);
+	ImageProcessing y(6, "Y", &filewriter, Identifier::yAngle, Identifier::yVelocity);
 	
 
 	//Creation of required threads
@@ -52,7 +52,7 @@ int main(int argc, char** argv){
 
 
 	//join all required threads
+	uartThread.join();
 	xThread.join();
 	yThread.join();
-	uartThread.join();
 }
