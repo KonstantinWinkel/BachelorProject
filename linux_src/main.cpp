@@ -29,19 +29,19 @@ int main(int argc, char** argv){
 	CommBuffer<double> CommBufferx;
 	CommBuffer<double> CommBuffery;
 
-	// UARTInterface uartinterface(&filewriter, deviceName, 115200);
+	UARTInterface uartinterface(&filewriter, deviceName, 115200);
 
 	//Controller controller(&filewriter);
 	DemoProgram demoprogram(&filewriter);
 	
-	ImageProcessing x(0, "X", &filewriter, &CommBufferx, Identifier::xAngle, Identifier::xVelocity);
-	ImageProcessing y(0, "Y", &filewriter, &CommBuffery, Identifier::yAngle, Identifier::yVelocity);
+	//ImageProcessing x(0, "X", &filewriter, &CommBufferx, Identifier::xAngle, Identifier::xVelocity);
+	//ImageProcessing y(0, "Y", &filewriter, &CommBuffery, Identifier::yAngle, Identifier::yVelocity);
 	
 
 	//Creation of required threads
-	std::thread xThread(&ImageProcessing::run, x);
+	//std::thread xThread(&ImageProcessing::run, x);
 	//std::thread yThread(&ImageProcessing::run, y);
-	//std::thread uartThread(&UARTInterface::run, uartinterface);
+	std::thread uartThread(&UARTInterface::run, uartinterface);
 
 	//conditional creation of controller and demo threads with join
 	if(programMode.compare("exp") == 0) {
@@ -56,7 +56,7 @@ int main(int argc, char** argv){
 
 
 	//join all required threads
-	xThread.join();
+	//xThread.join();
 	//yThread.join();
-	//uartThread.join();
+	uartThread.join();
 }
