@@ -7,9 +7,10 @@
 
 HAL_GPIO green(GPIO_060);
 
-#define MedianLenght 10
+#define MedianLenght 20
 
 LIDARDATA FilteredValues;
+LIDARDATA RawValues;
 
 class LIDARReader : public StaticThread <> {
 
@@ -52,8 +53,19 @@ class LIDARReader : public StaticThread <> {
             }
             //PRINTF("%d\n", sum/MedianLenght);
 
-            if(index == 0) FilteredValues.xDistance = sum/MedianLenght;
-            if(index == 1) FilteredValues.yDistance = sum/MedianLenght;
+            if(index == 0){
+                FilteredValues.xDistance = sum/MedianLenght;
+                RawValues.xDistance = newValue;
+                
+                //PRINTF("Filtered Value: %d\n", FilteredValues.xDistance );
+                return;
+            }
+            
+            if(index == 1){
+                FilteredValues.yDistance = sum/MedianLenght;
+                RawValues.yDistance = newValue;
+                return;
+            }
         }
 
         void readAndPrint(){
@@ -88,9 +100,10 @@ class LIDARReader : public StaticThread <> {
                 setCurrentI2C(2);
                 readAndPrint();
 
-                LIDAR_Topic.publish(FilteredValues);
+                LIDAR_Filtered_Topic.publish(FilteredValues);
+                LIDAR_Raw_Topic.publish(RawValues);
 
-                suspendCallerUntil( NOW() + 100*MILLISECONDS );
+                suspendCallerUntil( NOW() + 5*MILLISECONDS );
 	        }
         }
 

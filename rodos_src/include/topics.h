@@ -14,5 +14,6 @@ struct IMUDATA
 };
 
 
-extern Topic<LIDARDATA> LIDAR_Topic;
+extern Topic<LIDARDATA> LIDAR_Filtered_Topic;
+extern Topic<LIDARDATA> LIDAR_Raw_Topic;
 extern Topic<IMUDATA> IMU_Topic;

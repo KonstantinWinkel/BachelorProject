@@ -8,8 +8,7 @@
 #include "hal/hal_i2c.h"
 
 #include "../include/util.h"
-
-//using namespace twoChars;
+#include "../include/topics.h"
 
 #define MessageLength 19
 

@@ -60,7 +60,8 @@ void FileWriter::writeFLOAT(Identifier identifier, float value){
 	//Add Force
 	line += std::to_string(xForce) + "," + std::to_string(yForce) + ",";
 	//Add Lidar
-	line += std::to_string(xLidar) + "," + std::to_string(yLidar) + "\n";
+	line += std::to_string(xLidarFiltered) + "," + std::to_string(yLidarFiltered) + ",";
+	line += std::to_string(xLidarRaw) + "," + std::to_string(yLidarRaw) + "\n";
 	
 	//Write line to File   
 	file.open("output.csv", std::ios_base::app);
@@ -75,8 +76,10 @@ void FileWriter::writeUINT16(Identifier identifier, uint16_t value){
 	FileWriter::mutex.lock();
 
 	switch(identifier){
-		case Identifier::xLidar: xLidar = value; break;
-		case Identifier::yLidar: yLidar = value; break;
+		case Identifier::xLidarFiltered: xLidarFiltered = value; break;
+		case Identifier::yLidarFiltered: yLidarFiltered = value; break;
+		case Identifier::xLidarRaw: xLidarRaw = value; break;
+		case Identifier::yLidarRaw: yLidarRaw = value; break;
 	}
 
 	//FORMAT: csv
@@ -96,7 +99,8 @@ void FileWriter::writeUINT16(Identifier identifier, uint16_t value){
 	//Add Force
 	line += std::to_string(xForce) + "," + std::to_string(yForce) + "\n";
 	//Add Lidar
-	line += std::to_string(xLidar) + "," + std::to_string(yLidar) + "\n";
+	line += std::to_string(xLidarFiltered) + "," + std::to_string(yLidarFiltered) + ",";
+	line += std::to_string(xLidarRaw) + "," + std::to_string(yLidarRaw) + "\n";
 	
 	//Write line to File   
 	file.open("output.csv", std::ios_base::app);
