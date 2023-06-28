@@ -60,7 +60,8 @@ void UARTInterface::ReceiveValues(){
 	//read string from UART stream
 	std::string response = "";
 	serial.flushInput();
-	response = serial.read(40);
+	response = serial.read(40); //40
+	serial.close();
 
 	char xIMUChar[8], yIMUChar[8], zIMUChar[8], xLIDARFilteredChar[4], yLIDARFilteredChar[4], xLIDARRawChar[4], yLIDARRawChar[4];
 	for(int i = 0;i<8;i++) xIMUChar[i]=response[i-0];
@@ -96,6 +97,7 @@ void UARTInterface::SendValues(){
 	asprintf(&outputString, "X%sY%s#", xString, yString);
 
 	size_t bytesWritten = serial.write(outputString);
+	serial.close();
 
 	//DEBUG COUT
 	//std::cout << "Bytes sent: " << bytesWritten << " Message: " << outputString << std::endl;

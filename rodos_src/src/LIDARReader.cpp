@@ -8,6 +8,8 @@
 HAL_GPIO green(GPIO_060);
 
 #define MedianLenght 20
+#define XZero 0
+#define YZero 0 //- 25 - 180
 
 LIDARDATA FilteredValues;
 LIDARDATA RawValues;
@@ -30,7 +32,7 @@ class LIDARReader : public StaticThread <> {
 
     public:
 
-        LIDARReader() : StaticThread("LIDAR Reader", 100 ){}
+        LIDARReader() : StaticThread("LIDAR Reader", 5 ){}
 
         void init(){
             VL53L4CD_init();
@@ -40,20 +42,20 @@ class LIDARReader : public StaticThread <> {
         }
 
         void MedianFilter(uint8_t index, uint16_t newValue){
-            if(index == 0) RawXValues[RawIndex[index]] = newValue;
-            if(index == 1) RawYValues[RawIndex[index]] = newValue;
+            if(index == 1) RawXValues[RawIndex[index]] = newValue;
+            if(index == 0) RawYValues[RawIndex[index]] = newValue; // -(newValue + YZero);
 
             RawIndex[index]++;
             if(RawIndex[index] >= MedianLenght) RawIndex[index] = 0;
 
             uint16_t sum = 0;
             for(uint8_t i = 0; i < MedianLenght; i++){
-                if(index == 0) sum += RawXValues[i];
-                if(index == 1) sum += RawYValues[i];
+                if(index == 1) sum += RawXValues[i];
+                if(index == 0) sum += RawYValues[i];
             }
             //PRINTF("%d\n", sum/MedianLenght);
 
-            if(index == 0){
+            if(index == 1){
                 FilteredValues.xDistance = sum/MedianLenght;
                 RawValues.xDistance = newValue;
                 
@@ -61,9 +63,9 @@ class LIDARReader : public StaticThread <> {
                 return;
             }
             
-            if(index == 1){
+            if(index == 0){
                 FilteredValues.yDistance = sum/MedianLenght;
-                RawValues.yDistance = newValue;
+                RawValues.yDistance = newValue; //-(newValue + YZero);
                 return;
             }
         }
@@ -92,6 +94,7 @@ class LIDARReader : public StaticThread <> {
 
 	        while(1) {
 
+                int64_t t = NOW();
                 green.setPins(~green.readPins());
 
                 setCurrentI2C(1);
@@ -102,8 +105,8 @@ class LIDARReader : public StaticThread <> {
 
                 LIDAR_Filtered_Topic.publish(FilteredValues);
                 LIDAR_Raw_Topic.publish(RawValues);
-
-                suspendCallerUntil( NOW() + 5*MILLISECONDS );
+                //PRINTF("%ld", (long)(NOW()-t));
+                suspendCallerUntil( NOW() + 100*MILLISECONDS );
 	        }
         }
 

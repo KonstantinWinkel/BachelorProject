@@ -12,7 +12,6 @@
 #include "DemoProgram.h"
 
 int main(int argc, char** argv){
-
 	//Setup
 	std::string deviceName = argv[1]; // for example "/dev/ttyACM0"
 	std::string programMode = argv[2];
@@ -31,16 +30,16 @@ int main(int argc, char** argv){
 
 	UARTInterface uartinterface(&filewriter, deviceName, 115200);
 
-	//Controller controller(&filewriter);
+	//Controller controller(&filewriter, nullptr);
 	DemoProgram demoprogram(&filewriter);
 	
-	//ImageProcessing x(0, "X", &filewriter, &CommBufferx, Identifier::xAngle, Identifier::xVelocity);
-	//ImageProcessing y(0, "Y", &filewriter, &CommBuffery, Identifier::yAngle, Identifier::yVelocity);
+	ImageProcessing x(2, "X", &filewriter, &CommBufferx, Identifier::xAngle, Identifier::xVelocity);
+	ImageProcessing y(6, "Y", &filewriter, &CommBuffery, Identifier::yAngle, Identifier::yVelocity);
 	
 
 	//Creation of required threads
-	//std::thread xThread(&ImageProcessing::run, x);
-	//std::thread yThread(&ImageProcessing::run, y);
+	std::thread xThread(&ImageProcessing::run, x);
+	std::thread yThread(&ImageProcessing::run, y);
 	std::thread uartThread(&UARTInterface::run, uartinterface);
 
 	//conditional creation of controller and demo threads with join
@@ -56,7 +55,7 @@ int main(int argc, char** argv){
 
 
 	//join all required threads
-	//xThread.join();
-	//yThread.join();
+	xThread.join();
+	yThread.join();
 	uartThread.join();
 }

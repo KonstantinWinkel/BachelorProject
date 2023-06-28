@@ -97,7 +97,7 @@ void FileWriter::writeUINT16(Identifier identifier, uint16_t value){
 	//Add Positions
 	line += std::to_string(xPosition) + "," + std::to_string(yPosition) + ",";
 	//Add Force
-	line += std::to_string(xForce) + "," + std::to_string(yForce) + "\n";
+	line += std::to_string(xForce) + "," + std::to_string(yForce) + ",";
 	//Add Lidar
 	line += std::to_string(xLidarFiltered) + "," + std::to_string(yLidarFiltered) + ",";
 	line += std::to_string(xLidarRaw) + "," + std::to_string(yLidarRaw) + "\n";

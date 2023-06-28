@@ -12,3 +12,5 @@ target_link_libraries(serial rt)
 
 add_executable(main linux_src/main.cpp linux_src/FileWriter.cpp linux_src/ImageProcessing.cpp linux_src/Controller.cpp linux_src/UARTInterface.cpp linux_src/DemoProgram.cpp linux_src/DataPuffer.cpp linux_src/Filter.cpp)
 target_link_libraries(main ${OpenCV_LIBS} pthread serial)
+
+add_executable(output-cleaner linux_src/output-cleaner.cpp)

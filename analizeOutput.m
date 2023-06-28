@@ -2,8 +2,8 @@
 %-  READ DATA FROM CSV FILE
 %-
 
-%index mapping: 1 = time, 2/3 = x/y angle, 4/5 = x/y velocity, 6/7 = x/y controller output, 8/9 = x/y IMU reading
-M_1= "output.csv"; 
+%index mapping: 1 = time, 2/3 = x/y angle, 4/5 = x/y velocity, 6/7 = x/y controller output, 8/9 = x/y IMU reading, 10/11 = LIDAR Filtered, 12/13 = LIDAR Raw
+M_1= "output_cleanAF.csv"; 
 X_1= csvread(M_1);
 
 %-
@@ -19,6 +19,10 @@ CX = [];
 CY = [];
 FX = [];
 FY = [];
+LFX = [];
+LFY = [];
+LRX = [];
+LRY = [];
 
 %array definitions for time of datapoints
 TAX = [];
@@ -29,6 +33,10 @@ TCX = [];
 TCY = [];
 TFX = [];
 TFY = [];
+TLFX = [];
+TLFY = [];
+TLRX = [];
+TLRY = [];
 
 %init values for datapoints, mostly 0
 AX (1) = X_1(1,2);
@@ -39,6 +47,10 @@ CX (1) = X_1(1,6);
 CY (1) = X_1(1,7);
 FX (1) = X_1(1,8);
 FY (1) = X_1(1,9);
+LFX (1) = X_1(1,10);
+LFY (1) = X_1(1,11);
+LRX (1) = X_1(1,12);
+LRY (1) = X_1(1,13);
 
 %init values for time of datapoints, mostly 0
 TAX (1) = X_1(1,1);
@@ -49,6 +61,10 @@ TCX (1) = X_1(1,1);
 TCY (1) = X_1(1,1);
 TFX (1) = X_1(1,1);
 TFY (1) = X_1(1,1);
+TLFX (1) = X_1(1,1);
+TLFY (1) = X_1(1,1);
+TLRX (1) = X_1(1,1);
+TLRY (1) = X_1(1,1);
 
 for i = 1:size(X_1, 1)
   
@@ -99,6 +115,30 @@ for i = 1:size(X_1, 1)
     TFY(end + 1) = X_1(i, 1);
     FY(end + 1) = X_1(i, 9);
   endif
+
+  %fill LidarFilteredX values and times
+  if LFX(end) != X_1(i, 10)
+    TLFX(end + 1) = X_1(i, 1)
+    LFX(end + 1) = X_1(i, 10)
+  endif
+
+  %fill LidarFilteredY values and times
+  if LFY(end) != X_1(i, 11)
+    TLFY(end + 1) = X_1(i, 1)
+    LFY(end + 1) = X_1(i, 11)
+  endif
+
+  %fill LidarFilteredX values and times
+  if LRX(end) != X_1(i, 12)
+    TLRX(end + 1) = X_1(i, 1)
+    LRX(end + 1) = X_1(i, 12)
+  endif
+
+  %fill LidarFilteredY values and times
+  if LRY(end) != X_1(i, 13)
+    TLRY(end + 1) = X_1(i, 1)
+    LRY(end + 1) = X_1(i, 13)
+  endif
   
 endfor
 
@@ -144,6 +184,26 @@ hold off;
 title('Force on the pen as messured by the IMU');
 xlabel('Time [s]');
 ylabel('Force [Newton]');
+legend('X', 'Y');
+
+figure(5);
+plot(TLFX, LFX);
+hold on;
+plot(TLFY, LFY);
+hold off;
+title('Filtered Lidar values');
+xlabel('Time [s]');
+ylabel('Distance [mm]');
+legend('X', 'Y');
+
+figure(6);
+plot(TLRX, LRX);
+hold on;
+plot(TLRY, LRY);
+hold off;
+title('Raw Lidar values');
+xlabel('Time [s]');
+ylabel('Distance [mm]');
 legend('X', 'Y');
 
 %-

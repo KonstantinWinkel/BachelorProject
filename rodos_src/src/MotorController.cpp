@@ -10,7 +10,7 @@
 #include "../include/util.h"
 #include "../include/topics.h"
 
-#define MessageLength 19
+#define MessageLength 19 //19
 
 HAL_PWM servo1(PWM_IDX00); //PE9
 HAL_PWM servo2(PWM_IDX01); //PE11
@@ -71,21 +71,32 @@ class MotorController : public StaticThread<>
 
         void run(){
 			
-			
+			float tempy = 0, tempx=0;
+
 			
 			while(1){
 				orange.setPins(~orange.readPins());
-				if(frameCounter < 5){
-					curServoX += xChange;
-					curServoY += yChange;
-					frameCounter++;
-				}
+				//if(frameCounter < 5){
+				//	curServoX += xChange;
+				//	curServoY += yChange;
+				//	frameCounter++;
+				//}
+				//
+				//servo1.write(calculatePWM(curServoX));
+				//servo2.write(calculatePWM(curServoX));
+				//servo3.write(calculatePWM(curServoY));
+				//
+				//PRINTF("%d\n", curServoX);
 
-				servo1.write(calculatePWM(curServoX));
-				servo2.write(calculatePWM(curServoX));
-				servo3.write(calculatePWM(curServoY));
+				//tempx += 0.1;
+				//if(tempx >= 50) tempx = -50;
+				tempx=-50;
 
-				suspendCallerUntil(NOW() + 1 * MILLISECONDS);
+				servo1.write(calculatePWM(servoX));
+				servo2.write(calculatePWM(servoX));
+				servo3.write(calculatePWM(servoY));
+
+				suspendCallerUntil(NOW() + 5 * MILLISECONDS); // was 1
 			}
         }
 };
@@ -100,9 +111,10 @@ char ch[MessageLength];
 
 class UartReceiver: public StaticThread<>{
 	public:
-		UartReceiver() :	StaticThread("UART Reciever", 10) {}
+		UartReceiver() :	StaticThread("UART Reciever", 1000) {}
 
 		void clearMessage(){
+			//PRINTF("%s\n", all);
 			for(int i = 0; i < MessageLength; i++){
 				all[i] = 'z';
 			}
@@ -112,7 +124,8 @@ class UartReceiver: public StaticThread<>{
 		}
 
 		void init(){
-			uart_stdout.config(UART_PARAMETER_ENABLE_DMA,1);
+			uart_stdout.init();
+			uart_stdout.config(UART_PARAMETER_ENABLE_DMA,MessageLength);
 			clearMessage();
 		}
 
@@ -120,17 +133,23 @@ class UartReceiver: public StaticThread<>{
 		void run() {
 			
 			while (1) {
-				if (uart_stdout.read(ch,MessageLength) > 0){
-					//PRINTF("%c",ch[0]);   
-					all[pos] = ch[0];
-					if(all[pos] == 'X'){
-						clearMessage();
-						all[0] = 'X';
+				size_t readLength = uart_stdout.read(ch,MessageLength);
+				if (readLength > 0){
+					PRINTF("\n");
+					for(int i = 0; i < readLength; i++){
+						all[i] = ch[i];
 					}
-					pos++;
+					PRINTF("\n");
+					PRINTF("%c",ch[0]);   
+					//all[pos] = ch[0];
+					//if(all[pos] == 'X'){
+					//	clearMessage();
+					//	all[0] = 'X';
+					//}
+					//pos++;
 				}
 
-				if(all[pos-1] == '#' || pos > 18){
+				if(all[18] == '#' || pos > 18){
 					
 					if(all[0] != 'X' || all[9] != 'Y' || all[18] != '#'){
 						clearMessage();
@@ -148,14 +167,15 @@ class UartReceiver: public StaticThread<>{
 					servoX = toFloat(xString);
 					servoY = toFloat(yString);
 
-					xChange = (servoX - curServoX)/5.0f;
-					yChange = (servoY - curServoY)/5.0f;
-					frameCounter = 0;
+					//xChange = (servoX - curServoX)/5.0f;
+					//yChange = (servoY - curServoY)/5.0f;
+					//frameCounter = 0;
 
 					clearMessage();
 				}
 
 				uart_stdout.suspendUntilDataReady();
+				//suspendCallerUntil(NOW() + 3 *MILLISECONDS);
 			}
 			
 		}

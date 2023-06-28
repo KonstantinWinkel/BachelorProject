@@ -46,6 +46,7 @@ class UARTTransmitter : public StaticThread <> {
                 toChars(lidar_raw_data.yDistance, yLIDARRaw);
 
                 PRINTF("%s%s%s%s%s%s%s", xIMU, yIMU, zIMU, xLIDARFiltered, yLIDARFiltered, xLIDARRaw, yLIDARRaw);
+                //PRINTF("%s%s%s", xIMU, yIMU, zIMU);
 
                 //DEBUG OUTPUT
                 //PRINTF("UARTransmitter-----------------\n");
