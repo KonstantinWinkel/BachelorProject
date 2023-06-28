@@ -3,11 +3,16 @@
 
 //required header files
 #include "FileWriter.h"
+#include "DataPuffer.h"
 #include "../serial/include/serial/serial.h"
+
+using namespace je;
 
 class UARTInterface{
 	protected:
 		FileWriter * filewriter;
+		CommBuffer<uint16_t> * xLidarBuffer;
+		CommBuffer<uint16_t> * yLidarBuffer;
 
 		std::string deviceName;
 		int baudRate;
@@ -19,14 +24,11 @@ class UARTInterface{
 		float xValue; // currently changed to float, was double
 		float yValue; // maybe float is enough accuarcy?
 
-		uint16_t xLidarFiltered;
-		uint16_t yLidarFiltered;
-
-		uint16_t xLidarRaw;
-		uint16_t yLidarRaw;
+		uint16_t xLidar;
+		uint16_t yLidar;
 
 	public:
-		UARTInterface(FileWriter * filewriter, std::string deviceName, int baudRate);
+		UARTInterface(FileWriter * filewriter,CommBuffer<uint16_t> * xLidarBuffer, CommBuffer<uint16_t> * yLidarBuffer, std::string deviceName, int baudRate);
 		~UARTInterface();
 
 		virtual void PublishValues();
