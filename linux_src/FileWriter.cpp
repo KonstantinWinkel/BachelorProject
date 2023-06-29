@@ -9,17 +9,17 @@
 FileWriter::FileWriter(){
 	starttime = std::chrono::high_resolution_clock::now();
 
-	//check if file exists, if yes: clear, if no: create
-	file.open("output.csv", std::ofstream::out | std::ofstream::trunc);
-	
-	if(!file){
-		file.open("output.csv",  std::fstream::in | std::fstream::out | std::fstream::trunc);
-		file << "\n";
-		file.close();
-	}
-	else{
-		file.close();
-	}
+	//check if files exists, if yes: clear, if no: create
+	initFile(CameraXFile, CameraXFileName);
+	initFile(CameraYFile, CameraYFileName);
+	initFile(FilterXFile, FilterXFileName);
+	initFile(FilterYFile, FilterYFileName);
+	initFile(ControllerXFile, ControllerXFileName);
+	initFile(ControllerYFile, ControllerYFileName);
+	initFile(UARTFile, UARTFileName);
+
+	FileWriter::ControllerXValue = 0;
+	FileWriter::ControllerYValue = 0;
 }
 
 //destructor left empty
@@ -27,100 +27,99 @@ FileWriter::~FileWriter(){
 
 }
 
-//takes a new value, replaces the corosponding old value and then writes the current time plus all values into a new line
-void FileWriter::writeFLOAT(Identifier identifier, float value){
+void FileWriter::initFile(std::fstream &filestream, std::string filename){
+	filestream.open(filename, std::ofstream::out | std::ofstream::trunc);
 
-	FileWriter::mutex.lock();
-
-	switch(identifier){
-		case Identifier::xAngle: xAngle = value; break;
-		case Identifier::yAngle: yAngle = value; break;
-		case Identifier::xVelocity: xVelocity = value; break;
-		case Identifier::yVelocity: yVelocity = value; break;
-		case Identifier::xPosition: xPosition = value; break;
-		case Identifier::yPosition: yPosition = value; break;
-		case Identifier::xForce: xForce = value; break;
-		case Identifier::yForce: yForce = value; break;
+	if(!filestream){
+		filestream.open(filename,  std::fstream::in | std::fstream::out | std::fstream::trunc);
+		filestream << "\n";
+		filestream.close();
 	}
+	else filestream.close();
+}
 
-	//FORMAT: csv
-	//Time - xAngle - yAngle - xVelocity - yVelocity - xPosition - yPosition - xForce - yForce
-	//Multiple files maybe?
+void FileWriter::writeToFile(std::fstream &filestream, std::string filename, std::string line){
+	filestream.open(filename, std::ios_base::app);
+	filestream << line;
+	filestream.close();
+}
+
+void FileWriter::readControllerValues(float &xValue, float &yValue){
+	xValue = FileWriter::ControllerXValue;
+	yValue = FileWriter::ControllerYValue;
+}
+
+void FileWriter::writeCameraInfo(Identifier identifier, float position, float velocity){
+
 	std::string line = "";
 
-	//Add Time
+	//Add Time, angular position and angular velocity
 	std::chrono::duration<double, std::milli> ms_double = std::chrono::high_resolution_clock::now() - starttime;
 	line += std::to_string(ms_double.count()/1000) + ",";
-	//Add Angles
-	line += std::to_string(xAngle) + "," + std::to_string(yAngle) + ",";
-	//Add Velocities
-	line += std::to_string(xVelocity) + "," + std::to_string(yVelocity) + ",";
-	//Add Positions
-	line += std::to_string(xPosition) + "," + std::to_string(yPosition) + ",";
-	//Add Force
-	line += std::to_string(xForce) + "," + std::to_string(yForce) + ",";
-	//Add Lidar
-	line += std::to_string(xLidarFiltered) + "," + std::to_string(yLidarFiltered) + ",";
-	line += std::to_string(xLidarRaw) + "," + std::to_string(yLidarRaw) + "\n";
-	
-	//Write line to File   
-	file.open("output.csv", std::ios_base::app);
-	file << line;
-	file.close();
+	line += std::to_string(position) + "," + std::to_string(velocity) + "\n";
 
-	FileWriter::mutex.unlock();
+	//Write line to File
+	switch (identifier){
+		case Identifier::X: writeToFile(CameraXFile, CameraXFileName, line); break;
+		case Identifier::Y: writeToFile(CameraYFile, CameraYFileName, line); break;
+		default: break;
+	}
 
 }
 
-void FileWriter::writeUINT16(Identifier identifier, uint16_t value){
-	FileWriter::mutex.lock();
-
-	switch(identifier){
-		case Identifier::xLidarFiltered: xLidarFiltered = value; break;
-		case Identifier::yLidarFiltered: yLidarFiltered = value; break;
-		case Identifier::xLidarRaw: xLidarRaw = value; break;
-		case Identifier::yLidarRaw: yLidarRaw = value; break;
-	}
-
-	//FORMAT: csv
-	//Time - xAngle - yAngle - xVelocity - yVelocity - xPosition - yPosition - xForce - yForce
-	//Multiple files maybe?
+void FileWriter::writeControllerInfo(Identifier identifier, float value){
+	
 	std::string line = "";
 
-	//Add Time
+	//Add Time and controller value
 	std::chrono::duration<double, std::milli> ms_double = std::chrono::high_resolution_clock::now() - starttime;
 	line += std::to_string(ms_double.count()/1000) + ",";
-	//Add Angles
-	line += std::to_string(xAngle) + "," + std::to_string(yAngle) + ",";
-	//Add Velocities
-	line += std::to_string(xVelocity) + "," + std::to_string(yVelocity) + ",";
-	//Add Positions
-	line += std::to_string(xPosition) + "," + std::to_string(yPosition) + ",";
-	//Add Force
-	line += std::to_string(xForce) + "," + std::to_string(yForce) + ",";
-	//Add Lidar
-	line += std::to_string(xLidarFiltered) + "," + std::to_string(yLidarFiltered) + ",";
-	line += std::to_string(xLidarRaw) + "," + std::to_string(yLidarRaw) + "\n";
-	
-	//Write line to File   
-	file.open("output.csv", std::ios_base::app);
-	file << line;
-	file.close();
+	line += std::to_string(value) + "\n";
 
-	FileWriter::mutex.unlock();
-	
+	//Write line to File
+	switch (identifier){
+		case Identifier::X: 
+			writeToFile(ControllerXFile, ControllerXFileName, line);
+			FileWriter::ControllerXValue = value;
+			break;
+		case Identifier::Y: 
+			writeToFile(ControllerYFile, ControllerYFileName, line);
+			FileWriter::ControllerYValue = value;
+			break;
+		default: break;
+	}
+
 }
 
-float FileWriter::read(Identifier identifier){
-	switch(identifier){
-		case Identifier::xAngle: return xAngle;
-		case Identifier::yAngle: return yAngle;
-		case Identifier::xVelocity: return xVelocity;
-		case Identifier::yVelocity: return yVelocity;
-		case Identifier::xPosition: return xPosition;
-		case Identifier::yPosition: return yPosition;
-		case Identifier::xForce: return xForce;
-		case Identifier::yForce: return yForce;
+void FileWriter::writeFilterInfo(Identifier identifier, float angle, float ang_vel, float position, float velocity){
+	std::string line = "";
+
+	//Add Time and controller value
+	std::chrono::duration<double, std::milli> ms_double = std::chrono::high_resolution_clock::now() - starttime;
+	line += std::to_string(ms_double.count()/1000) + ",";
+	line += std::to_string(angle) + "," + std::to_string(ang_vel) + ",";
+	line += std::to_string(position) + "," + std::to_string(velocity) + "\n";
+
+	//Write line to File
+	switch (identifier){
+		case Identifier::X: writeToFile(FilterXFile, FilterXFileName, line); break;
+		case Identifier::Y: writeToFile(FilterYFile, FilterYFileName, line); break;
+		default: break;
 	}
-	return -1;
+}
+
+void FileWriter::writeUARTInfo(float xForce, float yForce, uint16_t xLidarFiltered, uint16_t yLidarFiltered, uint16_t xLidarRaw, uint16_t yLidarRaw){
+
+	std::string line = "";
+
+	//Add Time, Forces, filtered and raw Lidar data
+	std::chrono::duration<double, std::milli> ms_double = std::chrono::high_resolution_clock::now() - starttime;
+	line += std::to_string(ms_double.count()/1000) + ",";
+	line += std::to_string(xForce) + "," + std::to_string(yForce) + ",";
+	line += std::to_string(xLidarFiltered) + "," + std::to_string(yLidarFiltered) + ",";
+	line += std::to_string(xLidarRaw) + "," + std::to_string(yLidarRaw) + "\n";
+
+	//Write line to File
+	writeToFile(UARTFile, UARTFileName, line);
+
 }

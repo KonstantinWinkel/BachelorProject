@@ -45,16 +45,16 @@ int main(int argc, char** argv){
 
 	UARTInterface uartinterface(&filewriter, &ComBuffLidarX, &ComBuffLidarY, deviceName, 115200);
 
-	Controller controllerX(&filewriter,&filtered_data_x,Identifier::xPosition);
-	Controller controllerY(&filewriter,&filtered_data_y,Identifier::yPosition);
+	Controller controllerX(&filewriter,&filtered_data_x,Identifier::X);
+	Controller controllerY(&filewriter,&filtered_data_y,Identifier::Y);
 
 	Filter filterX(&filtered_data_x, &ComBuffLidarX, &ComBufPhiX);
 	Filter filterY(&filtered_data_y, &ComBuffLidarY, &ComBufPhiY);
 
 	DemoProgram demoprogram(&filewriter);
 
-	ImageProcessing x(0, "X", &filewriter, &ComBufPhiX, Identifier::xAngle, Identifier::xVelocity);
-	ImageProcessing y(2, "Y", &filewriter, &ComBufPhiY, Identifier::yAngle, Identifier::yVelocity);
+	ImageProcessing x(0, "X", &filewriter, &ComBufPhiX, Identifier::X);
+	ImageProcessing y(2, "Y", &filewriter, &ComBufPhiY, Identifier::Y);
 
 	//Creation of required threads
 	std::thread xThread(&ImageProcessing::run, x);

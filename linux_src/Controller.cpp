@@ -28,7 +28,7 @@ Controller::~Controller(){
 
 void Controller::PublishValues(){
 	//pass calculated values to the filewriter
-	filewriter->writeFLOAT(lever, pos);
+	filewriter->writeControllerInfo(lever, pos);
 }
 
 void Controller::update_pos(){

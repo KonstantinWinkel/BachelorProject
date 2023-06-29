@@ -24,12 +24,7 @@ UARTInterface::~UARTInterface(){
 
 void UARTInterface::PublishValues(){
 	//pass calculated values to the filewriter
-	filewriter->writeFLOAT(Identifier::xForce, xForce);
-	filewriter->writeFLOAT(Identifier::yForce, yForce);
-	filewriter->writeUINT16(Identifier::xLidarFiltered, xLidarFiltered);
-	filewriter->writeUINT16(Identifier::yLidarFiltered, yLidarFiltered);
-	filewriter->writeUINT16(Identifier::xLidarRaw, xLidarRaw);
-	filewriter->writeUINT16(Identifier::yLidarRaw, yLidarRaw);
+	filewriter->writeUARTInfo(xForce, yForce, xLidarFiltered, yLidarFiltered, xLidarRaw, yLidarRaw);
 }
 
 //
@@ -46,8 +41,7 @@ void UARTInterface::run(){
 }
 
 void UARTInterface::SetControllerValues(){
-	UARTInterface::xValue = filewriter->read(Identifier::xPosition);
-	UARTInterface::yValue = filewriter->read(Identifier::yPosition);
+	filewriter->readControllerValues(xValue, yValue);
 }
 
 void UARTInterface::ReceiveValues(){

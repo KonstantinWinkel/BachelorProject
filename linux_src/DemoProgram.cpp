@@ -17,8 +17,8 @@ DemoProgram::~DemoProgram(){
 
 void DemoProgram::PublishValues(){
     //pass calculated values to the filewriter
-	filewriter->writeFLOAT(Identifier::xPosition, xMotorValue );
-	filewriter->writeFLOAT(Identifier::yPosition, yMotorValue );
+	filewriter->writeControllerInfo(Identifier::X, xMotorValue);
+	filewriter->writeControllerInfo(Identifier::Y, yMotorValue);
     std::cout << "X: " << xMotorValue << " Y: " << yMotorValue << std::endl;
 }
 

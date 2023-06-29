@@ -19,8 +19,7 @@ class ImageProcessing{
 	protected:
 		FileWriter * filewriter;
 		CommBuffer<double> * ComBuf;
-		Identifier angleIdentifier;
-		Identifier velocityIdentifier;
+		Identifier identifier;
 
 		int cameraID;
 		std::string name;
@@ -42,7 +41,7 @@ class ImageProcessing{
 
 	public:
 		ImageProcessing();
-		ImageProcessing(int cameraID, std::string name, FileWriter * filewriter, CommBuffer<double> * ComBuf, Identifier angleIdentifier, Identifier velocityIdentifier);
+		ImageProcessing(int cameraID, std::string name, FileWriter * filewriter, CommBuffer<double> * ComBuf, Identifier identifier);
 		~ImageProcessing();
 		virtual void ReadAndProcessImage();
 		virtual void CalculatePositionAndVelocity();
