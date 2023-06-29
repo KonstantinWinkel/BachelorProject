@@ -7,10 +7,12 @@
 //required header files
 #include "UARTInterface.h"
 
-UARTInterface::UARTInterface(FileWriter * filewriter, std::string deviceName, int baudRate){
+UARTInterface::UARTInterface(FileWriter * filewriter,CommBuffer<uint16_t> * xLidarBuffer, CommBuffer<uint16_t> * yLidarBuffer, std::string deviceName, int baudRate){
 	UARTInterface::filewriter = filewriter;
-	UARTInterface::deviceName = deviceName;
+	UARTInterface::xLidarBuffer = xLidarBuffer;
+	UARTInterface::yLidarBuffer = yLidarBuffer;
 	UARTInterface::baudRate = baudRate;
+	UARTInterface::deviceName = deviceName;
 
 	UARTInterface::xValue = 0;
 	UARTInterface::yValue = 0;

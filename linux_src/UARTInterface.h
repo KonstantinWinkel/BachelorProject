@@ -24,8 +24,11 @@ class UARTInterface{
 		float xValue; // currently changed to float, was double
 		float yValue; // maybe float is enough accuarcy?
 
-		uint16_t xLidar;
-		uint16_t yLidar;
+		uint16_t xLidarRaw;
+		uint16_t yLidarRaw;
+
+		uint16_t xLidarFiltered;
+		uint16_t yLidarFiltered;
 
 	public:
 		UARTInterface(FileWriter * filewriter,CommBuffer<uint16_t> * xLidarBuffer, CommBuffer<uint16_t> * yLidarBuffer, std::string deviceName, int baudRate);

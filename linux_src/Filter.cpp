@@ -13,7 +13,6 @@
 #endif
 
 Filter::Filter(CommBuffer<std::array<double,4>> * CommBuffer_filtered_data, CommBuffer<uint16_t> * CommBuffer_x, CommBuffer<double> * CommBuffer_phi, size_t size_x, size_t size_phi) 
-    //:RingBuffer_x(size_x),RingBuffer_phi(size_phi){
     :RingBuffer_x(size_x,[=](int i){return size_x-i;}),RingBuffer_phi(size_phi,[=](int i){return size_phi-i;}){
     Filter::CommBuffer_filtered_data = CommBuffer_filtered_data;
     Filter::CommBuffer_x = CommBuffer_x;
