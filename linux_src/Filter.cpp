@@ -13,6 +13,7 @@
 Filter::Filter(Controller * controller,size_t size_x, size_t size_phi) 
     :RingBuffer_x(size_x,[=](int i){return size_x-i;}),RingBuffer_phi(size_phi,[=](int i){return size_phi-i;}){
     Filter::bias = 0;
+    Filter::controller = controller;
     last_time_x = std::chrono::high_resolution_clock::now();
     current_time_x = std::chrono::high_resolution_clock::now();
     last_time_phi = std::chrono::high_resolution_clock::now();

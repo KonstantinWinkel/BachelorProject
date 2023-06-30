@@ -16,7 +16,7 @@ int main(int argc, char** argv){
 
 	//Setup
 	std::string deviceName = "/dev/ttyACM0"; // for example "/dev/ttyACM0"
-	std::string programMode = "exp";
+	std::string programMode = "demo";
 	//std::string deviceName = argv[1]; // for example "/dev/ttyACM0"
 	//std::string programMode = argv[2];
 	std::cout << "Program Mode: " << programMode << std::endl;
