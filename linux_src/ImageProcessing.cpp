@@ -15,11 +15,11 @@ const cv::Scalar blueLow = cv::Scalar(80, 100, 100); //110 100 100
 const cv::Scalar blueHigh = cv::Scalar(125, 255, 255); //125 255 255
 
 //constructor, creates ImageProcessing object, sets identifying variables and intializes OpenCV Camera
-ImageProcessing::ImageProcessing(int cameraID, std::string name, FileWriter * filewriter, CommBuffer<double> * ComBuf, Identifier identifier){
+ImageProcessing::ImageProcessing(int cameraID, std::string name, FileWriter * filewriter, Filter * filter, Identifier identifier){
 	ImageProcessing::cameraID = cameraID;
 	ImageProcessing::name = name;
 	ImageProcessing::filewriter = filewriter;
-	ImageProcessing::ComBuf = ComBuf;
+	ImageProcessing::filter = filter;
 	ImageProcessing::identifier = identifier;
 
 	videoWindowName = "V" + name;
@@ -62,7 +62,7 @@ void ImageProcessing::CalculatePositionAndVelocity(){
 	lastIteration = std::chrono::high_resolution_clock::now();
 	angle = tempangle;
 
-	std::cout << angle << " " << velocity << std::endl;
+	_debug_print_image_(angle << " " << velocity);
 }
 
 //saves a frame from the camera and processes it --> finding coloured contrours
@@ -85,7 +85,7 @@ void ImageProcessing::ReadAndProcessImage(){
 
 	//if the size of contours is smaller than 2, its not possible to construct a line
 	if(contours.size() < 2){
-		printf("skipped frame \n");
+		_debug_print_image_("skipped frame \n");
 		skipFrame = true;
 		return;
 	}
@@ -133,6 +133,7 @@ void ImageProcessing::ReadAndProcessImage(){
 
 void ImageProcessing::PublishValues(){
 	filewriter->writeCameraInfo(identifier, angle, velocity);
+	filter->recieve_angle(angle);
 }
 
 //run method, handles programm flow

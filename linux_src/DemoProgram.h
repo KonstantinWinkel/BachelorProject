@@ -7,6 +7,13 @@
 //reqired header files
 #include "FileWriter.h"
 #include "UARTInterface.h"
+#include "bachelor_debug.h"
+
+#if defined(_DEBUG_DEMO_ON_)
+#define _debug_print_demo_(x) std::cout << x << std::endl
+#else
+#define _debug_print_demo_(x)
+#endif
 
 class DemoProgram {
     protected:

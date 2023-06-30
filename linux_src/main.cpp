@@ -29,32 +29,18 @@ int main(int argc, char** argv){
 	//Object Creation
 	FileWriter filewriter;
 
-	//Create CommBuffers for Communication
-	double phiX,phiY;
-	CommBuffer<double> ComBufPhiX; //angle sent by imageprocessing and recieved by filter
-	CommBuffer<double> ComBufPhiY;
+	Controller controllerX(&filewriter,Identifier::X);
+	Controller controllerY(&filewriter,Identifier::Y);
 
-	uint16_t lidarX,lidarY;
-	CommBuffer<uint16_t> ComBuffLidarX; //Lidar value sent by UartInterface, recieved by filter
-	CommBuffer<uint16_t> ComBuffLidarY;
+	Filter filterX(&controllerX);
+	Filter filterY(&controllerY);
 
-	std::array<double,4> data_x = {0,0,0,0};
-	std::array<double,4> data_y = {0,0,0,0};
-	CommBuffer<std::array<double,4>> filtered_data_x; //Filtered data sent by filter, recieved by controller
-	CommBuffer<std::array<double,4>> filtered_data_y;
-
-	UARTInterface uartinterface(&filewriter, &ComBuffLidarX, &ComBuffLidarY, deviceName, 115200);
-
-	Controller controllerX(&filewriter,&filtered_data_x,Identifier::X);
-	Controller controllerY(&filewriter,&filtered_data_y,Identifier::Y);
-
-	Filter filterX(&filtered_data_x, &ComBuffLidarX, &ComBufPhiX);
-	Filter filterY(&filtered_data_y, &ComBuffLidarY, &ComBufPhiY);
-
+	UARTInterface uartinterface(&filewriter, &filterX, &filterY, deviceName, 115200);
+	
 	DemoProgram demoprogram(&filewriter);
 
-	ImageProcessing x(0, "X", &filewriter, &ComBufPhiX, Identifier::X);
-	ImageProcessing y(2, "Y", &filewriter, &ComBufPhiY, Identifier::Y);
+	ImageProcessing x(0, "X", &filewriter, &filterX, Identifier::X);
+	ImageProcessing y(2, "Y", &filewriter, &filterY, Identifier::Y);
 
 	//Creation of required threads
 	std::thread xThread(&ImageProcessing::run, x);
@@ -63,17 +49,9 @@ int main(int argc, char** argv){
 
 	
 	//conditional creation of controller and demo threads with join
-	//if(programMode.compare("exp")==0) {
-		std::thread controllerThreadX(&Controller::run, controllerX);
-		std::thread controllerThreadY(&Controller::run, controllerY);
-		std::thread filterThreadX(&Filter::run, filterX);
-		std::thread filterThreadY(&Filter::run, filterY);
-		
-		controllerThreadX.join();
-		controllerThreadY.join();
-		filterThreadX.join();
-		filterThreadY.join();
-	//}
+	if(programMode.compare("exp")==0) {
+		//TODO fix programmode (demo will not work because the Controller isn't thread based anymore -> it cannot be turned off and will interfere with the demo program)
+	}
 
 	if(programMode.compare("demo")==0){
 		std::thread demoThread(&DemoProgram::run, demoprogram);

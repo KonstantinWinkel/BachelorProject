@@ -11,14 +11,20 @@
 
 //required header files
 #include "FileWriter.h"
-#include "DataPuffer.h"
+#include "Filter.h"
+
+#if defined(_DEBUG_IMAGE_ON_)
+#define _debug_print_image_(x) std::cout << x << std::endl
+#else
+#define _debug_print_image_(x)
+#endif
 
 using namespace je;
 
 class ImageProcessing{
 	protected:
 		FileWriter * filewriter;
-		CommBuffer<double> * ComBuf;
+		Filter * filter;
 		Identifier identifier;
 
 		int cameraID;
@@ -36,12 +42,14 @@ class ImageProcessing{
 		cv::Mat videoFrame;
 		cv::Mat detectionFrame;
 
+
+
 		std::string videoWindowName;
 		std::string detectionWindowName;
 
 	public:
 		ImageProcessing();
-		ImageProcessing(int cameraID, std::string name, FileWriter * filewriter, CommBuffer<double> * ComBuf, Identifier identifier);
+		ImageProcessing(int cameraID, std::string name, FileWriter * filewriter, Filter * filter, Identifier identifier);
 		~ImageProcessing();
 		virtual void ReadAndProcessImage();
 		virtual void CalculatePositionAndVelocity();

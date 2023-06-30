@@ -3,19 +3,29 @@
 
 //required header files
 #include "FileWriter.h"
-#include "DataPuffer.h"
 #include "../serial/include/serial/serial.h"
+
+#include "Filter.h"
+
+#include "bachelor_debug.h"
+
+#if defined(_DEBUG_UART_ON_)
+#define _debug_print_uart_(x) std::cout << x << std::endl
+#else
+#define _debug_print_uart_(x)
+#endif
 
 using namespace je;
 
 class UARTInterface{
 	protected:
 		FileWriter * filewriter;
-		CommBuffer<uint16_t> * xLidarBuffer;
-		CommBuffer<uint16_t> * yLidarBuffer;
 
 		std::string deviceName;
 		int baudRate;
+
+		Filter * filter_x;
+		Filter * filter_y;
 
 		float xForce;
 		float yForce;
@@ -31,7 +41,7 @@ class UARTInterface{
 		uint16_t yLidarFiltered;
 
 	public:
-		UARTInterface(FileWriter * filewriter,CommBuffer<uint16_t> * xLidarBuffer, CommBuffer<uint16_t> * yLidarBuffer, std::string deviceName, int baudRate);
+		UARTInterface(FileWriter * filewriter,Filter * filter_x, Filter * filter_y, std::string deviceName, int baudRate);
 		~UARTInterface();
 
 		virtual void PublishValues();

@@ -19,7 +19,7 @@ void DemoProgram::PublishValues(){
     //pass calculated values to the filewriter
 	filewriter->writeControllerInfo(Identifier::X, xMotorValue);
 	filewriter->writeControllerInfo(Identifier::Y, yMotorValue);
-    std::cout << "X: " << xMotorValue << " Y: " << yMotorValue << std::endl;
+    _debug_print_demo_("X: " << xMotorValue << " Y: " << yMotorValue);
 }
 
 void DemoProgram::run(){
@@ -36,29 +36,29 @@ void DemoProgram::bigDemo(){
     float xTemp = 0;
     float yTemp = 0;
     //start in middle
-    xMotorValue = PositionToAngle(6);
-    yMotorValue = PositionToAngle(4);
+    xMotorValue = PositionToAngle(7);
+    yMotorValue = PositionToAngle(3);
     PublishValues();
     std::this_thread::sleep_for(std::chrono::milliseconds(5000));
 
     //instant move to bottom right corner
     std::cout << "instant move to bottom right corner" << std::endl;
-    xMotorValue = PositionToAngle(4);
-    yMotorValue = PositionToAngle(4);
+    xMotorValue = PositionToAngle(3);
+    yMotorValue = PositionToAngle(3);
     PublishValues();
     std::this_thread::sleep_for(std::chrono::milliseconds(5000));
 
     //instant move to top left corner
     std::cout << "instant move to top left corner" << std::endl;
-    xMotorValue = PositionToAngle(6);
-    yMotorValue = PositionToAngle(6);
+    xMotorValue = PositionToAngle(7);
+    yMotorValue = PositionToAngle(7);
     PublishValues();
     std::this_thread::sleep_for(std::chrono::milliseconds(5000));
     
     //slow move to bottom left corner
     std::cout << "slow move to bottom left corner" << std::endl;
-    yTemp = 6;
-    while(yTemp > 4){
+    yTemp = 7;
+    while(yTemp > 3){
         yMotorValue = PositionToAngle(yTemp);
         yTemp -= 0.005;
         PublishValues();
@@ -66,7 +66,7 @@ void DemoProgram::bigDemo(){
         std::this_thread::sleep_for(std::chrono::milliseconds(5));
     }
 
-    yMotorValue = PositionToAngle(4);
+    yMotorValue = PositionToAngle(3);
     PublishValues();
     std::this_thread::sleep_for(std::chrono::milliseconds(5000));
 
@@ -74,7 +74,7 @@ void DemoProgram::bigDemo(){
     std::cout << "slow move to top right corner" << std::endl;
     xTemp = 6;
     yTemp = 4;
-    while(xTemp > 4 && yTemp < 6){
+    while(xTemp > 3 && yTemp < 7){
         xMotorValue = PositionToAngle(xTemp);
         yMotorValue = PositionToAngle(yTemp);
         xTemp -= 0.005;
@@ -84,14 +84,14 @@ void DemoProgram::bigDemo(){
         std::this_thread::sleep_for(std::chrono::milliseconds(5));
     }
 
-    xMotorValue = PositionToAngle(4);
-    yMotorValue = PositionToAngle(6);
+    xMotorValue = PositionToAngle(3);
+    yMotorValue = PositionToAngle(7);
     PublishValues();
     std::this_thread::sleep_for(std::chrono::milliseconds(5000));
 
     //return to middle
-    xMotorValue = PositionToAngle(6);
-    yMotorValue = PositionToAngle(4);
+    xMotorValue = PositionToAngle(7);
+    yMotorValue = PositionToAngle(3);
     PublishValues();
     std::this_thread::sleep_for(std::chrono::milliseconds(5000));
 

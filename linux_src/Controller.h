@@ -11,8 +11,6 @@ using namespace je;
 class Controller{
 	protected:
 		FileWriter * filewriter;
-		CommBuffer<std::array<double,4>> * filtered_data;
-		std::array<double,4> local_data;
 		std::array<double,6> state;
 		std::array<double,6> PID_CONST;
 		RingBuffer<double> phi_integrator;
@@ -25,10 +23,10 @@ class Controller{
 
 	public:
 
-		Controller(FileWriter * filewriter, CommBuffer<std::array<double,4>> * databuffer, Identifier lever, size_t phi_integrator_size = 10,size_t pos_integrator_size = 10);
+		Controller(FileWriter * filewriter, Identifier lever, size_t phi_integrator_size = 10,size_t pos_integrator_size = 10);
 		~Controller();
 
-		virtual void update_state();
+		virtual void update_state(std::array<double,4> filtered_data);
 
 		virtual void update_pos();
 
@@ -36,7 +34,7 @@ class Controller{
 
 		virtual void PublishValues();
 
-		virtual void run();
+		virtual void recieve_data(std::array<double,4> filtered_data);
 };
 
 #endif

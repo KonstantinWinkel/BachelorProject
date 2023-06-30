@@ -7,10 +7,10 @@
 //required header files
 #include "UARTInterface.h"
 
-UARTInterface::UARTInterface(FileWriter * filewriter,CommBuffer<uint16_t> * xLidarBuffer, CommBuffer<uint16_t> * yLidarBuffer, std::string deviceName, int baudRate){
+UARTInterface::UARTInterface(FileWriter * filewriter,Filter * filter_x, Filter * filter_y, std::string deviceName, int baudRate){
 	UARTInterface::filewriter = filewriter;
-	UARTInterface::xLidarBuffer = xLidarBuffer;
-	UARTInterface::yLidarBuffer = yLidarBuffer;
+	UARTInterface::filter_x = filter_x;
+	UARTInterface::filter_y = filter_y;
 	UARTInterface::baudRate = baudRate;
 	UARTInterface::deviceName = deviceName;
 
@@ -25,6 +25,8 @@ UARTInterface::~UARTInterface(){
 void UARTInterface::PublishValues(){
 	//pass calculated values to the filewriter
 	filewriter->writeUARTInfo(xForce, yForce, xLidarFiltered, yLidarFiltered, xLidarRaw, yLidarRaw);
+	filter_x->recieve_pos(xLidarRaw);
+	filter_y->recieve_pos(yLidarRaw);
 }
 
 //
@@ -75,8 +77,7 @@ void UARTInterface::ReceiveValues(){
 	xLidarRaw = toUINT16(xLIDARRawChar);
 	yLidarRaw = toUINT16(yLIDARRawChar);
 
-	//DEBUG COUT
-	std::cout << xForce <<" " << yForce << " " << zForce << " " << xLidarFiltered << " " << yLidarFiltered << " " << xLidarRaw << " " << yLidarRaw << '\n';
+	_debug_print_uart_(Force <<" " << yForce << " " << zForce << " " << xLidarFiltered << " " << yLidarFiltered << " " << xLidarRaw << " " << yLidarRaw);
 }
 
 void UARTInterface::SendValues(){
