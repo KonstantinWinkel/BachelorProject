@@ -85,7 +85,7 @@ void ImageProcessing::ReadAndProcessImage(){
 
 	//if the size of contours is smaller than 2, its not possible to construct a line
 	if(contours.size() < 2){
-		_debug_print_image_("skipped frame \n");
+		_debug_print_image_("skipped frame");
 		skipFrame = true;
 		return;
 	}

@@ -58,7 +58,7 @@ void UARTInterface::ReceiveValues(){
 	//read string from UART stream
 	std::string response = "";
 	serial.flushInput();
-	response = serial.read(40); //40
+	response = serial.read(41); //40
 	serial.close();
 
 	char xIMUChar[8], yIMUChar[8], zIMUChar[8], xLIDARFilteredChar[4], yLIDARFilteredChar[4], xLIDARRawChar[4], yLIDARRawChar[4];
