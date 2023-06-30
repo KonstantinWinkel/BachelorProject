@@ -13,6 +13,14 @@
 #include "FileWriter.h"
 #include "DataPuffer.h"
 
+#include "bachelor_debug.h"
+
+#if defined(_DEBUG_IMAGE_ON_)
+#define _debug_print_image_(x) std::cout << x << std::endl
+#else
+#define _debug_print_image_(x)
+#endif
+
 using namespace je;
 
 class ImageProcessing{

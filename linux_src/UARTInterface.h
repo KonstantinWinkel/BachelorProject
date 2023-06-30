@@ -6,6 +6,14 @@
 #include "DataPuffer.h"
 #include "../serial/include/serial/serial.h"
 
+#include "bachelor_debug.h"
+
+#if defined(_DEBUG_UART_ON_)
+#define _debug_print_uart_(x) std::cout << x << std::endl
+#else
+#define _debug_print_uart_(x)
+#endif
+
 using namespace je;
 
 class UARTInterface{

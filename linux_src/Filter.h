@@ -3,6 +3,14 @@
 
 #include "DataPuffer.h"
 
+#include "bachelor_debug.h"
+
+#if defined(_DEBUG_FILTER_ON_)
+#define _debug_print_filter_(x) std::cout << x << std::endl
+#else
+#define _debug_print_filter_(x)
+#endif
+
 using namespace je;
 
 class Filter

@@ -62,7 +62,7 @@ void ImageProcessing::CalculatePositionAndVelocity(){
 	lastIteration = std::chrono::high_resolution_clock::now();
 	angle = tempangle;
 
-	std::cout << angle << " " << velocity << std::endl;
+	_debug_print_image_(angle << " " << velocity);
 }
 
 //saves a frame from the camera and processes it --> finding coloured contrours
@@ -85,7 +85,7 @@ void ImageProcessing::ReadAndProcessImage(){
 
 	//if the size of contours is smaller than 2, its not possible to construct a line
 	if(contours.size() < 2){
-		printf("skipped frame \n");
+		_debug_print_image_("skipped frame");
 		skipFrame = true;
 		return;
 	}
