@@ -16,6 +16,8 @@ UARTInterface::UARTInterface(FileWriter * filewriter,Filter * filter_x, Filter *
 
 	UARTInterface::xValue = 0;
 	UARTInterface::yValue = 0;
+	
+	UARTInterface::lastIteration = std::chrono::high_resolution_clock::now();
 }
 
 UARTInterface::~UARTInterface(){
@@ -38,17 +40,19 @@ void UARTInterface::run(){
 		SendValues();
 		PublishValues();
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(5));
+		//std::this_thread::sleep_for(std::chrono::milliseconds(5));
 	}
 }
 
 void UARTInterface::SetControllerValues(){
-	filewriter->readControllerValues(xValue, yValue);
+	xValue = filewriter->readControllerValues(Identifier::X);
+	yValue = filewriter->readControllerValues(Identifier::Y);
 }
 
 void UARTInterface::ReceiveValues(){
 
 	//open port to STM Board
+
 	serial::Serial serial(deviceName, baudRate, serial::Timeout::simpleTimeout(3000));
 	if (!serial.isOpen()){
 		printf("Port failed to open \n");
@@ -58,10 +62,9 @@ void UARTInterface::ReceiveValues(){
 	//read string from UART stream
 	std::string response = "";
 	serial.flushInput();
-	response = serial.read(41); //40
-	serial.close();
+	response = serial.read(40); //40
+	serial.close();	
 
-	char xIMUChar[8], yIMUChar[8], zIMUChar[8], xLIDARFilteredChar[4], yLIDARFilteredChar[4], xLIDARRawChar[4], yLIDARRawChar[4];
 	for(int i = 0;i<8;i++) xIMUChar[i]=response[i-0];
 	for(int i = 8;i<16;i++) yIMUChar[i-8]=response[i];
 	for(int i = 16;i<24;i++) zIMUChar[i-16]=response[i];
@@ -77,7 +80,7 @@ void UARTInterface::ReceiveValues(){
 	xLidarRaw = toUINT16(xLIDARRawChar);
 	yLidarRaw = toUINT16(yLIDARRawChar);
 
-	_debug_print_uart_(Force <<" " << yForce << " " << zForce << " " << xLidarFiltered << " " << yLidarFiltered << " " << xLidarRaw << " " << yLidarRaw);
+	_debug_print_uart_(response << " " << xForce <<" " << yForce << " " << zForce << " " << xLidarFiltered << " " << yLidarFiltered << " " << xLidarRaw << " " << yLidarRaw);
 }
 
 void UARTInterface::SendValues(){
@@ -85,16 +88,22 @@ void UARTInterface::SendValues(){
 	if (!serial.isOpen()) printf("Port failed to open \n");	
 	serial.flushOutput();
 
+	std::chrono::duration<double, std::milli> ms_double = std::chrono::high_resolution_clock::now() - lastIteration;
+	lastIteration = std::chrono::high_resolution_clock::now();
+
 	char * outputString;
 	char xString[9] = ""; 
 	char yString[9] = "";
+	char tString[9] = "";
 	toChars(xValue, xString);
 	toChars(yValue, yString); 
+	toChars((float)(ms_double.count()/1000),tString);
 
-	asprintf(&outputString, "X%sY%s#", xString, yString);
+	asprintf(&outputString, "X%sY%sT%s#", xString, yString, tString);
 
 	size_t bytesWritten = serial.write(outputString);
 	serial.close();
+	std::cout << ms_double.count()/1000 << std::endl;
 
 	//DEBUG COUT
 	//std::cout << "Bytes sent: " << bytesWritten << " Message: " << outputString << std::endl;

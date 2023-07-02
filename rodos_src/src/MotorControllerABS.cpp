@@ -12,8 +12,6 @@
 #include "../include/topics.h"
 
 #define MessageLength 28 //19
-#define MAX_POS 5.0
-#define MIN_POS -5.0
 
 HAL_PWM servo1(PWM_IDX00); //PE9
 HAL_PWM servo2(PWM_IDX01); //PE11
@@ -23,14 +21,21 @@ HAL_GPIO orange(GPIO_061); //this threads "Controll LED"
 HAL_GPIO redMotor(GPIO_062); //reserved for calculations
 
 //desired Angles
-float acc_x = 0;
-float acc_y = 0;
+float servoX = 0;
+float servoY = 0;
+float time_frame = 0.1;
 
-float vel_x = 0;
-float vel_y = 0;
+//utility variables for smoother motion
+float curServoX = 0;
+float curServoY = 0;
 
-float pos_x = 0;
-float pos_y = 0;
+float xChange = 0;
+float yChange = 0;
+
+float lastServoX;
+float lastServoY;
+float nextServoX;
+float nextServoY;
 
 namespace RODOS {
 	extern HAL_UART uart_stdout;
@@ -55,10 +60,6 @@ class MotorController : public StaticThread<>
 			orange.init(1,1,0);
         }
 
-		float Pos2A(float position){
-			return position * (50.0f/5.0f);
-		}
-
 		float P2A(float percentage){
 			return percentage * 120 - 60;
 		}
@@ -71,41 +72,6 @@ class MotorController : public StaticThread<>
             return (unsigned int)(1920 - 2 * Angle);//orig:4
         }
 
-		void checkBounds(){
-			bool X_OUT_OF_BOUNDS = false;
-			bool Y_OUT_OF_BOUNDS = false;
-
-			if(pos_x > MAX_POS){
-				X_OUT_OF_BOUNDS = true;
-				pos_x = MAX_POS;
-			}
-
-			if(pos_x < MIN_POS){
-				X_OUT_OF_BOUNDS = true;
-				pos_x = MIN_POS;
-			}
-
-			if(pos_y > MAX_POS){
-				Y_OUT_OF_BOUNDS = true;
-				pos_y = MAX_POS;
-			}
-
-			if(pos_y < MIN_POS){
-				Y_OUT_OF_BOUNDS = true;
-				pos_y = MIN_POS;
-			}
-
-			if(X_OUT_OF_BOUNDS){
-				acc_x = 0;
-				vel_x = 0;
-			}
-
-			if(Y_OUT_OF_BOUNDS){
-				acc_y = 0;
-				vel_y = 0;
-			}
-		}
-
 
 
         void run(){
@@ -116,19 +82,13 @@ class MotorController : public StaticThread<>
 			TIME_LOOP(0*SECONDS, 1 * MILLISECONDS){
 				orange.setPins(~orange.readPins());
 
-				vel_x += acc_x/1000;
-				vel_y += acc_y/1000;
+				curServoX += xChange;
+				curServoY += yChange;
 
-				pos_x += vel_x/1000;
-				pos_y += vel_y/1000;
+				servo1.write(calculatePWM(curServoX));
+				servo2.write(calculatePWM(curServoX));
+				servo3.write(calculatePWM(curServoY));
 
-				checkBounds();
-
-				servo1.write(calculatePWM(Pos2A(pos_x)));
-				servo2.write(calculatePWM(Pos2A(pos_x)));
-				servo3.write(calculatePWM(Pos2A(pos_y)));
-
-				
 				suspendCallerUntil(NOW() + 1 * MILLISECONDS); // was 1
 			}
         }
@@ -147,9 +107,12 @@ class UartReceiver: public StaticThread<>{
 		UartReceiver() :	StaticThread("UART Reciever", 1000) {}
 
 		void clearMessage(){
+			//PRINTF("%s\n", all);
 			for(int i = 0; i < MessageLength; i++){
 				all[i] = 'z';
 			}
+			//setPriority(10);
+			//PRINTF("MESSAGE CLEARED: %s\n", all);
 			pos = 0;
 		}
 
@@ -164,6 +127,20 @@ class UartReceiver: public StaticThread<>{
 			
 			while (1) {
 				size_t readLength = uart_stdout.read(all,MessageLength);
+				if (readLength > 0){
+					//PRINTF("\n");
+					//for(int i = 0; i < readLength; i++){
+					//	all[i] = ch[i];
+					//}
+					//PRINTF("\n");
+					//PRINTF("%c",ch[0]);   
+					//all[pos] = ch[0];
+					//if(all[pos] == 'X'){
+					//	clearMessage();
+					//	all[0] = 'X';
+					//}
+					//pos++;
+				}
 
 				if(all[27] == '#' ){
 
@@ -183,8 +160,23 @@ class UartReceiver: public StaticThread<>{
 						tString[i] = all[19+i];
 					}
 
-					acc_x = toFloat(xString);
-					acc_y = toFloat(yString);
+					//PRINTF("\n %s %s %s \n", xString, yString, tString);
+
+					//servoX = toFloat(xString);
+					//servoY = toFloat(yString);
+
+					curServoX = nextServoX;
+					curServoY = nextServoY;
+
+					lastServoX = nextServoX;
+					lastServoY = nextServoY;
+
+					nextServoX = toFloat(xString);
+					nextServoY = toFloat(yString);
+					time_frame = toFloat(tString);
+
+					xChange = (nextServoX - lastServoX)/(time_frame * 1000);
+					yChange = (nextServoY - lastServoY)/(time_frame * 1000);
 
 					clearMessage();
 				}

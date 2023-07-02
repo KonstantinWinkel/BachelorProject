@@ -44,9 +44,13 @@ void FileWriter::writeToFile(std::fstream &filestream, std::string filename, std
 	filestream.close();
 }
 
-void FileWriter::readControllerValues(float &xValue, float &yValue){
-	xValue = FileWriter::ControllerXValue;
-	yValue = FileWriter::ControllerYValue;
+float FileWriter::readControllerValues(Identifier identifier){
+	switch (identifier)
+	{
+	case Identifier::X: return FileWriter::ControllerXValue;
+	case Identifier::Y: return FileWriter::ControllerYValue;
+	default:return 0;
+	}
 }
 
 void FileWriter::writeCameraInfo(Identifier identifier, float position, float velocity){

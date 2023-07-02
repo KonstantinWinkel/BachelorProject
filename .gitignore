@@ -6,6 +6,7 @@ DisplayImage
 FindAngles
 ImageProcessing
 main
+output-cleaner
 output.csv
 .vscode/
 cmake_install.cmake

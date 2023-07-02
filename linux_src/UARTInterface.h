@@ -9,6 +9,8 @@
 
 #include "bachelor_debug.h"
 
+#include <chrono>
+
 #if defined(_DEBUG_UART_ON_)
 #define _debug_print_uart_(x) std::cout << x << std::endl
 #else
@@ -39,6 +41,10 @@ class UARTInterface{
 
 		uint16_t xLidarFiltered;
 		uint16_t yLidarFiltered;
+
+		std::chrono::_V2::system_clock::time_point lastIteration;
+
+		char xIMUChar[8], yIMUChar[8], zIMUChar[8], xLIDARFilteredChar[4], yLIDARFilteredChar[4], xLIDARRawChar[4], yLIDARRawChar[4];
 
 	public:
 		UARTInterface(FileWriter * filewriter,Filter * filter_x, Filter * filter_y, std::string deviceName, int baudRate);

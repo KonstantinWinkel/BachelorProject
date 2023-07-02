@@ -36,6 +36,8 @@ class DemoProgram {
         virtual void bigDemo();
 
         virtual void circle();
+
+        virtual void newDemo();
 };
 
 #endif

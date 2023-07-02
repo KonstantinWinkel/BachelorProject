@@ -43,7 +43,7 @@ class FileWriter{
 		virtual void initFile(std::fstream &filestream, std::string filename);
 		virtual void writeToFile(std::fstream &filestream, std::string filename, std::string line);
 
-		virtual void readControllerValues(float &xValue, float &yValue);
+		virtual float readControllerValues(Identifier identifier);
 
 		virtual void writeCameraInfo(Identifier identifier, float position, float velocity);
 		virtual void writeControllerInfo(Identifier identifier, float value);
