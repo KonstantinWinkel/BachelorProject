@@ -44,19 +44,19 @@ class ImageProcessing{
 		std::vector<cv::Point> points;
 		double angle;
 		double velocity;
+		double calib_correction;
 		std::chrono::_V2::system_clock::time_point lastIteration;
 
 		cv::VideoCapture camera;
 		cv::Mat videoFrame;
 		cv::Mat detectionFrame;
 
-
-
 		std::string videoWindowName;
 		std::string detectionWindowName;
 
 	public:
 		ImageProcessing();
+		ImageProcessing(int cameraID, std::string name);
 		ImageProcessing(int cameraID, std::string name, FileWriter * filewriter, Filter * filter, Identifier identifier);
 		~ImageProcessing();
 		virtual void ReadAndProcessImage();
@@ -64,6 +64,9 @@ class ImageProcessing{
 		virtual void PublishValues();
 
 		virtual void run();
+
+		virtual void showVideoStream();
+		virtual float processOneImage();
 
 };
 

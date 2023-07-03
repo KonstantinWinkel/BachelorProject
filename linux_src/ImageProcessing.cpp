@@ -1,6 +1,7 @@
 //c++ includes
 #include <stdio.h>
 #include <cmath>
+#include <fstream>
 
 //opencv includes
 #include <opencv2/opencv.hpp>
@@ -37,6 +38,42 @@ ImageProcessing::ImageProcessing(int cameraID, std::string name, FileWriter * fi
 	cv::namedWindow(detectionWindowName);
 
 	firstIteration = true;
+
+	std::ifstream calib_file("camera.calib");
+
+	if(calib_file){
+		double values[2];
+
+		calib_file >> values[0];
+		calib_file >> values[1];	
+
+		if(ImageProcessing::identifier == Identifier::X) calib_correction = values[0];
+		if(ImageProcessing::identifier == Identifier::Y) calib_correction = values[1];
+
+		std::cout << calib_correction << std::endl;
+	}
+
+}
+
+ImageProcessing::ImageProcessing(int cameraID, std::string name){
+	ImageProcessing::cameraID = cameraID;
+	ImageProcessing::name = name;
+
+	videoWindowName = "V" + name;
+	detectionWindowName = "D" + name;
+
+	if(cameraID < 0) throw std::invalid_argument("cameraID cannot be negative");
+	std::stringstream path_to_camera;
+	path_to_camera << "/dev/video" << cameraID;
+
+	std::cout << "Trying to access camera " << cameraID << "(path " << path_to_camera.str() <<')' << std::endl;
+	cv::VideoCapture localCamera(path_to_camera.str());
+	camera = localCamera;
+
+	cv::namedWindow(videoWindowName);
+	cv::namedWindow(detectionWindowName);
+
+	firstIteration = true;
 }
 
 //destructor, left empty
@@ -51,7 +88,6 @@ void ImageProcessing::CalculatePositionAndVelocity(){
 	angleComputation.x = points.at(1).x - points.at(0).x;
 	angleComputation.y = points.at(1).y - points.at(0).y;
 
-	cv::line(videoFrame, points.at(0), points.at(1), cv::Scalar(255,255,255), 2, cv::LINE_8);
 	double tempangle = -atan2(angleComputation.y, angleComputation.x) * 180/M_PI;
 
 	std::chrono::duration<double, std::milli> ms_double = std::chrono::high_resolution_clock::now() - lastIteration;
@@ -129,6 +165,8 @@ void ImageProcessing::ReadAndProcessImage(){
 	}
 
 	points = largestPoints;
+
+	cv::line(videoFrame, points.at(0), points.at(1), cv::Scalar(255,255,255), 2, cv::LINE_8);
 }
 
 void ImageProcessing::PublishValues(){
@@ -149,6 +187,31 @@ void ImageProcessing::run(){
 		cv::imshow(videoWindowName, videoFrame);
 		cv::imshow(detectionWindowName, detectionFrame);
 
+		//maybe remove?
 		if(cv::waitKey(1)==1){return; }
 	}
+}
+
+void ImageProcessing::showVideoStream(){
+	while(1){
+		ReadAndProcessImage();
+
+		cv::imshow(videoWindowName, videoFrame);
+		cv::imshow(detectionWindowName, detectionFrame);
+
+		//wait for space key
+		if(cv::waitKey(1)==32){break; }
+	}
+
+	cv::destroyAllWindows();
+}
+
+float ImageProcessing::processOneImage(){
+	skipFrame = false;
+	ReadAndProcessImage();
+	if(!skipFrame){
+		CalculatePositionAndVelocity();
+	}
+
+	return angle;
 }

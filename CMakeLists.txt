@@ -14,3 +14,6 @@ add_executable(main linux_src/main.cpp linux_src/FileWriter.cpp linux_src/ImageP
 target_link_libraries(main ${OpenCV_LIBS} pthread serial)
 
 add_executable(output-cleaner linux_src/output-cleaner.cpp)
+
+add_executable(calibrate-cameras linux_src/calibrate-cameras.cpp linux_src/ImageProcessing.cpp)
+target_link_libraries(calibrate-cameras ${OpenCV_LIBS})

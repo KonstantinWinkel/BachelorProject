@@ -53,7 +53,7 @@ void UARTInterface::ReceiveValues(){
 
 	//open port to STM Board
 
-	serial::Serial serial(deviceName, baudRate, serial::Timeout::simpleTimeout(3000));
+	serial::Serial serial(deviceName, baudRate, serial::Timeout::simpleTimeout(5));
 	if (!serial.isOpen()){
 		printf("Port failed to open \n");
 		return;

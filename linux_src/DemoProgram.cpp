@@ -125,19 +125,19 @@ void DemoProgram::circle(){
 
 void DemoProgram::newDemo(){
     while(1){
-        xMotorValue = 10;
+        xMotorValue = 20;
         PublishValues();
         std::this_thread::sleep_for(std::chrono::milliseconds(5000));
 
-        xMotorValue = -10;
+        xMotorValue = -20;
         PublishValues();
         std::this_thread::sleep_for(std::chrono::milliseconds(5000));
 
-        yMotorValue = 10;
+        yMotorValue = 20;
         PublishValues();
         std::this_thread::sleep_for(std::chrono::milliseconds(5000));
 
-        yMotorValue = -10;
+        yMotorValue = -20;
         PublishValues();
         std::this_thread::sleep_for(std::chrono::milliseconds(5000));
     }

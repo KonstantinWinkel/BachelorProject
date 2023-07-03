@@ -7,8 +7,16 @@ FindAngles
 ImageProcessing
 main
 output-cleaner
-output.csv
+camera_x_output*.csv
+camera_y_output*.csv
+controller_x_output.csv
+controller_y_output.csv
+filter_x_output.csv
+filter_y_output.csv
+uart_output*.csv
 .vscode/
 cmake_install.cmake
 libserial.a
 CompilationLog
+calibrate-cameras
+camera.calib
