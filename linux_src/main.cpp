@@ -21,52 +21,42 @@ int main(int argc, char** argv){
 	std::string programMode = argv[2];
 	std::cout << "Program Mode: " << programMode << std::endl;
 
+	bool is_demo = false;
+
 	if(programMode.compare("demo") != 0 && programMode.compare("exp") != 0){
 		std::cerr<< "\033[1;31mERROR: INVALID PROGRAM MODE\033[0m" << std::endl;
 		return -1;
 	}
 
+	is_demo = (programMode.compare("demo")==0);
+
+
 	//Object Creation
 	FileWriter filewriter;
 
-	Controller controllerX(&filewriter,Identifier::X);
-	Controller controllerY(&filewriter,Identifier::Y);
+	Controller controllerX(&filewriter, Identifier::X, is_demo);
+	Controller controllerY(&filewriter, Identifier::Y, is_demo);
 
 	Filter filterX(&controllerX);
 	Filter filterY(&controllerY);
 
 	UARTInterface uartinterface(&filewriter, &filterX, &filterY, deviceName, 115200);
-	
-	DemoProgram demoprogram(&filewriter);
 
-	ImageProcessing x(2, "X", &filewriter, &filterX, Identifier::X);
-	ImageProcessing y(6, "Y", &filewriter, &filterY, Identifier::Y);
+	ImageProcessing x(6, "X", &filewriter, &filterX, Identifier::X);
+	ImageProcessing y(2, "Y", &filewriter, &filterY, Identifier::Y);
 
 	//Creation of required threads
 	std::thread xThread(&ImageProcessing::run, x);
 	std::thread yThread(&ImageProcessing::run, y);
 	std::thread uartThread(&UARTInterface::run, uartinterface);
 
-	
-	//conditional creation of controller and demo threads with join
-	if(programMode.compare("exp")==0) {
-		//TODO fix programmode (demo will not work because the Controller isn't thread based anymore -> it cannot be turned off and will interfere with the demo program)
-		//std::thread controllerThreadX(&Controller::run, controllerX);
-		//std::thread controllerThreadY(&Controller::run, controllerY);
-		//std::thread filterThreadX(&Filter::run, filterX);
-		//std::thread filterThreadY(&Filter::run, filterY);
-		//
-		//controllerThreadX.join();
-		//controllerThreadY.join();
-		//filterThreadX.join();
-		//filterThreadY.join();
-	}
+	if(is_demo) {
+		DemoProgram demoprogram(&filewriter);
 
-	if(programMode.compare("demo")==0){
 		std::thread demoThread(&DemoProgram::run, demoprogram);
+		is_demo = true;
 		demoThread.join();
 	}
-
 
 	//join all required threads
 	xThread.join();

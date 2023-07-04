@@ -12,8 +12,8 @@
 #include "../include/topics.h"
 
 #define MessageLength 28 //19
-#define MAX_POS 5.0
-#define MIN_POS -5.0
+#define MAX_POS 3.0
+#define MIN_POS -3.0
 
 HAL_PWM servo1(PWM_IDX00); //PE9
 HAL_PWM servo2(PWM_IDX01); //PE11

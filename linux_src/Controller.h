@@ -11,6 +11,7 @@ using namespace je;
 class Controller{
 	protected:
 		FileWriter * filewriter;
+		bool is_demo;
 		std::array<double,6> state;
 		std::array<double,6> PID_CONST;
 		RingBuffer<double> phi_integrator;
@@ -23,10 +24,12 @@ class Controller{
 
 	public:
 
-		Controller(FileWriter * filewriter, Identifier lever, size_t phi_integrator_size = 10,size_t pos_integrator_size = 10);
+		Controller(FileWriter * filewriter, Identifier lever,bool is_demo, size_t phi_integrator_size = 10,size_t pos_integrator_size = 10);
 		~Controller();
 
 		virtual void update_state(std::array<double,4> filtered_data);
+
+		virtual void print_controller_state();
 
 		virtual void update_pos();
 
