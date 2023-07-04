@@ -1,5 +1,6 @@
 //c++ includes
 #include <chrono>
+#include <cmath>
 #include <string>
 #include <stdio.h>
 #include <stdlib.h>
@@ -19,22 +20,15 @@ const int image_width = 500;
 const cv::Scalar blueLow = cv::Scalar(80, 100, 100); //110 100 100
 const cv::Scalar blueHigh = cv::Scalar(125, 255, 255); //125 255 255
 
-int main(int argc, char** argv){
+cv::Mat BLACK(1000, 1000, CV_64FC4);
+cv::Mat BLUE(1000,1000, CV_64FC4);
 
-    cv::Mat BLACK(1000, 1000, CV_64FC4);
-    cv::Mat BLUE(1000,1000, CV_64FC4);
-    cv::Mat videoframe;
-    cv::Mat detectionframe;
+cv::Mat videoframe;
+cv::Mat detectionframe;
 
-    BLACK = cv::Scalar(0, 0, 0);
-    BLUE = cv::Scalar(255, 0, 0);
+double times[3] = {0.0, 0.0, 0.0};
 
-    cv::namedWindow("LatencyWindow");
-    cv::namedWindow("VideoFeed");
-    cv::namedWindow("Detection");
-
-
-    int cameraID = strtol(argv[1], NULL, 10);
+void iteration(int cameraID){
     if(cameraID < 0) throw std::invalid_argument("cameraID cannot be negative");
 	std::stringstream path_to_camera;
 	path_to_camera << "/dev/video" << cameraID;
@@ -67,7 +61,7 @@ int main(int argc, char** argv){
     std::chrono::duration<double, std::milli> ms_double;
 
     int camera_retries = 0;
-    double total_time = 0;
+    double total_read_time = 0;
     double total_calc_time = 0;
 
     while(1){
@@ -75,7 +69,7 @@ int main(int argc, char** argv){
         camera.read(videoframe);   
         ms_double = std::chrono::high_resolution_clock::now() - start_of_frame;   
 
-        total_time += ms_double.count();
+        total_read_time += ms_double.count();
 
         camera_retries++;
 
@@ -104,11 +98,16 @@ int main(int argc, char** argv){
                 total_calc_time += ms_double.count();
 
                 ms_double = std::chrono::high_resolution_clock::now() - start;
-                std::cout << "Total latency is " << ms_double.count() << "ms after " << camera_retries << " frames" << std::endl;
-                std::cout << "Total reading time is " << total_time << "ms" << std::endl;
-                std::cout << "Total calc time is " << total_calc_time << "ms" << std::endl;
 
-                return 0;
+                times[0] = ms_double.count();
+                times[1] = total_read_time;
+                times[2] = total_calc_time;
+
+                std::cout << ms_double.count() << "ms after " << camera_retries << " frames" << std::endl;
+                //std::cout << "Total reading time is " << total_time << "ms" << std::endl;
+                //std::cout << "Total calc time is " << total_calc_time << "ms" << std::endl;
+
+                return;
             }
 	    }
 
@@ -117,5 +116,54 @@ int main(int argc, char** argv){
         ms_double = std::chrono::high_resolution_clock::now() - start_of_calc;
         total_calc_time += ms_double.count();
     }
+}
 
+double calculate_average(double values[], int length){
+    double result = 0;
+
+    for(int i = 0; i < length; i++) result += values[i];
+
+    return result / length;
+}
+
+double calculate_std_error(double values[], int length){
+    double average = calculate_average(values, length);
+    double sum = 0;
+
+    for(int i = 0; i < length; i++) sum += pow(values[i] - average,2);
+
+    return sqrt(sum / (length - 1))/sqrt(length);
+}
+
+int main(int argc, char** argv){
+
+    //init
+    BLACK = cv::Scalar(0, 0, 0);
+    BLUE = cv::Scalar(255, 0, 0);
+
+    cv::namedWindow("LatencyWindow");
+    cv::namedWindow("VideoFeed");
+    cv::namedWindow("Detection");
+
+    int cameraID = strtol(argv[1], NULL, 10);
+    int iterations = strtol(argv[2], NULL, 10);
+
+    double all_times[iterations], all_read_times[iterations], all_calc_times[iterations];
+
+    for(int i = 0; i < iterations; i++){
+        std::cout << "----------------------------" << std::endl;
+        std::cout << "Iteration " << i << std::endl;
+
+        iteration(cameraID);
+
+        all_times[i] = times[0];
+        all_read_times[i] = times[1];
+        all_calc_times[i] = times[2];
+    }
+
+    std::cout << "----------------------------" << std::endl;
+    std::cout << "Total latency is " << calculate_average(all_times, iterations) << " +- " << calculate_std_error(all_times, iterations) << "ms" << std::endl;
+    std::cout << "Total reading time is " << calculate_average(all_read_times, iterations) << " +- " << calculate_std_error(all_read_times, iterations) << "ms" << std::endl;
+    std::cout << "Total calc time is " << calculate_average(all_calc_times, iterations) << " +- " << calculate_std_error(all_calc_times, iterations) << "ms" << std::endl;
+    
 }
