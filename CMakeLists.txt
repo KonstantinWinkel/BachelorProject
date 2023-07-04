@@ -17,3 +17,6 @@ add_executable(output-cleaner linux_src/output-cleaner.cpp)
 
 add_executable(calibrate-cameras linux_src/calibrate-cameras.cpp linux_src/ImageProcessing.cpp)
 target_link_libraries(calibrate-cameras ${OpenCV_LIBS})
+
+add_executable(reset-board linux_src/reset-board.cpp linux_src/UARTInterface.cpp)
+target_link_libraries(reset-board serial)

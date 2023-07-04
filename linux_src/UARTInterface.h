@@ -48,6 +48,7 @@ class UARTInterface{
 
 	public:
 		UARTInterface(FileWriter * filewriter,Filter * filter_x, Filter * filter_y, std::string deviceName, int baudRate);
+		UARTInterface(std::string deviceName, int baudRate);
 		~UARTInterface();
 
 		virtual void PublishValues();
@@ -58,6 +59,7 @@ class UARTInterface{
 		virtual void SendValues();
 
 		virtual void SetControllerValues();
+		virtual void SetControllerValues(float x, float y);
 
 		//utility methods
 		//virtual float toFloat(char* c);

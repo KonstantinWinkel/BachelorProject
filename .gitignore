@@ -19,4 +19,5 @@ cmake_install.cmake
 libserial.a
 CompilationLog
 calibrate-cameras
+reset-board
 camera.calib

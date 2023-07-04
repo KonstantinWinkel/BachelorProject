@@ -20,6 +20,16 @@ UARTInterface::UARTInterface(FileWriter * filewriter,Filter * filter_x, Filter *
 	UARTInterface::lastIteration = std::chrono::high_resolution_clock::now();
 }
 
+UARTInterface::UARTInterface(std::string deviceName, int baudRate){
+	UARTInterface::baudRate = baudRate;
+	UARTInterface::deviceName = deviceName;
+
+	UARTInterface::xValue = 0;
+	UARTInterface::yValue = 0;
+
+	UARTInterface::lastIteration = std::chrono::high_resolution_clock::now();
+}
+
 UARTInterface::~UARTInterface(){
 
 }
@@ -47,6 +57,11 @@ void UARTInterface::run(){
 void UARTInterface::SetControllerValues(){
 	xValue = filewriter->readControllerValues(Identifier::X);
 	yValue = filewriter->readControllerValues(Identifier::Y);
+}
+
+void UARTInterface::SetControllerValues(float x, float y){
+	xValue = x;
+	yValue = y;
 }
 
 void UARTInterface::ReceiveValues(){
@@ -103,7 +118,6 @@ void UARTInterface::SendValues(){
 
 	size_t bytesWritten = serial.write(outputString);
 	serial.close();
-	std::cout << ms_double.count()/1000 << std::endl;
 
 	//DEBUG COUT
 	//std::cout << "Bytes sent: " << bytesWritten << " Message: " << outputString << std::endl;

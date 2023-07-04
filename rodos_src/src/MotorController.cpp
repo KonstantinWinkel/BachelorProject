@@ -1,6 +1,7 @@
 //c++ things
 //#include <string.h>
 #include <stdlib.h>
+#include <limits>
 
 //RODOS things
 #include "rodos.h"
@@ -155,6 +156,14 @@ class UartReceiver: public StaticThread<>{
 			clearMessage();
 		}
 
+		void CheckForSpecialValues(float value){
+			if(value == 0){
+				pos_x = pos_y = 0;
+				vel_x = vel_x = 0;
+				acc_x = acc_y = 0;
+			}
+		}
+
 
 		void run() {
 			
@@ -181,6 +190,8 @@ class UartReceiver: public StaticThread<>{
 
 					acc_x = toFloat(xString);
 					acc_y = toFloat(yString);
+
+					if(acc_x == std::numeric_limits<float>::max()) CheckForSpecialValues(acc_y);
 
 					clearMessage();
 				}
