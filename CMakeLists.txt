@@ -20,3 +20,6 @@ target_link_libraries(calibrate-cameras ${OpenCV_LIBS})
 
 add_executable(reset-board linux_src/reset-board.cpp linux_src/UARTInterface.cpp)
 target_link_libraries(reset-board serial)
+
+add_executable(find-latency linux_src/find-latency.cpp)
+target_link_libraries(find-latency ${OpenCV_LIBS})

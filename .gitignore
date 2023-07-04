@@ -20,4 +20,5 @@ libserial.a
 CompilationLog
 calibrate-cameras
 reset-board
+find-latency
 camera.calib
