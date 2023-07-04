@@ -17,13 +17,14 @@ using namespace je;
 class Filter
 {
 private:
+    double sum;
+    int no;
     double x,y,phi,omega;
     uint16_t bias;
     std::array<double,4> state;
     RingBuffer<double> RingBuffer_x;
     RingBuffer<double> RingBuffer_phi;
 
-    uint16_t pos_uint;
     std::chrono::_V2::system_clock::time_point current_time_x;
     std::chrono::_V2::system_clock::time_point last_time_x;
     std::chrono::_V2::system_clock::time_point current_time_phi;
@@ -36,6 +37,8 @@ public:
     ~Filter();
 
     virtual void publish();
+
+    virtual double to_radiants(double angle);
 
     virtual double to_m(uint16_t lidar_data);
 
