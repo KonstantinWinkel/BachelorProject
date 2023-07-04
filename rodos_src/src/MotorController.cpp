@@ -12,8 +12,8 @@
 #include "../include/topics.h"
 
 #define MessageLength 28 //19
-#define MAX_POS 3.0
-#define MIN_POS -3.0
+#define MAX_POS 5.0
+#define MIN_POS -5.0
 
 HAL_PWM servo1(PWM_IDX00); //PE9
 HAL_PWM servo2(PWM_IDX01); //PE11
@@ -110,17 +110,14 @@ class MotorController : public StaticThread<>
 
         void run(){
 			
-			float tempy = 0, tempx=0;
-
-			
 			TIME_LOOP(0*SECONDS, 1 * MILLISECONDS){
 				orange.setPins(~orange.readPins());
 
+				pos_x += 0.5*acc_x/1000000 + vel_x/1000;
+				pos_y += 0.5*acc_y/1000000 + vel_y/1000;
+
 				vel_x += acc_x/1000;
 				vel_y += acc_y/1000;
-
-				pos_x += vel_x/1000;
-				pos_y += vel_y/1000;
 
 				checkBounds();
 
@@ -128,7 +125,6 @@ class MotorController : public StaticThread<>
 				servo2.write(calculatePWM(Pos2A(pos_x)));
 				servo3.write(calculatePWM(Pos2A(pos_y)));
 
-				
 				suspendCallerUntil(NOW() + 1 * MILLISECONDS); // was 1
 			}
         }
