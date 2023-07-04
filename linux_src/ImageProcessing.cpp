@@ -34,6 +34,11 @@ ImageProcessing::ImageProcessing(int cameraID, std::string name, FileWriter * fi
 	cv::VideoCapture localCamera(path_to_camera.str());
 	camera = localCamera;
 
+	ROI = cv::Rect(200, 100, 300, 380);
+
+	//camera.set(3, 400); //could be used to reduce delay :thinking:
+	//camera.set(4, 200);
+	
 	cv::namedWindow(videoWindowName);
 	cv::namedWindow(detectionWindowName);
 
@@ -49,8 +54,6 @@ ImageProcessing::ImageProcessing(int cameraID, std::string name, FileWriter * fi
 
 		if(ImageProcessing::identifier == Identifier::X) calib_correction = values[0];
 		if(ImageProcessing::identifier == Identifier::Y) calib_correction = values[1];
-
-		std::cout << calib_correction << std::endl;
 	}
 
 }
@@ -69,6 +72,11 @@ ImageProcessing::ImageProcessing(int cameraID, std::string name){
 	std::cout << "Trying to access camera " << cameraID << "(path " << path_to_camera.str() <<')' << std::endl;
 	cv::VideoCapture localCamera(path_to_camera.str());
 	camera = localCamera;
+
+	ROI = cv::Rect(200, 100, 300, 380);
+
+	//camera.set(3, 400); //could be used to reduce delay :thinking:
+	//camera.set(4, 200);
 
 	cv::namedWindow(videoWindowName);
 	cv::namedWindow(detectionWindowName);
@@ -105,6 +113,8 @@ void ImageProcessing::CalculatePositionAndVelocity(){
 void ImageProcessing::ReadAndProcessImage(){
 
 	bool successfullRead = camera.read(videoFrame);
+
+	videoFrame = videoFrame(ROI);
 
 	cv::cvtColor(videoFrame, detectionFrame, cv::COLOR_BGR2HSV);
 	cv::inRange(detectionFrame, blueLow, blueHigh, detectionFrame);

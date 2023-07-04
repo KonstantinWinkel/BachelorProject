@@ -7,6 +7,7 @@
 //opencv includes
 #include <opencv2/opencv.hpp>
 #include <opencv2/core.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/videoio.hpp>
 
 //required header files
@@ -50,6 +51,8 @@ class ImageProcessing{
 		cv::VideoCapture camera;
 		cv::Mat videoFrame;
 		cv::Mat detectionFrame;
+
+		cv::Rect ROI; //600 x 480
 
 		std::string videoWindowName;
 		std::string detectionWindowName;
