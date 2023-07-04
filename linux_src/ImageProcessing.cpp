@@ -15,6 +15,12 @@
 const cv::Scalar blueLow = cv::Scalar(80, 100, 100); //110 100 100
 const cv::Scalar blueHigh = cv::Scalar(125, 255, 255); //125 255 255
 
+const int image_height = 400;
+const int image_width = 500;
+
+//                          w  h  w    h
+const int RECT_PARAMS[4] = {200, 100, 299, 260}; //400x500 -> {}
+
 //constructor, creates ImageProcessing object, sets identifying variables and intializes OpenCV Camera
 ImageProcessing::ImageProcessing(int cameraID, std::string name, FileWriter * filewriter, Filter * filter, Identifier identifier){
 	ImageProcessing::cameraID = cameraID;
@@ -34,11 +40,11 @@ ImageProcessing::ImageProcessing(int cameraID, std::string name, FileWriter * fi
 	cv::VideoCapture localCamera(path_to_camera.str());
 	camera = localCamera;
 
-	ROI = cv::Rect(200, 100, 300, 380);
+	ROI = cv::Rect(RECT_PARAMS[0], RECT_PARAMS[1], RECT_PARAMS[2], RECT_PARAMS[3]);
 
-	//camera.set(3, 400); //could be used to reduce delay :thinking:
-	//camera.set(4, 200);
-	
+	camera.set(3, image_width); //could be used to reduce delay :thinking:
+	camera.set(4, image_height);
+
 	cv::namedWindow(videoWindowName);
 	cv::namedWindow(detectionWindowName);
 
@@ -73,10 +79,10 @@ ImageProcessing::ImageProcessing(int cameraID, std::string name){
 	cv::VideoCapture localCamera(path_to_camera.str());
 	camera = localCamera;
 
-	ROI = cv::Rect(200, 100, 300, 380);
+	ROI = cv::Rect(RECT_PARAMS[0], RECT_PARAMS[1], RECT_PARAMS[2], RECT_PARAMS[3]);
 
-	//camera.set(3, 400); //could be used to reduce delay :thinking:
-	//camera.set(4, 200);
+	camera.set(3, image_width); //could be used to reduce delay :thinking:
+	camera.set(4, image_height);
 
 	cv::namedWindow(videoWindowName);
 	cv::namedWindow(detectionWindowName);
