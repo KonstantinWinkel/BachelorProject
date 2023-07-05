@@ -157,10 +157,19 @@ class UartReceiver: public StaticThread<>{
 		}
 
 		void CheckForSpecialValues(float value){
-			if(value == 0){
-				pos_x = pos_y = 0;
-				vel_x = vel_x = 0;
-				acc_x = acc_y = 0;
+
+			vel_x = vel_x = 0;
+			acc_x = acc_y = 0;
+
+			switch ((int)value)
+			{
+				case 0: pos_x = 0;       pos_y = 0;       break;
+				case 1: pos_x = MAX_POS; pos_y = MIN_POS; break;
+				case 2: pos_x = MAX_POS; pos_y = MAX_POS; break;
+				case 3: pos_x = MIN_POS; pos_y = MAX_POS; break;
+				case 4: pos_x = MIN_POS; pos_y = MIN_POS; break;
+					
+				default:break;
 			}
 		}
 
