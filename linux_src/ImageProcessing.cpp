@@ -110,7 +110,7 @@ void ImageProcessing::CalculatePositionAndVelocity(){
 
 	firstIteration = false;
 	lastIteration = std::chrono::high_resolution_clock::now();
-	angle = tempangle;
+	angle = tempangle - calib_correction - 90;
 
 	_debug_print_image_(angle << " " << velocity);
 }

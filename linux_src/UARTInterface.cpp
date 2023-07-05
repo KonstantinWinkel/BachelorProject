@@ -111,7 +111,7 @@ void UARTInterface::SendValues(){
 	char yString[9] = "";
 	char tString[9] = "";
 	toChars(xValue, xString);
-	toChars(yValue, yString); 
+	toChars(yValue, yString);
 	toChars((float)(ms_double.count()/1000),tString);
 
 	asprintf(&outputString, "X%sY%sT%s#", xString, yString, tString);
