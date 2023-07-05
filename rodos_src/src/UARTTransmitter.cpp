@@ -45,7 +45,7 @@ class UARTTransmitter : public StaticThread <> {
                 toChars(lidar_raw_data.xDistance, xLIDARRaw);
                 toChars(lidar_raw_data.yDistance, yLIDARRaw);
 
-                PRINTF("%s%s%s%s%s%s%s", xIMU, yIMU, zIMU, xLIDARFiltered, yLIDARFiltered, xLIDARRaw, yLIDARRaw);
+                PRINTF("%s%s%s%s%s%s%s#", xIMU, yIMU, zIMU, xLIDARFiltered, yLIDARFiltered, xLIDARRaw, yLIDARRaw);
                 //PRINTF("%s%s%s", xIMU, yIMU, zIMU);
 
                 //DEBUG OUTPUT
@@ -55,7 +55,7 @@ class UARTTransmitter : public StaticThread <> {
                 //PRINTF("LIDAR Raw:\n%d %d\n", lidar_raw_data.xDistance, lidar_raw_data.yDistance);
                 
 
-                suspendCallerUntil(NOW() + 100 * MILLISECONDS);
+                suspendCallerUntil(NOW() + 20 * MILLISECONDS);
             }
         }
 

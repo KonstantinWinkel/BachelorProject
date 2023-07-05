@@ -40,14 +40,6 @@ class IMUReader : public StaticThread <>
 
         IMUReader() : StaticThread("IMU Reader", 100 ){}
 
-        float adjust(float realValue){
-            if(realValue > 1) return realValue-4;
-        }
-
-        float squareSum(float x,float y,float z){
-            return x*x+y*y+z*z;
-        }
-
         void calibrate(int cycles){
             float sumX = 0;
             float sumY = 0;
@@ -73,9 +65,9 @@ class IMUReader : public StaticThread <>
                 for(int i = 0; i < 3; i++){
                     realValues[i] = (0.061/1000) * rawValues[i]  - calibrationValues[i];
                 }
-                sumX += adjust(realValues[0]);
-                sumY += adjust(realValues[1]);
-                sumZ += adjust(realValues[2]);
+                sumX += realValues[0];
+                sumY += realValues[1];
+                sumZ += realValues[2];
             }
             calibrationValues[0] = sumX/cycles;
             calibrationValues[1] = sumY/cycles;
@@ -119,7 +111,7 @@ class IMUReader : public StaticThread <>
 
                 //calculate accelerations based on raw values and calibration values
                 for(int i = 0; i < 3; i++){
-                    realValues[i] = (0.061/1000) * rawValues[i]  - calibrationValues[i];
+                    realValues[i] = (0.061/1000) * rawValues[i] - calibrationValues[i];
                 }
 
                 data.xForce = realValues[0];
