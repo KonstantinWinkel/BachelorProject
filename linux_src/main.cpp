@@ -8,8 +8,8 @@
 #include "DataPuffer.h"
 #include "ImageProcessing.h"
 #include "UARTInterface.h"
-#include "Controller.h"
-#include "Filter.h"
+#include "PID_Controller.h"
+#include "Weighted_median_filter.h"
 #include "DemoProgram.h"
 
 int main(int argc, char** argv){
@@ -34,11 +34,11 @@ int main(int argc, char** argv){
 	//Object Creation
 	FileWriter filewriter;
 
-	Controller controllerX(&filewriter, Identifier::X, is_demo);
-	Controller controllerY(&filewriter, Identifier::Y, is_demo);
+	PID_Controller controllerX(&filewriter, Identifier::X, is_demo);
+	PID_Controller controllerY(&filewriter, Identifier::Y, is_demo);
 
-	Filter filterX(&controllerX);
-	Filter filterY(&controllerY);
+	Weighted_median_filter filterX(&controllerX);
+	Weighted_median_filter filterY(&controllerY);
 
 	UARTInterface uartinterface(&filewriter, &filterX, &filterY, deviceName, 115200);
 

@@ -16,35 +16,21 @@ using namespace je;
 
 class Filter
 {
-private:
-    double sum;
-    int no;
-    double x,y,phi,omega;
-    uint16_t bias;
+protected:
     std::array<double,4> state;
-    RingBuffer<double> RingBuffer_x;
-    RingBuffer<double> RingBuffer_phi;
-
-    std::chrono::_V2::system_clock::time_point current_time_x;
-    std::chrono::_V2::system_clock::time_point last_time_x;
-    std::chrono::_V2::system_clock::time_point current_time_phi;
-    std::chrono::_V2::system_clock::time_point last_time_phi;
-
     Controller * controller;
-    
+
 public:
-    Filter(Controller * controller, size_t size_x = 10, size_t size_phi = 5);
-    ~Filter();
+    ~Filter(){};
 
-    virtual void publish();
+    virtual void publish(){
+        //_debug_print_filter_("published state :" << state_str(state));
+        controller->recieve_data(state);
+    }
 
-    virtual double to_radiants(double angle);
+    virtual void recieve_pos(uint16_t pos) = 0;
 
-    virtual double to_m(uint16_t lidar_data);
-
-    virtual void recieve_pos(uint16_t pos);
-
-    virtual void recieve_angle(double phi);
+    virtual void recieve_angle(double phi) = 0;
 };
 
 
