@@ -2,6 +2,8 @@
 #include <thread>
 #include <stdio.h>
 #include <string>
+#include <stdlib.h>
+#include <signal.h>
 
 //required header files
 #include "FileWriter.h"
@@ -11,6 +13,13 @@
 #include "PID_Controller.h"
 #include "Weighted_median_filter.h"
 #include "DemoProgram.h"
+
+FileWriter * filewriter_reference;
+
+void trapCTRLC(sig_atomic_t s){
+	filewriter_reference->handleCTRLC();
+	exit(128);
+}
 
 int main(int argc, char** argv){
 
@@ -33,12 +42,16 @@ int main(int argc, char** argv){
 
 	//Object Creation
 	FileWriter filewriter;
+	filewriter_reference = &filewriter;
 
 	PID_Controller controllerX(&filewriter, Identifier::X, is_demo);
 	PID_Controller controllerY(&filewriter, Identifier::Y, is_demo);
 
 	Weighted_median_filter filterX(&controllerX);
 	Weighted_median_filter filterY(&controllerY);
+
+	//trapping CTRL-C so that Filewriter can do its thing
+	signal(SIGINT, trapCTRLC);
 
 	UARTInterface uartinterface(&filewriter, &filterX, &filterY, deviceName, 115200);
 

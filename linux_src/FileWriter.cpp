@@ -1,7 +1,3 @@
-//c++ includes
-#include <stdio.h>
-#include <iostream>
-
 //class header
 #include "FileWriter.h"
 
@@ -9,22 +5,13 @@
 FileWriter::FileWriter(){
 	starttime = std::chrono::high_resolution_clock::now();
 
-	//check if files exists, if yes: clear, if no: create
-	initFile(CameraXFile, CameraXFileName);
-	initFile(CameraYFile, CameraYFileName);
-	initFile(FilterXFile, FilterXFileName);
-	initFile(FilterYFile, FilterYFileName);
-	initFile(ControllerXFile, ControllerXFileName);
-	initFile(ControllerYFile, ControllerYFileName);
-	initFile(UARTFile, UARTFileName);
-
 	FileWriter::ControllerXValue = 0;
 	FileWriter::ControllerYValue = 0;
 }
 
 //destructor left empty
 FileWriter::~FileWriter(){
-
+	std::cout << "dead" << std::endl;
 }
 
 void FileWriter::initFile(std::fstream &filestream, std::string filename){
@@ -38,9 +25,9 @@ void FileWriter::initFile(std::fstream &filestream, std::string filename){
 	else filestream.close();
 }
 
-void FileWriter::writeToFile(std::fstream &filestream, std::string filename, std::string line){
+void FileWriter::writeToFile(std::fstream &filestream, std::string filename, std::stringstream &stringstream){
 	filestream.open(filename, std::ios_base::app);
-	filestream << line;
+	filestream << stringstream.str();
 	filestream.close();
 }
 
@@ -64,8 +51,8 @@ void FileWriter::writeCameraInfo(Identifier identifier, float position, float ve
 
 	//Write line to File
 	switch (identifier){
-		case Identifier::X: writeToFile(CameraXFile, CameraXFileName, line); break;
-		case Identifier::Y: writeToFile(CameraYFile, CameraYFileName, line); break;
+		case Identifier::X: CameraXStream << line; break;
+		case Identifier::Y: CameraYStream << line; break;
 		default: break;
 	}
 
@@ -83,11 +70,11 @@ void FileWriter::writeControllerInfo(Identifier identifier, float value){
 	//Write line to File
 	switch (identifier){
 		case Identifier::X: 
-			writeToFile(ControllerXFile, ControllerXFileName, line);
+			ControllerXStream << line;
 			FileWriter::ControllerXValue = value;
 			break;
 		case Identifier::Y: 
-			writeToFile(ControllerYFile, ControllerYFileName, line);
+			ControllerYStream << line;
 			FileWriter::ControllerYValue = value;
 			break;
 		default: break;
@@ -106,8 +93,8 @@ void FileWriter::writeFilterInfo(Identifier identifier, float angle, float ang_v
 
 	//Write line to File
 	switch (identifier){
-		case Identifier::X: writeToFile(FilterXFile, FilterXFileName, line); break;
-		case Identifier::Y: writeToFile(FilterYFile, FilterYFileName, line); break;
+		case Identifier::X: FilterXStream << line; break;
+		case Identifier::Y: FilterYStream << line; break;
 		default: break;
 	}
 }
@@ -124,6 +111,36 @@ void FileWriter::writeUARTInfo(float xForce, float yForce, uint16_t xLidarFilter
 	line += std::to_string(xLidarRaw) + "," + std::to_string(yLidarRaw) + "\n";
 
 	//Write line to File
-	writeToFile(UARTFile, UARTFileName, line);
+	UARTStream << line;
+}
 
+//writes all stringstreams to file
+void FileWriter::handleCTRLC(){
+
+	std::fstream CameraXFile;
+	std::fstream CameraYFile;
+	std::fstream FilterXFile;
+	std::fstream FilterYFile;
+	std::fstream ControllerXFile;
+	std::fstream ControllerYFile;
+	std::fstream UARTFile;
+
+	//check if files exists, if yes: clear, if no: create
+	initFile(CameraXFile, CameraXFileName);
+	initFile(CameraYFile, CameraYFileName);
+	initFile(FilterXFile, FilterXFileName);
+	initFile(FilterYFile, FilterYFileName);
+	initFile(ControllerXFile, ControllerXFileName);
+	initFile(ControllerYFile, ControllerYFileName);
+	initFile(UARTFile, UARTFileName);
+
+	writeToFile(CameraXFile, CameraXFileName, CameraXStream);
+	writeToFile(CameraYFile, CameraYFileName, CameraYStream);
+	writeToFile(FilterXFile, FilterXFileName, FilterXStream);
+	writeToFile(FilterYFile, FilterYFileName, FilterYStream);
+	writeToFile(ControllerXFile, ControllerXFileName, ControllerXStream);
+	writeToFile(ControllerYFile, ControllerYFileName, ControllerYStream);
+	writeToFile(UARTFile, UARTFileName, UARTStream);
+
+	std::cout << "Files written" << std::endl;
 }
