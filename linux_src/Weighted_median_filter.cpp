@@ -10,8 +10,6 @@
 #define _debug_print_filter_(x)
 #endif
 
-#define toradiants 0.01745329251
-
 Weighted_median_filter::Weighted_median_filter(Controller * controller,size_t size_x, size_t size_phi) 
     :RingBuffer_x(size_x,[=](int i){return size_x-i;}),RingBuffer_phi(size_phi,[=](int i){return size_phi-i;}){
     Filter::state = {0,0,0,0};
@@ -21,24 +19,6 @@ Weighted_median_filter::Weighted_median_filter(Controller * controller,size_t si
     current_time_x = std::chrono::high_resolution_clock::now();
     last_time_phi = std::chrono::high_resolution_clock::now();
     current_time_phi = std::chrono::high_resolution_clock::now();
-}
-
-inline double Weighted_median_filter::to_radiants(double angle){
-    return toradiants*angle;
-}
-
-double Weighted_median_filter::to_m(uint16_t lidar_data){
-    sum += lidar_data/1000.0-bias/1000.0;
-    no++;
-    std::cout << "bias: " << sum/no << std::endl;
-    return lidar_data/1000.0-bias/1000.0;
-}
-
-std::string Weighted_median_filter::state_str(std::array<double,4> state){
-    std::stringstream s;
-    for(int i = 0; i<3;i++) s<< state[i] << ',';
-    s<<state[3];
-    return s.str();
 }
 
 void Weighted_median_filter::recieve_pos(uint16_t pos_uint){

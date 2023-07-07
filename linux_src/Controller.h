@@ -2,7 +2,6 @@
 #define CONTROLLER_H
 
 #include "FileWriter.h"
-#include "Controller.h"
 
 class Controller{
 	protected:
