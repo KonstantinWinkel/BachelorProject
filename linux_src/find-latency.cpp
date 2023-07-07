@@ -135,7 +135,20 @@ double calculate_std_error(double values[], int length){
     return sqrt(sum / (length - 1))/sqrt(length);
 }
 
+void help(){
+    std::cout << "Use this programm to find the latency of any camera" << std::endl;
+    std::cout << "Command Usage: ./find-latency <Cam_ID> <Iterations>" << std::endl;
+    std::cout << std::endl << "How to use:" << std::endl;
+    std::cout << "The program will open 3 windows. One showing the video stream, one showing all blue pixels in the video and one big window showing a black screen" << std::endl;
+    std::cout << "Point your camera at the big black window. Once you're satisfied with what the camera sees press space." << std::endl;
+    std::cout << "The screen will flash blue and calculate the time it takes for the camera to register it." << std::endl;
+    std::cout << "Repeat this process <Iterations> times." << std::endl;
+    exit(0);
+}
+
 int main(int argc, char** argv){
+
+    if(strcmp(argv[1], "-h") == 0) help();
 
     //init
     BLACK = cv::Scalar(0, 0, 0);

@@ -102,7 +102,7 @@ void ImageProcessing::CalculatePositionAndVelocity(){
 	angleComputation.x = points.at(1).x - points.at(0).x;
 	angleComputation.y = points.at(1).y - points.at(0).y;
 
-	double tempangle = -atan2(angleComputation.y, angleComputation.x) * 180/M_PI;
+	double tempangle = -atan2(angleComputation.y, angleComputation.x) * 180/M_PI - calib_correction;
 
 	std::chrono::duration<double, std::milli> ms_double = std::chrono::high_resolution_clock::now() - lastIteration;
 
@@ -110,7 +110,7 @@ void ImageProcessing::CalculatePositionAndVelocity(){
 
 	firstIteration = false;
 	lastIteration = std::chrono::high_resolution_clock::now();
-	angle = tempangle - calib_correction - 90;
+	angle = tempangle;
 
 	_debug_print_image_(angle << " " << velocity);
 }
