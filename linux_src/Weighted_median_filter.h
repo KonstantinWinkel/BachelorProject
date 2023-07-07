@@ -24,12 +24,6 @@ public:
 
 Weighted_median_filter(Controller * controller,size_t size_x = 10, size_t size_phi = 3);
 
-inline double to_radiants(double angle);
-
-double to_m(uint16_t lidar_data);
-
-std::string state_str(std::array<double,4> state);
-
 void recieve_pos(uint16_t pos_uint);
 
 void recieve_angle(double phi);

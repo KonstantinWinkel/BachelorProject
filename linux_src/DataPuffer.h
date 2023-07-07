@@ -20,7 +20,7 @@
 namespace je{
     template<typename T> class RingBuffer
     {
-        private:
+        protected:
         size_t size;
         int current_size;
         const std::function<double(int)> weight_func;
@@ -114,6 +114,54 @@ namespace je{
                 s << buf << ((i==current_size-1)?"":",");
             }
             return s.str();
+        }
+    };
+
+    struct datapoint{
+        double value;
+        double time;
+
+        datapoint operator +(const datapoint& a){ //implemented because I dont want ringbuffermethods to throw an exception. never rly use it.
+            return datapoint{this->value+a.value,this->time+a.time};
+        }
+        datapoint operator /(const double& b){
+            return datapoint{this->value/b,this->time/b};
+        }
+        std::ostream& operator<<(std::ostream& os)
+        {
+            return os << "value: " << this->value << " time: " << this->time;
+        }
+    };
+
+    class linear_regression : public RingBuffer<datapoint> {
+        
+        protected:
+        double sum(size_t size, const std::function<double(int)>& inner_func){
+            double ret_sum = 0;
+            for(int i=0;i<size;i++)ret_sum += inner_func(i);
+            return ret_sum;
+        }
+
+        public:
+        linear_regression(size_t size):
+            RingBuffer(size){ };
+
+        double get_slope(){
+            double s_x = sum(current_size,[=](int i){return data[i].value;});
+            double s_xx = sum(current_size,[=](int i){return data[i].value*data[i].value;});
+            double s_xy = sum(current_size,[=](int i){return data[i].value*data[i].time;});
+            double s_y = sum(current_size,[=](int i){return data[i].time;});
+        
+            return (s_y*s_xx-s_x*s_xy)/(current_size*s_xx-s_x*s_x);
+        }
+
+        double get_intercept(){
+            double s_x = sum(current_size,[=](int i){return data[i].value;});
+            double s_xx = sum(current_size,[=](int i){return data[i].value*data[i].value;});
+            double s_xy = sum(current_size,[=](int i){return data[i].value*data[i].time;});
+            double s_y = sum(current_size,[=](int i){return data[i].time;});
+
+            return (current_size * s_xy - s_x * s_y)/(current_size*s_xx-s_x*s_x);
         }
     };
 }
