@@ -26,7 +26,7 @@ class IMUReader : public StaticThread <>
         float calibrationValues[3]; //fill through experiments
         float realValues[3] = {0.0, 0.0, 0.0};
 
-        int rawValues[3] = {0, 0, 0};
+        int16_t rawValues[3] = {0, 0, 0};
 
         //Local Adresses of registers
         uint8_t X_L[1] = {0x28};

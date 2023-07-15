@@ -77,30 +77,50 @@ void UARTInterface::ReceiveValues(){
 	//read string from UART stream
 	std::string response = "";
 	serial.flushInput();
-		response = serial.read(41); //40
+	response = serial.read(20); //40
 	serial.close();	
 
-	if(response[40] != '#'){
+	if(response[19] != '#'){
 		std::cout << "message dropped: " << response << std::endl;
 		return;
 	}
 
-	for(int i = 0;i<8;i++) xIMUChar[i]=response[i-0];
-	for(int i = 8;i<16;i++) yIMUChar[i-8]=response[i];
-	for(int i = 16;i<24;i++) zIMUChar[i-16]=response[i];
-	for(int i = 24;i<28;i++) xLIDARFilteredChar[i-24]=response[i];
-	for(int i = 28;i<32;i++) yLIDARFilteredChar[i-28]=response[i];
-	for(int i = 32;i<36;i++) xLIDARRawChar[i-32]=response[i];
-	for(int i = 36;i<40;i++) yLIDARRawChar[i-36]=response[i];
-	xForce = toFloat(xIMUChar); //mb substr will work
-	yForce = toFloat(yIMUChar);
-	zForce = toFloat(zIMUChar);
-	xLidarFiltered = toUINT16(xLIDARFilteredChar);
-	yLidarFiltered = toUINT16(yLIDARFilteredChar);
-	xLidarRaw = toUINT16(xLIDARRawChar);
-	yLidarRaw = toUINT16(yLIDARRawChar);
+	std::cout << "message accepted: " << response << std::endl;
 
-	_debug_print_uart_(response << " " << xForce <<" " << yForce << " " << zForce << " " << xLidarFiltered << " " << yLidarFiltered << " " << xLidarRaw << " " << yLidarRaw);
+	char xResponse[8], yResponse[8];
+
+	for(int i = 0;i<8;i++) xResponse[i]=response[i+2];
+	for(int i = 0;i<8;i++) yResponse[i-8]=response[i+11];
+	
+	switch (response[0])
+	{
+		case '0':
+			xForce = toFloat(xResponse);
+			yForce = toFloat(yResponse);
+			break;
+
+		case '1':
+			xLidarFiltered = toUINT16(xResponse);
+			yLidarFiltered = toUINT16(yResponse);
+			break;
+
+		case '2':
+			xLidarRaw = toUINT16(xResponse);
+			yLidarRaw = toUINT16(yResponse);
+			break;
+
+		case '3':
+			//TODO
+			break;
+		
+		case '4':
+			//TODO
+			break;
+
+		default:
+			break;
+	}
+
 }
 
 void UARTInterface::SendValues(){
@@ -119,7 +139,7 @@ void UARTInterface::SendValues(){
 	toChars(yValue, yString);
 	toChars((float)(ms_double.count()/1000),tString);
 
-	asprintf(&outputString, "X%sY%sT%s#", xString, yString, tString);
+	asprintf(&outputString, "X%sY%s#", xString, yString);
 
 	size_t bytesWritten = serial.write(outputString);
 	serial.close();

@@ -27,13 +27,13 @@ class FileWriter{
 		std::stringstream ControllerYStream;
 		std::stringstream UARTStream;
 
-		const std::string CameraXFileName = "camera_x_output.csv";
-		const std::string CameraYFileName = "camera_y_output.csv";
-		const std::string FilterXFileName = "filter_x_output.csv";
-		const std::string FilterYFileName = "filter_y_output.csv";
-		const std::string ControllerXFileName = "controller_x_output.csv";
-		const std::string ControllerYFileName = "controller_y_output.csv";
-		const std::string UARTFileName = "uart_output.csv";
+		const std::string CameraXFileName = "csv_files/camera_x_output.csv";
+		const std::string CameraYFileName = "csv_files/camera_y_output.csv";
+		const std::string FilterXFileName = "csv_files/filter_x_output.csv";
+		const std::string FilterYFileName = "csv_files/filter_y_output.csv";
+		const std::string ControllerXFileName = "csv_files/controller_x_output.csv";
+		const std::string ControllerYFileName = "csv_files/controller_y_output.csv";
+		const std::string UARTFileName = "csv_files/uart_output.csv";
 
 		float ControllerXValue;
 		float ControllerYValue;
@@ -51,7 +51,7 @@ class FileWriter{
 		virtual void writeCameraInfo(Identifier identifier, float position, float velocity);
 		virtual void writeControllerInfo(Identifier identifier, float value);
 		virtual void writeFilterInfo(Identifier identifier, float angle, float ang_vel, float position, float velocity);
-		virtual void writeUARTInfo(float xForce, float yForce, uint16_t xLidarFiltered, uint16_t yLidarFiltered, uint16_t xLidarRaw, uint16_t yLidarRaw);
+		virtual void writeUARTInfo(float xForce, float yForce, int16_t xLidarFiltered, int16_t yLidarFiltered, int16_t xLidarRaw, int16_t yLidarRaw);
 
 		virtual void handleCTRLC();
 };		

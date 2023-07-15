@@ -17,6 +17,7 @@
 
 #define TopBound 7
 #define LowBound 3
+#define Speed 200
 
 DemoProgram::DemoProgram(FileWriter * filewriter){
     DemoProgram::filewriter = filewriter;
@@ -125,20 +126,20 @@ void DemoProgram::circle(){
 
 void DemoProgram::newDemo(){
     while(1){
-        xMotorValue = 20;
+        xMotorValue = Speed;
         PublishValues();
-        std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
-        xMotorValue = -20;
+        xMotorValue = -Speed;
         PublishValues();
-        std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
-        yMotorValue = 20;
+        yMotorValue = Speed;
         PublishValues();
-        std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
-        yMotorValue = -20;
+        yMotorValue = -Speed;
         PublishValues();
-        std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     }
 }

@@ -36,11 +36,11 @@ class UARTInterface{
 		float xValue; // currently changed to float, was double
 		float yValue; // maybe float is enough accuarcy?
 
-		uint16_t xLidarRaw;
-		uint16_t yLidarRaw;
+		int16_t xLidarRaw;
+		int16_t yLidarRaw;
 
-		uint16_t xLidarFiltered;
-		uint16_t yLidarFiltered;
+		int16_t xLidarFiltered;
+		int16_t yLidarFiltered;
 
 		std::chrono::_V2::system_clock::time_point lastIteration;
 

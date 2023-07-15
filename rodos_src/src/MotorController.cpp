@@ -12,7 +12,7 @@
 #include "../include/util.h"
 #include "../include/topics.h"
 
-#define MessageLength 28 //19
+#define MessageLength 19 //19
 #define MAX_POS 5.0
 #define MIN_POS -5.0
 
@@ -22,6 +22,10 @@ HAL_PWM servo3(PWM_IDX02); //PE13
 
 HAL_GPIO orange(GPIO_061); //this threads "Controll LED"
 HAL_GPIO redMotor(GPIO_062); //reserved for calculations
+
+CommBuffer<ANGLES> Controller_Buffer;
+
+Subscriber Controller_Subscriber(Angles_Topic, Controller_Buffer);
 
 //desired Angles
 float acc_x = 0;
@@ -37,42 +41,23 @@ namespace RODOS {
 	extern HAL_UART uart_stdout;
 }
 
-class MotorController : public StaticThread<>
+
+class MotorController : public StaticThread <>
 {
     private:
 
+        //float vel_x = 0;
+        //float vel_y = 0;
+
+        //float pos_x = 0;
+        //float pos_y = 0;
+
+        float constants[3] = {0,0.1,0};
+        
     public:
+        MotorController() : StaticThread("lmao", 100){}
 
-		MotorController() : StaticThread("Motor Controller", 1000) {
-		}
-
-		int i = 0;
-
-        void init(){
-            servo1.init(50, 4000);
-            servo2.init(50, 4000);
-            servo3.init(50, 4000);
-
-			orange.init(1,1,0);
-        }
-
-		float Pos2A(float position){
-			return position * (50.0f/5.0f);
-		}
-
-		float P2A(float percentage){
-			return percentage * 120 - 60;
-		}
-
-		//for 4k  inc: 1920 - 2*Angle
-		//for 8k  inc: 3840 - 4*Angle
-		//for 16k inc: 7680 - 8*Angle
-		unsigned int calculatePWM(float Angle)
-        {
-            return (unsigned int)(1920 - 2 * Angle);//orig:4
-        }
-
-		void checkBounds(){
+        void checkBounds(){
 			bool X_OUT_OF_BOUNDS = false;
 			bool Y_OUT_OF_BOUNDS = false;
 
@@ -97,41 +82,68 @@ class MotorController : public StaticThread<>
 			}
 
 			if(X_OUT_OF_BOUNDS){
-				acc_x = 0;
+				//acc_x = 0;
 				vel_x = 0;
 			}
 
 			if(Y_OUT_OF_BOUNDS){
-				acc_y = 0;
+				//acc_y = 0;
 				vel_y = 0;
 			}
 		}
 
-
+        void init(){
+            servo1.init(50, 4000);
+            servo3.init(50, 4000);
+            orange.init(1,1,0);
+			redMotor.init(1,1,0);
+        }
 
         void run(){
-			
-			TIME_LOOP(0*SECONDS, 1 * MILLISECONDS){
-				orange.setPins(~orange.readPins());
+
+            ANGLES data;
+
+            while(1){
+                orange.setPins(~orange.readPins());
+
+                Controller_Buffer.get(data);
+                vel_x = -2 * data.xAngle;
+                vel_y = -2 * data.yAngle;
+
+                pos_x = -constants[1] * data.xAngle;
+                pos_y = -constants[1] * data.yAngle;
 
 				pos_x += 0.5*acc_x/1000000 + vel_x/1000;
 				pos_y += 0.5*acc_y/1000000 + vel_y/1000;
+                
+                servo1.write(calculatePWM(Pos2A(pos_x)));
+                servo3.write(calculatePWM(Pos2A(pos_y)));
 
-				vel_x += acc_x/1000;
-				vel_y += acc_y/1000;
+                checkBounds();
 
-				checkBounds();
+                suspendCallerUntil(NOW() + 5*MILLISECONDS);
 
-				servo1.write(calculatePWM(Pos2A(pos_x)));
-				servo2.write(calculatePWM(Pos2A(pos_x)));
-				servo3.write(calculatePWM(Pos2A(pos_y)));
 
-				suspendCallerUntil(NOW() + 1 * MILLISECONDS); // was 1
-			}
+            }
         }
-};
-MotorController motorcontroller;
 
+        float Pos2A(float position){
+            return position * (50.0f/5.0f);
+        }
+
+        float P2A(float percentage){
+            return percentage * 120 - 60;
+        }
+
+        //for 4k  inc: 1920 - 2*Angle
+        //for 8k  inc: 3840 - 4*Angle
+        //for 16k inc: 7680 - 8*Angle
+        unsigned int calculatePWM(float Angle)
+        {
+            return (unsigned int)(1920 - 2 * Angle);//orig:4
+        }
+
+} motorcontroller;
 
 //black magic from here on out
 char all[MessageLength];
@@ -179,10 +191,10 @@ class UartReceiver: public StaticThread<>{
 			while (1) {
 				size_t readLength = uart_stdout.read(all,MessageLength);
 
-				if(all[27] == '#' ){
 
+				if(all[18] == '#' ){
 					
-					if(all[0] != 'X' || all[9] != 'Y' || all[18] != 'T' || all[27] != '#'){
+					if(all[0] != 'X' || all[9] != 'Y' || all[18] != '#'){
 						clearMessage();
 						continue; //XaaaaaaaaYaaaaaipd#
 					}
@@ -194,13 +206,19 @@ class UartReceiver: public StaticThread<>{
 					for(int i = 0; i < 8; i++){
 						xString[i] = all[1+i];
 						yString[i] = all[10+i];
-						tString[i] = all[19+i];
+						//tString[i] = all[19+i];
 					}
+					
+					float value_x = toFloat(xString);
+					float value_y = toFloat(yString);
 
-					acc_x = toFloat(xString);
-					acc_y = toFloat(yString);
+					if(value_x == std::numeric_limits<float>::max()) CheckForSpecialValues(value_y);
+					else{
+						vel_x = value_x;
+						vel_y = value_y;
 
-					if(acc_x == std::numeric_limits<float>::max()) CheckForSpecialValues(acc_y);
+						//PRINTF("%f %f \n", vel_x, vel_y);
+					}
 
 					clearMessage();
 				}

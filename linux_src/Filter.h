@@ -31,7 +31,7 @@ public:
     }
 
     inline double to_radiants(double angle){
-        return toradiants*angle;
+        return angle;
     }
 
     double to_m(uint16_t lidar_data){

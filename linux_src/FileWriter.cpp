@@ -99,7 +99,7 @@ void FileWriter::writeFilterInfo(Identifier identifier, float angle, float ang_v
 	}
 }
 
-void FileWriter::writeUARTInfo(float xForce, float yForce, uint16_t xLidarFiltered, uint16_t yLidarFiltered, uint16_t xLidarRaw, uint16_t yLidarRaw){
+void FileWriter::writeUARTInfo(float xForce, float yForce, int16_t xLidarFiltered, int16_t yLidarFiltered, int16_t xLidarRaw, int16_t yLidarRaw){
 
 	std::string line = "";
 

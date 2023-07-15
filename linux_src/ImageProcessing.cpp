@@ -48,6 +48,14 @@ ImageProcessing::ImageProcessing(int cameraID, std::string name, FileWriter * fi
 	cv::namedWindow(videoWindowName);
 	cv::namedWindow(detectionWindowName);
 
+	cv::moveWindow(videoWindowName, 0, 0);
+	cv::moveWindow(detectionWindowName, 0, 500);
+
+	if(identifier == Identifier::Y){
+		cv::moveWindow(videoWindowName, 500, 0);
+		cv::moveWindow(detectionWindowName, 500, 500);
+	}
+
 	firstIteration = true;
 
 	std::ifstream calib_file("camera.calib");
@@ -102,7 +110,7 @@ void ImageProcessing::CalculatePositionAndVelocity(){
 	angleComputation.x = points.at(1).x - points.at(0).x;
 	angleComputation.y = points.at(1).y - points.at(0).y;
 
-	double tempangle = -atan2(angleComputation.y, angleComputation.x) * 180/M_PI - calib_correction;
+	double tempangle = -atan2(angleComputation.y, angleComputation.x) - calib_correction;
 
 	std::chrono::duration<double, std::milli> ms_double = std::chrono::high_resolution_clock::now() - lastIteration;
 

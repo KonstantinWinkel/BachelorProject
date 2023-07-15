@@ -1,5 +1,6 @@
 #include "rodos.h"
 #include "../include/VL53L4CD_api.h"
+#include "../include/VL53L4CD_calibration.h"
 #include "../include/platform.h"
 #include "../include/topics.h"
 
@@ -8,8 +9,9 @@
 HAL_GPIO green(GPIO_060);
 
 #define MedianLenght 20
-#define XZero 0
-#define YZero 0 //- 25 - 180
+#define CalibLength 100
+#define XZero 85
+#define YZero 99
 
 LIDARDATA FilteredValues;
 LIDARDATA RawValues;
@@ -23,10 +25,13 @@ class LIDARReader : public StaticThread <> {
         VL53L4CD_ResultsData_t results;	
 
         //for median filter
-        uint16_t RawXValues[MedianLenght];
-        uint16_t RawYValues[MedianLenght];
+        int16_t RawXValues[MedianLenght];
+        int16_t RawYValues[MedianLenght];
         
         uint8_t RawIndex[2] = {0, 0};
+
+        int16_t BIAS_X = 0;
+        int16_t BIAS_Y = 0;
 
     //my code
 
@@ -34,42 +39,8 @@ class LIDARReader : public StaticThread <> {
 
         LIDARReader() : StaticThread("LIDAR Reader", 5 ){}
 
-        void init(){
-            VL53L4CD_init();
-            green.init(1,1,0);
-            
-            for(int i = 0; i < MedianLenght; i++) RawXValues[i] = RawYValues[i] = 0;
-        }
 
-        void MedianFilter(uint8_t index, uint16_t newValue){
-            if(index == 1) RawXValues[RawIndex[index]] = newValue;
-            if(index == 0) RawYValues[RawIndex[index]] = newValue; // -(newValue + YZero);
-
-            RawIndex[index]++;
-            if(RawIndex[index] >= MedianLenght) RawIndex[index] = 0;
-
-            uint16_t sum = 0;
-            for(uint8_t i = 0; i < MedianLenght; i++){
-                if(index == 1) sum += RawXValues[i];
-                if(index == 0) sum += RawYValues[i];
-            }
-            //PRINTF("%d\n", sum/MedianLenght);
-
-            if(index == 1){
-                FilteredValues.xDistance = sum/MedianLenght;
-                RawValues.xDistance = newValue;
-                
-                //PRINTF("Filtered Value: %d\n", FilteredValues.xDistance );
-                return;
-            }
-            
-            if(index == 0){
-                FilteredValues.yDistance = sum/MedianLenght;
-                RawValues.yDistance = newValue; //-(newValue + YZero);
-                return;
-            }
-        }
-
+        //Util Methods
         void readAndPrint(){
             status = VL53L4CD_CheckForDataReady( dev, &isReady );
 
@@ -83,6 +54,70 @@ class LIDARReader : public StaticThread <> {
             }
         }
 
+        void MedianFilter(uint8_t index, uint16_t newValue){
+            if(index == 1) RawXValues[RawIndex[index]] = newValue - BIAS_X;
+            if(index == 0) RawYValues[RawIndex[index]] = newValue - BIAS_Y; // -(newValue + YZero);
+
+            int16_t sum = 0;
+            for(uint8_t i = 0; i < MedianLenght; i++){
+                if(index == 1) sum += RawXValues[i];
+                if(index == 0) sum += RawYValues[i];
+            }
+            //PRINTF("%d\n", sum/MedianLenght);
+
+            if(index == 1){
+                FilteredValues.xDistance = sum/MedianLenght;
+                RawValues.xDistance = RawXValues[RawIndex[index]];
+            }
+            
+            if(index == 0){
+                FilteredValues.yDistance = sum/MedianLenght;
+                RawValues.yDistance = RawYValues[RawIndex[index]]; //-(newValue + YZero);
+            }
+
+            RawIndex[index]++;
+            if(RawIndex[index] >= MedianLenght) RawIndex[index] = 0;
+        }
+
+        //Thread Methods
+
+        void init(){
+            VL53L4CD_init();
+            green.init(1,1,0);
+
+            int16_t x_lib_offset = 0;
+            int16_t y_lib_offset = 0;
+
+            setCurrentI2C(1);
+            //VL53L4CD_CalibrateOffset(dev, XZero, &x_lib_offset, 100);
+
+            setCurrentI2C(2);
+            //VL53L4CD_CalibrateOffset(dev, XZero, &y_lib_offset, 100);
+
+
+            int32_t sumX = 0;
+            int32_t sumY = 0;
+
+            //find bias
+            for(int i = 0; i < CalibLength; i++){
+                green.setPins(~green.readPins());
+
+                setCurrentI2C(1);
+                readAndPrint();
+
+                setCurrentI2C(2);
+                readAndPrint();
+                sumX += RawValues.xDistance;
+                sumY += RawValues.yDistance;
+	        }
+
+            BIAS_X = sumX / CalibLength;
+            BIAS_Y = sumY / CalibLength;
+
+            for(int i = 0; i < MedianLenght; i++) RawXValues[i] = RawYValues[i] = 0;
+
+        }
+
         void run() {
             setCurrentI2C(1);
             VL53L4CD_SensorInit( dev );
@@ -92,9 +127,7 @@ class LIDARReader : public StaticThread <> {
             VL53L4CD_SensorInit( dev );
             status = VL53L4CD_StartRanging( dev );
 
-	        while(1) {
-
-                int64_t t = NOW();
+	        TIME_LOOP(0*SECONDS, 100 * MILLISECONDS){
                 green.setPins(~green.readPins());
 
                 setCurrentI2C(1);
@@ -105,8 +138,6 @@ class LIDARReader : public StaticThread <> {
 
                 LIDAR_Filtered_Topic.publish(FilteredValues);
                 LIDAR_Raw_Topic.publish(RawValues);
-                //PRINTF("%ld", (long)(NOW()-t));
-                suspendCallerUntil( NOW() + 100*MILLISECONDS );
 	        }
         }
 

@@ -14,6 +14,9 @@
 #include "Weighted_median_filter.h"
 #include "DemoProgram.h"
 
+#include "Pass_filter.h"
+#include "P_Controller.h"
+
 FileWriter * filewriter_reference;
 
 void trapCTRLC(sig_atomic_t s){
