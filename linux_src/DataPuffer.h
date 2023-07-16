@@ -29,6 +29,14 @@ namespace je{
         double normalize; 
 
         public:
+        int temp_ptr(){
+            return ptr;
+        }
+
+        int get_current_size(){
+            return current_size;
+        }
+
         void update_normalized(){
             double sum = 0;
             int i = 0;
@@ -39,8 +47,8 @@ namespace je{
         }
 
         inline int get_ptr(int index){
-            int ret = (ptr-index)%size;
-            return ret<0?ret+size:ret;
+            int ret = (ptr-index+size)%size;
+            return ret;
         }
 
         RingBuffer<T>(size_t size,const std::function<double(int)>& weight_func = [](int index){return 1;}): 
@@ -51,7 +59,12 @@ namespace je{
         }
 
         void set(T new_data){
-            current_size = ++current_size>size?size:current_size;
+            //current_size = (++current_size)>size?size:current_size;
+            if(current_size < size){
+                current_size++;
+                std::cout << "WE GOING UP" << current_size << std::endl;
+            }
+            else current_size = size;
             ptr = (ptr+1)%size;
             data[ptr] = new_data;
         }
@@ -105,7 +118,7 @@ namespace je{
             return sum/current_size;
         }
 
-        std::string to_string(){ //returns contents in .csv format
+        /*virtual std::string to_string(){ //returns contents in .csv format
             std::stringstream s;
             T buf;
             for(int i = 0; i<current_size;++i){
@@ -114,7 +127,7 @@ namespace je{
                 s << buf << ((i==current_size-1)?"":",");
             }
             return s.str();
-        }
+        }*/
     };
 
     struct datapoint{
@@ -131,6 +144,11 @@ namespace je{
         {
             return os << "value: " << this->value << " time: " << this->time;
         }
+        std::string to_string(){
+            std::stringstream s;
+            s << "value: " << this->value << " time: " << this->time;
+            return s.str();
+        }
     };
 
     class linear_regression : public RingBuffer<datapoint> {
@@ -142,26 +160,51 @@ namespace je{
             return ret_sum;
         }
 
+        std::string make_jank(datapoint d)
+        {
+            std::stringstream s;
+            s << "value: " << d.value << " time: " << d.time;
+            return s.str();
+        }
+
         public:
         linear_regression(size_t size):
             RingBuffer(size){ };
 
         double get_slope(){
+            if(current_size == 0) return 0;
+            if(current_size == 1) return 0;
             double s_x = sum(current_size,[=](int i){return data[i].value;});
             double s_xx = sum(current_size,[=](int i){return data[i].value*data[i].value;});
             double s_xy = sum(current_size,[=](int i){return data[i].value*data[i].time;});
             double s_y = sum(current_size,[=](int i){return data[i].time;});
+
+            if(current_size*s_xx-s_x*s_x==0) return 0;
         
-            return (s_y*s_xx-s_x*s_xy)/(current_size*s_xx-s_x*s_x);
+            return (current_size * s_xy - s_x * s_y)/(current_size*s_xx-s_x*s_x);
         }
 
         double get_intercept(){
+            if(current_size == 0) return 0;
             double s_x = sum(current_size,[=](int i){return data[i].value;});
             double s_xx = sum(current_size,[=](int i){return data[i].value*data[i].value;});
             double s_xy = sum(current_size,[=](int i){return data[i].value*data[i].time;});
             double s_y = sum(current_size,[=](int i){return data[i].time;});
 
-            return (current_size * s_xy - s_x * s_y)/(current_size*s_xx-s_x*s_x);
+            if(current_size*s_xx-s_x*s_x == 0) return data[1].value;
+            if(s_xx == 0.0) return data[0].value;
+
+            return (s_y*s_xx-s_x*s_xy)/(current_size*s_xx-s_x*s_x);
+        }
+
+        std::string to_csv(){
+            std::stringstream s;
+            datapoint buf;
+            for(int i = 0; i<current_size;++i){
+                get(buf,i); 
+                s << make_jank(buf) << ((i==current_size-1)?"":",");
+            }
+            return s.str();
         }
     };
 }

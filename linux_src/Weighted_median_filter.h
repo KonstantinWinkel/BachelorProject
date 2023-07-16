@@ -22,11 +22,11 @@ private:
 
 public:
 
-Weighted_median_filter(Controller * controller,size_t size_x = 10, size_t size_phi = 3);
+Weighted_median_filter(Identifier axis,size_t size_x = 10, size_t size_phi = 3);
 
-void recieve_pos(uint16_t pos_uint);
+void update_pos(uint16_t pos_uint, double last_u, double state[4]);
 
-void recieve_angle(double phi);
+void update_angle(double phi, double last_u, double state[4]);
 };
 
 #endif //WEIGHTED_MEDIAN_FILTER_H

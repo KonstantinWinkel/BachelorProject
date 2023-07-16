@@ -14,10 +14,10 @@ void P_Controller::update_accell(){
     Controller::PublishValues();
 }
 
-void P_Controller::recieve_data(std::array<double, 4> filtered_data){
-    for(int i = 0; i < 4; i++) P_Controller::state[i] = filtered_data[i];
+void P_Controller::recieve_data(){
+    for(int i = 0; i < 4; i++) P_Controller::state[i] = filtered_state[i];
 
-    sum_of_angles += filtered_data[0];
+    sum_of_angles += filtered_state[0];
 
     update_accell();
 }

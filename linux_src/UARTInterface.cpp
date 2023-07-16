@@ -7,10 +7,10 @@
 //required header files
 #include "UARTInterface.h"
 
-UARTInterface::UARTInterface(FileWriter * filewriter,Filter * filter_x, Filter * filter_y, std::string deviceName, int baudRate){
+UARTInterface::UARTInterface(FileWriter * filewriter,Controller * controller_x, Controller * controller_y, std::string deviceName, int baudRate){
 	UARTInterface::filewriter = filewriter;
-	UARTInterface::filter_x = filter_x;
-	UARTInterface::filter_y = filter_y;
+	UARTInterface::controller_x = controller_x;
+	UARTInterface::controller_y = controller_y;
 	UARTInterface::baudRate = baudRate;
 	UARTInterface::deviceName = deviceName;
 
@@ -37,8 +37,8 @@ UARTInterface::~UARTInterface(){
 void UARTInterface::PublishValues(){
 	//pass calculated values to the filewriter
 	filewriter->writeUARTInfo(xForce, yForce, xLidarFiltered, yLidarFiltered, xLidarRaw, yLidarRaw);
-	filter_x->recieve_pos(xLidarRaw);
-	filter_y->recieve_pos(yLidarRaw);
+	controller_x->recieve_pos(xLidarRaw);
+	controller_y->recieve_pos(yLidarRaw);
 }
 
 //

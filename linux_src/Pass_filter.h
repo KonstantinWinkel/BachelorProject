@@ -11,9 +11,9 @@ class Pass_filter : public Filter{
     public:
         Pass_filter(Controller * controller);
 
-        void recieve_pos(uint16_t pos_uint);
+        void update_pos(uint16_t pos_uint);
 
-        void recieve_angle(double phi);
+        void update_angle(double phi);
 
         void recieve_velo(double velo);
 

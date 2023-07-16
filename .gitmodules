@@ -4,3 +4,6 @@
 [submodule "serial"]
 	path = serial
 	url = https://github.com/wjwwood/serial.git
+[submodule "eigen"]
+	path = eigen
+	url = https://gitlab.com/libeigen/eigen.git

@@ -5,7 +5,7 @@
 #include "FileWriter.h"
 #include "../serial/include/serial/serial.h"
 
-#include "Filter.h"
+#include "Controller.h"
 
 #include "bachelor_debug.h"
 
@@ -26,8 +26,8 @@ class UARTInterface{
 		std::string deviceName;
 		int baudRate;
 
-		Filter * filter_x;
-		Filter * filter_y;
+		Controller * controller_x;
+		Controller * controller_y;
 
 		float xForce;
 		float yForce;
@@ -47,7 +47,7 @@ class UARTInterface{
 		char xIMUChar[8], yIMUChar[8], zIMUChar[8], xLIDARFilteredChar[4], yLIDARFilteredChar[4], xLIDARRawChar[4], yLIDARRawChar[4];
 
 	public:
-		UARTInterface(FileWriter * filewriter,Filter * filter_x, Filter * filter_y, std::string deviceName, int baudRate);
+		UARTInterface(FileWriter * filewriter,Controller * controller_x, Controller * controller_y, std::string deviceName, int baudRate);
 		UARTInterface(std::string deviceName, int baudRate);
 		~UARTInterface();
 

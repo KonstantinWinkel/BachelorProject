@@ -22,11 +22,11 @@ const int image_width = 500;
 const int RECT_PARAMS[4] = {200, 100, 299, 260}; //400x500 -> {}
 
 //constructor, creates ImageProcessing object, sets identifying variables and intializes OpenCV Camera
-ImageProcessing::ImageProcessing(int cameraID, std::string name, FileWriter * filewriter, Filter * filter, Identifier identifier){
+ImageProcessing::ImageProcessing(int cameraID, std::string name, FileWriter * filewriter, Controller * controller, Identifier identifier){
 	ImageProcessing::cameraID = cameraID;
 	ImageProcessing::name = name;
 	ImageProcessing::filewriter = filewriter;
-	ImageProcessing::filter = filter;
+	ImageProcessing::controller = controller;
 	ImageProcessing::identifier = identifier;
 
 	videoWindowName = "V" + name;
@@ -195,7 +195,7 @@ void ImageProcessing::ReadAndProcessImage(){
 
 void ImageProcessing::PublishValues(){
 	filewriter->writeCameraInfo(identifier, angle, velocity);
-	filter->recieve_angle(angle);
+	controller->recieve_angle(angle);
 }
 
 //run method, handles programm flow

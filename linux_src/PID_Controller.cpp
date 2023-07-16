@@ -9,14 +9,16 @@
 #define _debug_print_controller_(x)
 #endif
 
-PID_Controller::PID_Controller(FileWriter * filewriter, Identifier axis,bool is_demo , size_t phi_integrator_size,size_t x_integrator_size): phi_integrator(phi_integrator_size), x_integrator(x_integrator_size){
+PID_Controller::PID_Controller(FileWriter * filewriter, Filter * filter, Identifier axis,bool is_demo , size_t phi_integrator_size,size_t x_integrator_size): phi_integrator(phi_integrator_size), x_integrator(x_integrator_size){
+	Controller::filter = filter;
 	Controller::is_demo = is_demo;
 	Controller::axis = axis;
 	Controller::filewriter = filewriter;
 	Controller::acceleration = 0;
 	PID_Controller::velocity = 0;
 	PID_Controller::pos = 0;
-	PID_Controller::PID_CONST = {0,0,0,10.2970,-0.6419,0};
+	//PID_Controller::PID_CONST = {0,0,0,10.2970,-0.6419,0};
+	PID_Controller::PID_CONST = {0,0,0,200.535,-0.6419,0};
 	PID_Controller::state = {0,0,0,0,0,0};
 	PID_Controller::last_update = std::chrono::high_resolution_clock::now();
 }
@@ -27,13 +29,7 @@ void PID_Controller::print_controller_state(){
 		s << state[i] << ',';
 	}
 	s << state[5];
-	std::cout << "Controller state: " << s.str() << std::endl;
-}
-
-void PID_Controller::update_pos(){
-	double d_t = (std::chrono::high_resolution_clock::now() - last_update).count()/1000; //time_point.count() returns ms. -> /1000
-	pos += velocity*d_t + acceleration*d_t*d_t;
-	velocity += acceleration*d_t;
+	std::cout << "Controller" << (axis?"X":"Y") << " state: " << s.str() << std::endl;
 }
 
 void PID_Controller::update_accel(){
@@ -43,25 +39,24 @@ void PID_Controller::update_accel(){
 	}
 }
 
-void PID_Controller::update_state(std::array<double,4> filtered_data){
-	state[0] = filtered_data[0] - axis == Identifier::X ? 0.173169:0.0873933;
-	state[1] = filtered_data[1];
+void PID_Controller::update_state(){
+	state[0] = filtered_state[0] - axis == Identifier::X ? 0.173169:0.0873933;
+	state[1] = filtered_state[1];
 	state[2] = x_integrator.get_sum();
-	state[3] = filtered_data[2];
-	state[4] = filtered_data[3];
+	state[3] = filtered_state[2];
+	state[4] = filtered_state[3];
 	state[5] = phi_integrator.get_sum();
 }
 
-void PID_Controller::recieve_data(std::array<double,4> filtered_data){
-	pos = filtered_data[0];
-	velocity = filtered_data[1];
-	x_integrator.set(filtered_data[0] - axis == Identifier::X ? 0.173169:0.0873933);
-	phi_integrator.set(filtered_data[2]);
-	update_state(filtered_data);
+void PID_Controller::recieve_data(){
+	pos = filtered_state[0];
+	velocity = filtered_state[1];
+	x_integrator.set(filtered_state[0] - axis == Identifier::X ? 0.173169:0.0873933);
+	phi_integrator.set(filtered_state[2]);
+	update_state();
 	update_accel();
 	
-	update_pos();
-	if(!is_demo) PublishValues();
+	PublishValues();
 	_debug_print_controller_("Controller recieved data");
 	std::this_thread::sleep_for(std::chrono::milliseconds(10));
 }

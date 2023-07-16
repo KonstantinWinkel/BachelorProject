@@ -13,12 +13,16 @@ private:
     linear_regression lr_x;
     linear_regression lr_phi;
     std::chrono::_V2::system_clock::time_point start_time;
+    std::string path;
+    std::fstream file;
 
-double time(std::chrono::_V2::system_clock::time_point time);
+double time_since_start(std::chrono::_V2::system_clock::time_point time);
 
 public:
 
-Linear_regression_filter(Controller * controller, double camera_latency = 0.133, double lidar_latency = 0.1, size_t size_x = 10, size_t size_phi = 5);
+Linear_regression_filter(Controller * controller, double camera_latency = 0.133, double lidar_latency = 0.1, size_t size_x = 10, size_t size_phi = 10);
+
+void write_to_file(double new_value, std::array<double,4> state);
 
 void update_angle();
 

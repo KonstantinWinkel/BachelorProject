@@ -12,6 +12,7 @@
 #include "UARTInterface.h"
 #include "PID_Controller.h"
 #include "Weighted_median_filter.h"
+#include "Linear_regression_filter.h"
 #include "DemoProgram.h"
 
 #include "Pass_filter.h"
@@ -47,19 +48,19 @@ int main(int argc, char** argv){
 	FileWriter filewriter;
 	filewriter_reference = &filewriter;
 
-	PID_Controller controllerX(&filewriter, Identifier::X, is_demo);
-	PID_Controller controllerY(&filewriter, Identifier::Y, is_demo);
+	Linear_regression_filter filterX(Identifier::X);
+	Linear_regression_filter filterY(Identifier::Y);
 
-	Weighted_median_filter filterX(&controllerX);
-	Weighted_median_filter filterY(&controllerY);
+	PID_Controller controllerX(&filewriter, &filterX, Identifier::X, is_demo);
+	PID_Controller controllerY(&filewriter, &filterY, Identifier::Y, is_demo);
 
 	//trapping CTRL-C so that Filewriter can do its thing
 	signal(SIGINT, trapCTRLC);
 
-	UARTInterface uartinterface(&filewriter, &filterX, &filterY, deviceName, 115200);
+	UARTInterface uartinterface(&filewriter, &controllerX, &controllerY, deviceName, 115200);
 
-	ImageProcessing x(6, "X", &filewriter, &filterX, Identifier::X);
-	ImageProcessing y(2, "Y", &filewriter, &filterY, Identifier::Y);
+	ImageProcessing x(6, "X", &filewriter, &controllerX, Identifier::X);
+	ImageProcessing y(2, "Y", &filewriter, &controllerY, Identifier::Y);
 
 	//Creation of required threads
 	std::thread xThread(&ImageProcessing::run, x);

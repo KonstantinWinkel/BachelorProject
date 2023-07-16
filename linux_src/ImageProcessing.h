@@ -12,7 +12,7 @@
 
 //required header files
 #include "FileWriter.h"
-#include "Filter.h"
+#include "Controller.h"
 
 #if defined(_DEBUG_IMAGE_ON_)
 #define _debug_print_image_(x) std::cout << x << std::endl
@@ -33,7 +33,7 @@ using namespace je;
 class ImageProcessing{
 	protected:
 		FileWriter * filewriter;
-		Filter * filter;
+		Controller * controller;
 		Identifier identifier;
 
 		int cameraID;
@@ -60,7 +60,7 @@ class ImageProcessing{
 	public:
 		ImageProcessing();
 		ImageProcessing(int cameraID, std::string name);
-		ImageProcessing(int cameraID, std::string name, FileWriter * filewriter, Filter * filter, Identifier identifier);
+		ImageProcessing(int cameraID, std::string name, FileWriter * filewriter, Controller * controller, Identifier identifier);
 		~ImageProcessing();
 		virtual void ReadAndProcessImage();
 		virtual void CalculatePositionAndVelocity();

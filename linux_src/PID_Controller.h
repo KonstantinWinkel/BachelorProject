@@ -22,17 +22,15 @@ class PID_Controller: public Controller{
 
 	public:
 
-		PID_Controller(FileWriter * filewriter, Identifier axis,bool is_demo, size_t phi_integrator_size = 10,size_t pos_integrator_size = 10);
+		PID_Controller(FileWriter * filewriter, Filter * filter, Identifier axis,bool is_demo, size_t phi_integrator_size = 10,size_t pos_integrator_size = 10);
 
-		void update_state(std::array<double,4> filtered_data);
+		void update_state();
 
 		void print_controller_state();
 
-		void update_pos();
-
 		void update_accel();
 
-		void recieve_data(std::array<double,4> filtered_data);
+		void recieve_data();
 };
 
 #endif //PID_CONTROLLER
