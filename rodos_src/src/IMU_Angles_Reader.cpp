@@ -13,6 +13,7 @@ HAL_GPIO LED(GPIO_033);
 
 HAL_I2C AnglesIMU(I2C_IDX2);
 
+//Calibration, Y then Z then X
 
 class IMU_Angles_Reader : public StaticThread <>
 {
@@ -179,7 +180,7 @@ class IMU_Angles_Reader : public StaticThread <>
                 
 
                 angles_data.xAngle = filterXsum / 10.0;
-                angles_data.yAngle = filterYsum / 10.0;
+                angles_data.yAngle = -filterYsum / 10.0;
 
                 Angles_Topic.publish(angles_data);
             }

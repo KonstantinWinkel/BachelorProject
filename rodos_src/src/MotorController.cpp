@@ -22,10 +22,11 @@ HAL_PWM servo3(PWM_IDX02); //PE13
 
 HAL_GPIO orange(GPIO_061); //this threads "Controll LED"
 HAL_GPIO redMotor(GPIO_062); //reserved for calculations
+HAL_GPIO button(GPIO_000);
 
-CommBuffer<ANGLES> Controller_Buffer;
+CommBuffer<CONTROLLERDATA> Controller_Buffer;
 
-Subscriber Controller_Subscriber(Angles_Topic, Controller_Buffer);
+Subscriber Controller_Subscriber(Controller_Topic, Controller_Buffer);
 
 //desired Angles
 float acc_x = 0;
@@ -97,24 +98,26 @@ class MotorController : public StaticThread <>
             servo3.init(50, 4000);
             orange.init(1,1,0);
 			redMotor.init(1,1,0);
+			button.init(0,1,0);
         }
 
         void run(){
 
-            ANGLES data;
+            CONTROLLERDATA data;
 
             while(1){
                 orange.setPins(~orange.readPins());
 
-                Controller_Buffer.get(data);
-                vel_x = -2 * data.xAngle;
-                vel_y = -2 * data.yAngle;
+                if(~button.readPins()) Controller_Buffer.get(data);
+                //vel_x = -2 * data.xAngle;
+                //vel_y = -2 * data.yAngle;
 
-                pos_x = -constants[1] * data.xAngle;
-                pos_y = -constants[1] * data.yAngle;
+                //pos_x = data.xValue;
+                //pos_y = data.yValue;
 
 				pos_x += 0.5*acc_x/1000000 + vel_x/1000;
 				pos_y += 0.5*acc_y/1000000 + vel_y/1000;
+
                 
                 servo1.write(calculatePWM(Pos2A(pos_x)));
                 servo3.write(calculatePWM(Pos2A(pos_y)));
