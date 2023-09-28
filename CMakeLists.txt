@@ -12,8 +12,9 @@ list(APPEND serial_SRCS serial/src/impl/unix.cc)
 add_library( serial ${serial_SRCS})
 target_link_libraries(serial rt)
 
-add_executable(main linux_src/main.cpp linux_src/FileWriter.cpp linux_src/ImageProcessing.cpp linux_src/PID_Controller.cpp linux_src/UARTInterface.cpp linux_src/DemoProgram.cpp linux_src/DataPuffer.cpp linux_src/Weighted_median_filter.cpp linux_src/Linear_regression_filter.cpp linux_src/KF.cpp linux_src/LQR.cpp)
-target_link_libraries(main ${OpenCV_LIBS} Eigen3::Eigen pthread serial)
+add_subdirectory(rodos)
+add_executable(main linux_src/FileWriter.cpp linux_src/ImageProcessing.cpp linux_src/PID_Controller.cpp linux_src/UARTInterface.cpp linux_src/DemoProgram.cpp linux_src/DataPuffer.cpp linux_src/Weighted_median_filter.cpp linux_src/Linear_regression_filter.cpp linux_src/KF.cpp linux_src/LQR.cpp linux_src/KF_IMU.cpp linux_src/linux.cpp)
+target_link_libraries(main PUBLIC ${OpenCV_LIBS} Eigen3::Eigen pthread serial rodos)
 
 add_executable(output-cleaner linux_src/output-cleaner.cpp)
 

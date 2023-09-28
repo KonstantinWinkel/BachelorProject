@@ -13,8 +13,8 @@
 #include "../include/topics.h"
 
 #define MessageLength 19 //19
-#define MAX_POS 5.0
-#define MIN_POS -5.0
+#define MAX_POS 4.9
+#define MIN_POS -4.9
 
 HAL_PWM servo1(PWM_IDX00); //PE9
 HAL_PWM servo2(PWM_IDX01); //PE11
@@ -22,10 +22,11 @@ HAL_PWM servo3(PWM_IDX02); //PE13
 
 HAL_GPIO orange(GPIO_061); //this threads "Controll LED"
 HAL_GPIO redMotor(GPIO_062); //reserved for calculations
+HAL_GPIO button(GPIO_000);
 
-CommBuffer<ANGLES> Controller_Buffer;
+//CommBuffer<CONTROLLERDATA> Controller_Buffer;
 
-Subscriber Controller_Subscriber(Angles_Topic, Controller_Buffer);
+//Subscriber Controller_Subscriber(Controller_Topic, Controller_Buffer);
 
 //desired Angles
 float acc_x = 0;
@@ -36,6 +37,10 @@ float vel_y = 0;
 
 float pos_x = 0;
 float pos_y = 0;
+
+bool setPos = false;
+bool setVel = true;
+bool setAcc = false;
 
 namespace RODOS {
 	extern HAL_UART uart_stdout;
@@ -55,7 +60,7 @@ class MotorController : public StaticThread <>
         float constants[3] = {0,0.1,0};
         
     public:
-        MotorController() : StaticThread("lmao", 100){}
+        MotorController() : StaticThread("Motor Controller", 100){}
 
         void checkBounds(){
 			bool X_OUT_OF_BOUNDS = false;
@@ -97,33 +102,32 @@ class MotorController : public StaticThread <>
             servo3.init(50, 4000);
             orange.init(1,1,0);
 			redMotor.init(1,1,0);
+			button.init(0,1,0);
         }
 
         void run(){
 
-            ANGLES data;
+            CONTROLLERDATA data;
 
             while(1){
                 orange.setPins(~orange.readPins());
 
-                Controller_Buffer.get(data);
-                vel_x = -2 * data.xAngle;
-                vel_y = -2 * data.yAngle;
+                //if(~button.readPins()) Controller_Buffer.get(data);
+                //vel_x = -2 * data.xAngle;
+                //vel_y = -2 * data.yAngle;
 
-                pos_x = -constants[1] * data.xAngle;
-                pos_y = -constants[1] * data.yAngle;
+                //pos_x = data.xValue;
+                //pos_y = data.yValue;
 
 				pos_x += 0.5*acc_x/1000000 + vel_x/1000;
 				pos_y += 0.5*acc_y/1000000 + vel_y/1000;
+                checkBounds();
                 
                 servo1.write(calculatePWM(Pos2A(pos_x)));
                 servo3.write(calculatePWM(Pos2A(pos_y)));
 
-                checkBounds();
 
                 suspendCallerUntil(NOW() + 5*MILLISECONDS);
-
-
             }
         }
 
@@ -167,6 +171,14 @@ class UartReceiver: public StaticThread<>{
 			uart_stdout.config(UART_PARAMETER_ENABLE_DMA,MessageLength);
 			clearMessage();
 		}
+		
+		//to avoid stuttering at the edges
+		//void CheckBeforeWriteAndWrite(float value_x, float value_y){
+		//if(pos)
+		//
+		//	vel_x = value_x;
+		//	vel_y = value_y;
+		//}
 
 		void CheckForSpecialValues(float value){
 
@@ -180,6 +192,10 @@ class UartReceiver: public StaticThread<>{
 				case 2: pos_x = MAX_POS; pos_y = MAX_POS; break;
 				case 3: pos_x = MIN_POS; pos_y = MAX_POS; break;
 				case 4: pos_x = MIN_POS; pos_y = MIN_POS; break;
+				
+				case 10: setPos = true;  setVel = false; setAcc = false; break;
+				case 11: setPos = false; setVel = true;  setAcc = false; break;
+				case 12: setPos = false; setVel = false; setAcc = true;  break;
 					
 				default:break;
 			}
@@ -214,17 +230,26 @@ class UartReceiver: public StaticThread<>{
 
 					if(value_x == std::numeric_limits<float>::max()) CheckForSpecialValues(value_y);
 					else{
-						vel_x = value_x;
-						vel_y = value_y;
+						if(setPos){
+							pos_x = value_x;
+							pos_y = value_y;
+						}
+						
+						if(setVel){
+							vel_x = value_x;
+							vel_y = value_y;
+						}
 
-						//PRINTF("%f %f \n", vel_x, vel_y);
+						if(setAcc){
+							acc_x = value_x;
+							acc_y = value_y;
+						}
 					}
 
 					clearMessage();
 				}
 
 				uart_stdout.suspendUntilDataReady();
-				//suspendCallerUntil(NOW() + 3 *MILLISECONDS);
 			}
 			
 		}

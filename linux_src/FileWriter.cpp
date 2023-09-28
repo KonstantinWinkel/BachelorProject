@@ -114,8 +114,16 @@ void FileWriter::writeUARTInfo(float xForce, float yForce, int16_t xLidarFiltere
 	UARTStream << line;
 }
 
+void FileWriter::writeUARTMessageInfo(int all_in, int acc_in, int all_out){
+	UART_all_messages_in = all_in;
+	UART_accepted_messages_in = acc_in;
+	UART_all_messages_out = all_out;
+}
+
 //writes all stringstreams to file
 void FileWriter::handleCTRLC(){
+
+	std::chrono::duration<double, std::milli> ms_double = std::chrono::high_resolution_clock::now() - starttime;
 
 	std::fstream CameraXFile;
 	std::fstream CameraYFile;
@@ -142,5 +150,13 @@ void FileWriter::handleCTRLC(){
 	writeToFile(ControllerYFile, ControllerYFileName, ControllerYStream);
 	writeToFile(UARTFile, UARTFileName, UARTStream);
 
+	std::cout << std::endl << std::endl;
 	std::cout << "Files written" << std::endl;
+	std::cout << std::endl;
+	std::cout << "Total time: " << ms_double.count()/1000 << "s" << std::endl;
+	std::cout << "UART messages sent    : " << UART_all_messages_out << std::endl;
+	std::cout << "UART messages recieved: " << UART_all_messages_in << std::endl;
+	std::cout << "UART messages accepted: " << UART_accepted_messages_in << std::endl;
+	std::cout << "UART message in ratio : " << 100 * UART_accepted_messages_in / ((float) UART_all_messages_in) << "%" << std::endl;
+	std::cout << std::endl << std::endl;
 }

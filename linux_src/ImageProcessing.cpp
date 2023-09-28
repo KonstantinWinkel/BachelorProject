@@ -45,7 +45,7 @@ ImageProcessing::ImageProcessing(int cameraID, std::string name, FileWriter * fi
 	camera.set(3, image_width); //could be used to reduce delay :thinking:
 	camera.set(4, image_height);
 
-	cv::namedWindow(videoWindowName);
+	/*cv::namedWindow(videoWindowName);
 	cv::namedWindow(detectionWindowName);
 
 	cv::moveWindow(videoWindowName, 0, 0);
@@ -55,6 +55,7 @@ ImageProcessing::ImageProcessing(int cameraID, std::string name, FileWriter * fi
 		cv::moveWindow(videoWindowName, 500, 0);
 		cv::moveWindow(detectionWindowName, 500, 500);
 	}
+*/
 
 	firstIteration = true;
 

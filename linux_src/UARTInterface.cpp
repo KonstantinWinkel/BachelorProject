@@ -46,7 +46,7 @@ void UARTInterface::run(){
 	while(1){
 		SetControllerValues();
 
-		ReceiveValues();
+		//ReceiveValues();
 		SendValues();
 		PublishValues();
 
@@ -145,5 +145,5 @@ void UARTInterface::SendValues(){
 	serial.close();
 
 	//DEBUG COUT
-	//std::cout << "Bytes sent: " << bytesWritten << " Message: " << outputString << std::endl;
+	std::cout << "Bytes sent: " << bytesWritten << " Message: " << outputString << std::endl;
 }

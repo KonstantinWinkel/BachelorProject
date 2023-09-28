@@ -1,4 +1,5 @@
-#define AccADDR 0x6B
+#define AccADDR 0x6B //also includes gyro
+#define MagADDR 0x1E
 
 #include "rodos.h"
 #include "hal/hal_gpio.h"
@@ -13,35 +14,150 @@ HAL_GPIO LED(GPIO_033);
 
 HAL_I2C AnglesIMU(I2C_IDX2);
 
+//Calibration, Y then Z then X
 
 class IMU_Angles_Reader : public StaticThread <>
 {
     private:
-        ANGLES angles_data;
+        IMUDATA data;
+
+        //Buffers for data to be read into
+        uint8_t DATA_L[1] = {0};
+        uint8_t DATA_H[1] = {0};
+
+        /*
+         *  Buffers for all processed values
+         */
         
-        float calibrationValues[3] = {0.011, 0.050, 0.079}; //fill through experiments
-        float realValues[3] = {0.0, 0.0, 0.0};
+        //GYRO
+        float GYR_CALIB_VALS[3] = {0.0, 0.0, 0.0}; //fill through experiments ?
+        float GYR_REAL_VALS[3] = {0.0, 0.0, 0.0};
+        int16_t GYR_RAW_VALS[3] = {0, 0, 0};
 
-        float xAngle = 0;
-        float yAngle = 0;
+        //ACCELEROMETER
+        float ACC_CALIB_VALS[3] = {0.011, 0.050, 0.079}; //fill through experiments ?
+        float ACC_REAL_VALS[3] = {0.0, 0.0, 0.0};
+        int16_t ACC_RAW_VALS[3] = {0, 0, 0};
 
-        float filterYsum = 0;
-        float filterXsum = 0;
+        //MAGNETOMETER
+        //TODO how tf does this calib work????
+        float MAG_CALIB_MAX[3] = {0.0, 0.0, 0.0};
+        float MAG_CALIB_MIN[3] = {0.0, 0.0, 0.0};
+        float MAG_REAL_VALS[3] = {0.0, 0.0, 0.0};
+        int16_t MAG_RAW_VALS[3] = {0, 0, 0};
 
-        int16_t rawValues[3] = {0, 0, 0};
+        bool is_calibrating = true;
 
-        uint8_t X_L[1] = {0x28};
-        uint8_t X_H[1] = {0x29};
-        uint8_t Y_L[1] = {0x2A};
-        uint8_t Y_H[1] = {0x2B};
-        uint8_t Z_L[1] = {0x2C};
-        uint8_t Z_H[1] = {0x2D};
+        /*
+         *  REGISTER ADDRESSES
+         */
+        
+        //GYRO
+        uint8_t GYR_X_L[1] = {0x18};
+        uint8_t GYR_X_H[1] = {0x19};
+        uint8_t GYR_Y_L[1] = {0x1A};
+        uint8_t GYR_Y_H[1] = {0x1B};
+        uint8_t GYR_Z_L[1] = {0x1C};
+        uint8_t GYR_Z_H[1] = {0x1D};
+
+        //ACCELLEROMETER
+        uint8_t ACC_X_L[1] = {0x28};
+        uint8_t ACC_X_H[1] = {0x29};
+        uint8_t ACC_Y_L[1] = {0x2A};
+        uint8_t ACC_Y_H[1] = {0x2B};
+        uint8_t ACC_Z_L[1] = {0x2C};
+        uint8_t ACC_Z_H[1] = {0x2D};
+
+        //MAGNETOMETER
+        uint8_t MAG_X_L[1] = {0x28};
+        uint8_t MAG_X_H[1] = {0x29};
+        uint8_t MAG_Y_L[1] = {0x2A};
+        uint8_t MAG_Y_H[1] = {0x2B};
+        uint8_t MAG_Z_L[1] = {0x2C};
+        uint8_t MAG_Z_H[1] = {0x2D};
 
     public:
     
-        IMU_Angles_Reader() : StaticThread("IMU Angles Reader", 100){}
+        IMU_Angles_Reader() : StaticThread("IMU Angles Reader", 100){
 
-        void calib_axis(int cycles){
+        }
+
+
+        void read_GYR(){
+            AnglesIMU.writeRead(AccADDR, GYR_X_L, 1, DATA_L, 1);
+            AnglesIMU.writeRead(AccADDR, GYR_X_H, 1, DATA_H, 1);
+            GYR_RAW_VALS[0] = DATA_L[0] + (DATA_H[0] << 8);
+
+            AnglesIMU.writeRead(AccADDR, GYR_Y_L, 1, DATA_L, 1);
+            AnglesIMU.writeRead(AccADDR, GYR_Y_H, 1, DATA_H, 1);
+            GYR_RAW_VALS[1] = DATA_L[0] + (DATA_H[0] << 8);
+
+            AnglesIMU.writeRead(AccADDR, GYR_Z_L, 1, DATA_L, 1);
+            AnglesIMU.writeRead(AccADDR, GYR_Z_H, 1, DATA_H, 1);
+            GYR_RAW_VALS[2] = DATA_L[0] + (DATA_H[0] << 8);
+
+            for(int j = 0; j < 3; j++){
+                GYR_REAL_VALS[j] = (70/1000) * GYR_RAW_VALS[j] - GYR_CALIB_VALS[j];
+            }
+        }
+
+        void read_ACC(){
+            AnglesIMU.writeRead(AccADDR, ACC_X_L, 1, DATA_L, 1);
+            AnglesIMU.writeRead(AccADDR, ACC_X_H, 1, DATA_H, 1);
+            ACC_RAW_VALS[0] = DATA_L[0] + (DATA_H[0] << 8);
+
+            AnglesIMU.writeRead(AccADDR, ACC_Y_L, 1, DATA_L, 1);
+            AnglesIMU.writeRead(AccADDR, ACC_Y_H, 1, DATA_H, 1);
+            ACC_RAW_VALS[1] = DATA_L[0] + (DATA_H[0] << 8);
+
+            AnglesIMU.writeRead(AccADDR, ACC_Z_L, 1, DATA_L, 1);
+            AnglesIMU.writeRead(AccADDR, ACC_Z_H, 1, DATA_H, 1);
+            ACC_RAW_VALS[2] = DATA_L[0] + (DATA_H[0] << 8);
+
+            for(int j = 0; j < 3; j++){
+                ACC_REAL_VALS[j] = (0.061/1000) * ACC_RAW_VALS[j] - ACC_CALIB_VALS[j];
+            }
+        }
+
+        void read_MAG(){
+            AnglesIMU.writeRead(MagADDR, MAG_X_L, 1, DATA_L, 1);
+            AnglesIMU.writeRead(MagADDR, MAG_X_H, 1, DATA_H, 1);
+            MAG_RAW_VALS[0] = DATA_L[0] + (DATA_H[0] << 8);
+
+            AnglesIMU.writeRead(MagADDR, MAG_Y_L, 1, DATA_L, 1);
+            AnglesIMU.writeRead(MagADDR, MAG_Y_H, 1, DATA_H, 1);
+            MAG_RAW_VALS[1] = DATA_L[0] + (DATA_H[0] << 8);
+
+            AnglesIMU.writeRead(MagADDR, MAG_Z_L, 1, DATA_L, 1);
+            AnglesIMU.writeRead(MagADDR, MAG_Z_H, 1, DATA_H, 1);
+            MAG_RAW_VALS[2] = DATA_L[0] + (DATA_H[0] << 8);
+
+            for(int j = 0; j < 3; j++){
+                if(!is_calibrating) MAG_REAL_VALS[j] = ((0.14/1000) * MAG_RAW_VALS[j] - MAG_CALIB_MIN[j]) / (MAG_CALIB_MAX[j] - MAG_CALIB_MIN[j]) * 2 - 1;
+                else MAG_REAL_VALS[j] = (0.14/1000) * MAG_RAW_VALS[j];
+            }
+        }
+
+        void show_next_calib(int type){
+            switch (type)
+            {
+                case 0:
+                    for(int i = 0; i < 6; i++){
+                        LED.setPins(~LED.readPins());
+                        suspendCallerUntil(NOW() + 500*MILLISECONDS);
+                    }
+                    break;
+                
+                case 1:
+                    for(int i = 0; i < 20; i++){
+                        LED.setPins(~LED.readPins());
+                        suspendCallerUntil(NOW() + 100*MILLISECONDS);
+                    }
+                default: break;
+            }
+        }
+
+        void calib_acc(int cycles){
             float sumX1 = 0, sumX2 = 0;
             float sumY1 = 0, sumY2 = 0;
             float sumZ1 = 0, sumZ2 = 0;
@@ -54,38 +170,26 @@ class IMU_Angles_Reader : public StaticThread <>
 
                 for (int i = 0; i < cycles; i++)
                 {
-                    uint8_t DATA_L[1] = {0};
-                    uint8_t DATA_H[1] = {0};
 
-                    AnglesIMU.writeRead(AccADDR, X_L, 1, DATA_L, 1);
-                    AnglesIMU.writeRead(AccADDR, X_H, 1, DATA_H, 1);
-                    rawValues[0] = DATA_L[0] + (DATA_H[0] << 8);
-
-                    AnglesIMU.writeRead(AccADDR, Y_L, 1, DATA_L, 1);
-                    AnglesIMU.writeRead(AccADDR, Y_H, 1, DATA_H, 1);
-                    rawValues[1] = DATA_L[0] + (DATA_H[0] << 8);
-
-                    AnglesIMU.writeRead(AccADDR, Z_L, 1, DATA_L, 1);
-                    AnglesIMU.writeRead(AccADDR, Z_H, 1, DATA_H, 1);
-                    rawValues[2] = DATA_L[0] + (DATA_H[0] << 8);
+                    read_ACC();
 
                     //calculate accelerations based on raw values and calibration values
                     for(int i = 0; i < 3; i++){
-                        realValues[i] = (0.061/1000) * rawValues[i];
+                        ACC_REAL_VALS[i] = (0.061/1000) * ACC_RAW_VALS[i];
                     }
 
                     switch(axis){
                         case 0:
-                            sumY1 += realValues[1];
-                            sumZ1 += realValues[2];
+                            sumY1 += ACC_REAL_VALS[1];
+                            sumZ1 += ACC_REAL_VALS[2];
                             break;
                         case 2:
-                            sumX1 += realValues[0];
-                            sumZ2 += realValues[2];
+                            sumX1 += ACC_REAL_VALS[0];
+                            sumZ2 += ACC_REAL_VALS[2];
                             break;
                         case 1:
-                            sumX2 += realValues[0];
-                            sumY2 += realValues[1];
+                            sumX2 += ACC_REAL_VALS[0];
+                            sumY2 += ACC_REAL_VALS[1];
                             break;
                     }
                 }
@@ -93,96 +197,114 @@ class IMU_Angles_Reader : public StaticThread <>
                 suspendCallerUntil(NOW() + 2*SECONDS);
             }
 
-            calibrationValues[0] = (sumX1 + sumX2)/(2*cycles);
-            calibrationValues[1] = (sumY1 + sumY2)/(2*cycles);
-            calibrationValues[2] = (sumZ1 + sumZ2)/(2*cycles);
+            ACC_CALIB_VALS[0] = (sumX1 + sumX2)/(2*cycles);
+            ACC_CALIB_VALS[1] = (sumY1 + sumY2)/(2*cycles);
+            ACC_CALIB_VALS[2] = (sumZ1 + sumZ2)/(2*cycles);
 
-            PRINTF("CALIB VALUES: %f %f %f", calibrationValues[0], calibrationValues[1], calibrationValues[2]);
+            PRINTF("CALIB VALUES: %f %f %f", ACC_CALIB_VALS[0], ACC_CALIB_VALS[1], ACC_CALIB_VALS[2]);
         }
 
-        void calibrate(int cycles){
-            float sumX = 0;
-            float sumY = 0;
-            float sumZ = 0;
-            for (int i = 0; i < cycles; i++)
-            {
-                uint8_t DATA_L[1] = {0};
-                uint8_t DATA_H[1] = {0};
+        void calib_gyro(int cycles){
 
-                AnglesIMU.writeRead(AccADDR, X_L, 1, DATA_L, 1);
-                AnglesIMU.writeRead(AccADDR, X_H, 1, DATA_H, 1);
-                rawValues[0] = DATA_L[0] + (DATA_H[0] << 8);
+            float GYR_SUM[3] = {0.0, 0.0, 0.0};
 
-                AnglesIMU.writeRead(AccADDR, Y_L, 1, DATA_L, 1);
-                AnglesIMU.writeRead(AccADDR, Y_H, 1, DATA_H, 1);
-                rawValues[1] = DATA_L[0] + (DATA_H[0] << 8);
+            LED.setPins(1);
+            for(int i = 0; i < cycles; i++){
+                read_GYR();
 
-                AnglesIMU.writeRead(AccADDR, Z_L, 1, DATA_L, 1);
-                AnglesIMU.writeRead(AccADDR, Z_H, 1, DATA_H, 1);
-                rawValues[2] = DATA_L[0] + (DATA_H[0] << 8);
-
-                //calculate accelerations based on raw values and calibration values
-                for(int i = 0; i < 3; i++){
-                    realValues[i] = (0.061/1000) * rawValues[i];
+                for(int j = 0; j < 3; j++){
+                    GYR_SUM[j] += (70/1000) * GYR_RAW_VALS[j];
                 }
-                sumX += realValues[0];
-                sumY += realValues[1];
-                sumZ += realValues[2];
             }
-            calibrationValues[0] = sumX/cycles;
-            calibrationValues[1] = sumY/cycles + 1;
-            calibrationValues[2] = sumZ/cycles;
+
+            for(int j = 0; j < 3; j++){
+                GYR_CALIB_VALS[j] = GYR_SUM[j] / cycles;
+            }
+
+            LED.setPins(0);
+        }
+
+        void calib_mag(int time){
+            LED.setPins(1);
+
+            for(int i = 0; i < time*1000; i++){
+                read_MAG();
+                for(int j = 0; j < 3; j++){
+                    if(MAG_REAL_VALS[j] < MAG_CALIB_MIN[j]) MAG_CALIB_MIN[j] = MAG_REAL_VALS[j];
+                    if(MAG_REAL_VALS[j] > MAG_CALIB_MAX[j]) MAG_CALIB_MAX[j] = MAG_REAL_VALS[j];
+                }
+                suspendCallerUntil(NOW() + 1*MILLISECONDS);
+            }
+
+            LED.setPins(0);
+
+        }
+
+        void calib_all(int cycles_acc, int cycles_gyro, int time_mag){
+            show_next_calib(0);
+            calib_acc(cycles_acc);
+
+            show_next_calib(0);
+            calib_gyro(cycles_gyro);
+            
+            show_next_calib(0);
+            calib_mag(time_mag);
+
+            show_next_calib(1);
+            is_calibrating = false;
         }
 
         void init(){
             LED.init(1,1,0);
             AnglesIMU.init(400000);
-            uint8_t INIT_REG[2] = {0x20, 0b10000011}; //Address: 0x20, value 0b10000011 - see LuRI Lab for more info
-            AnglesIMU.write(AccADDR, INIT_REG, 2);
+
+            uint8_t INIT_REG_GYR[2] = {0x10, 0b10011000};
+            uint8_t INIT_REG_ACC[2] = {0x20, 0b10000011}; //Address: 0x20, value 0b10000011 - see LuRI Lab for more info
+            uint8_t INIT_REG_MAG_1[2] = {0x20, 0b00011100};
+            uint8_t INIT_REG_MAG_2[2] = {0x21, 0b01100000};
+            uint8_t INIT_REG_MAG_3[2] = {0x22, 0b00000000};
+            
+            AnglesIMU.write(AccADDR, INIT_REG_GYR, 2);
+            AnglesIMU.write(AccADDR, INIT_REG_ACC, 2);
+            AnglesIMU.write(MagADDR, INIT_REG_MAG_1, 2);
+            AnglesIMU.write(MagADDR, INIT_REG_MAG_2, 2);
+            AnglesIMU.write(MagADDR, INIT_REG_MAG_3, 2);
         }
 
         void run(){
             
-            calib_axis(50);
+            calib_all(50,50, 10);
 
             TIME_LOOP(0*SECONDS, 50 * MILLISECONDS){
-                //Read Registers from IMU
-                uint8_t DATA_L[1] = {0};
-                uint8_t DATA_H[1] = {0};
 
-                filterYsum = 0;
-                filterXsum = 0;
+                /*
+                 *  READ REGISTERS FROM IMU
+                 */
 
-                for(int i = 0; i < 10; i++){
+                //GYRO
+                read_GYR();
 
-                    AnglesIMU.writeRead(AccADDR, X_L, 1, DATA_L, 1);
-                    AnglesIMU.writeRead(AccADDR, X_H, 1, DATA_H, 1);
-                    rawValues[0] = DATA_L[0] + (DATA_H[0] << 8);
+                //ACCELLEROMETER
+                read_ACC();
 
-                    AnglesIMU.writeRead(AccADDR, Y_L, 1, DATA_L, 1);
-                    AnglesIMU.writeRead(AccADDR, Y_H, 1, DATA_H, 1);
-                    rawValues[1] = DATA_L[0] + (DATA_H[0] << 8);
+                //MAGNETOMETER
+                read_MAG();
 
-                    AnglesIMU.writeRead(AccADDR, Z_L, 1, DATA_L, 1);
-                    AnglesIMU.writeRead(AccADDR, Z_H, 1, DATA_H, 1);
-                    rawValues[2] = DATA_L[0] + (DATA_H[0] << 8);
+                //publish values
+                data.xAngularVelocity = GYR_REAL_VALS[0];
+                data.yAngularVelocity = GYR_REAL_VALS[1];
+                data.zAngularVelocity = GYR_REAL_VALS[2];
 
-                    //calculate accelerations based on raw values and calibration values
-                    for(int j = 0; j < 3; j++){
-                        realValues[j] = (0.061/1000) * rawValues[j] - calibrationValues[j];
-                    }
-                    
-                    filterYsum += atan2(realValues[0], sqrt(realValues[1] * realValues[1] + realValues[2] * realValues[2])) * R2D;
-                    filterXsum += atan2(realValues[2], sqrt(realValues[0] * realValues[0] + realValues[1] * realValues[1])) * R2D;
+                data.xForce = ACC_REAL_VALS[0];
+                data.yForce = ACC_REAL_VALS[1];
+                data.zForce = ACC_REAL_VALS[2];
 
-                }
-                
+                data.xMagneticFlux = MAG_REAL_VALS[0];
+                data.yMagneticFlux = MAG_REAL_VALS[1];
+                data.zMagneticFlux = MAG_REAL_VALS[2];
 
-                angles_data.xAngle = filterXsum / 10.0;
-                angles_data.yAngle = filterYsum / 10.0;
-
-                Angles_Topic.publish(angles_data);
+                Full_IMU_Topic.publish(data);
             }
         }
 
-} lol;
+} imu_angles_reader;
