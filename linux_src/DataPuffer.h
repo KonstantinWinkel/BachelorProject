@@ -51,7 +51,7 @@ namespace je{
             return ret;
         }
 
-        RingBuffer<T>(size_t size,const std::function<double(int)>& weight_func = [](int index){return 1;}): 
+        RingBuffer(size_t size,const std::function<double(int)>& weight_func = [](int index){return 1;}): 
             data(new T[size]), size(size), ptr(-1), current_size(0), weight_func(weight_func){ };
 
         ~RingBuffer(){
@@ -62,7 +62,7 @@ namespace je{
             //current_size = (++current_size)>size?size:current_size;
             if(current_size < size){
                 current_size++;
-                std::cout << "WE GOING UP" << current_size << std::endl;
+                //std::cout << "WE GOING UP" << current_size << std::endl;
             }
             else current_size = size;
             ptr = (ptr+1)%size;
@@ -71,7 +71,7 @@ namespace je{
 
         inline int get(T& data_ref, int index = 0){
             if(!(index<current_size)) {
-                std::cout << "index: " << index << " current_cize: " << current_size << std::endl;
+                //std::cout << "index: " << index << " current_cize: " << current_size << std::endl;
                 return -1;
             }
             data_ref = data[get_ptr(index)];

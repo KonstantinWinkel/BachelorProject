@@ -6,7 +6,7 @@
 
 //reqired header files
 #include "FileWriter.h"
-#include "UARTInterface.h"
+//#include "UARTInterface.h"
 #include "bachelor_debug.h"
 
 #if defined(_DEBUG_DEMO_ON_)
@@ -18,7 +18,7 @@
 class DemoProgram {
     protected:
         FileWriter * filewriter;
-        UARTInterface * uartinterface;
+        //UARTInterface * uartinterface;
 
         float xMotorValue = 0;
         float yMotorValue = 0;
@@ -32,6 +32,7 @@ class DemoProgram {
 
         //utility methods
         virtual float PositionToAngle(float position);
+        virtual void setAndWrite(float x, float y);
 
         virtual void bigDemo();
 

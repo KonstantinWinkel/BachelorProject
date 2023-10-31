@@ -17,7 +17,7 @@
 
 #define TopBound 7
 #define LowBound 3
-#define Speed 200
+#define Speed  100//2000
 
 DemoProgram::DemoProgram(FileWriter * filewriter){
     DemoProgram::filewriter = filewriter;
@@ -43,6 +43,14 @@ float DemoProgram::PositionToAngle(float position){
     //     converto to angle                       Rad2Deg        
     //return (2.0/3.0) * (acosf32(0.5*position/5.0) * (180.0/M_PI));  // L = 5cm, reference equation (5)
     return (position-5.0f)*(50.0f/5.0f);
+}
+
+void DemoProgram::setAndWrite(float x, float y){
+    xMotorValue = x;
+    yMotorValue = y;
+    PublishValues();
+    std::this_thread::sleep_for(std::chrono::milliseconds(10000));
+    PublishValues();
 }
 
 void DemoProgram::bigDemo(){
@@ -125,21 +133,25 @@ void DemoProgram::circle(){
 }
 
 void DemoProgram::newDemo(){
-    while(1){
-        xMotorValue = Speed;
-        PublishValues();
-        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
-        xMotorValue = -Speed;
-        PublishValues();
-        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+    //1. start in lower right corner
+    setAndWrite(Speed, -Speed);
 
-        yMotorValue = Speed;
-        PublishValues();
-        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+    //2. Move to upper right corner ASAP
+    setAndWrite(0, Speed);
 
-        yMotorValue = -Speed;
-        PublishValues();
-        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-    }
+    //3. Move to lower left corner ASAP
+    setAndWrite(-Speed, -Speed);
+
+    //4. Move to upper left corner SLOWLY
+    setAndWrite(0, 10);
+    
+    //5. Move to lower right corner SLOWLY
+    setAndWrite(10, -10);
+
+    //STOP
+    setAndWrite(0, 0);
+
+    filewriter->handleCTRLC();
+    exit(0);
 }
