@@ -25,7 +25,7 @@ protected:
 public:
     ~Filter(){};
 
-    double to_m(uint16_t lidar_data){
+    inline double to_m(uint16_t lidar_data){
         return lidar_data/1000.0;
     }
 

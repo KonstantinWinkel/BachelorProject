@@ -20,7 +20,7 @@ double time_since_start(std::chrono::_V2::system_clock::time_point time);
 
 public:
 
-Linear_regression_filter(Controller * controller, double camera_latency = 0.133, double lidar_latency = 0.1, size_t size_x = 10, size_t size_phi = 10);
+Linear_regression_filter(Identifier axis, double camera_latency = 0.133, double lidar_latency = 0.1, size_t size_x = 10, size_t size_phi = 10);
 
 void write_to_file(double new_value, std::array<double,4> state);
 
@@ -28,9 +28,9 @@ void update_angle();
 
 void update_pos();
 
-void recieve_pos(uint16_t pos_uint);
+void update_pos(uint16_t pos_uint, double u, double state[4]);
 
-void recieve_angle(double phi);
+void update_angle(double phi, double u, double state[4]);
 };
 
 #endif //LINEAR_REGRESSION_FILTER_H
