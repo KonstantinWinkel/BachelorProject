@@ -1,42 +1,19 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
-#include "FileWriter.h"
-#include "Filter.h"
-#include "fstream"
-
 class Controller{
 	protected:
-		Filter * filter;
-		FileWriter * filewriter;
-		Identifier axis;
-		double filtered_state[4];
-		bool is_demo;
-		double acceleration;
+		double target_state[4] = {0,0,0,0};
 
 	public:
-
-		~Controller(){};
-
-		Identifier get_axis(){
-			return axis;
+		virtual void update_target_state(double new_target[4]){
+			for(int i = 0;i<4;i++)
+				target_state[i] = new_target[i];
 		}
 
-		virtual void PublishValues(){
-            if(!is_demo) filewriter->writeControllerInfo(axis, acceleration);
-        }
-
-		virtual void recieve_angle(double angle){
-			filter->update_angle(angle,acceleration,filtered_state);
-			this->recieve_data();
-		}
-
-		virtual void recieve_pos(uint16_t pos){
-			filter->update_pos(pos,acceleration,filtered_state);
-			this->recieve_data();
-		}
-
-		virtual void recieve_data() = 0;
+		//
+		virtual void calculate_u(double x_hat[4], double& u) = 0;
 };
 
 #endif //CONTROLLER_H
+

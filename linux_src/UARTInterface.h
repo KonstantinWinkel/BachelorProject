@@ -5,7 +5,7 @@
 #include "FileWriter.h"
 #include "../serial/include/serial/serial.h"
 
-#include "Controller.h"
+#include "Regulator.h"
 
 #include "bachelor_debug.h"
 
@@ -17,8 +17,6 @@
 #define _debug_print_uart_(x)
 #endif
 
-using namespace je;
-
 class UARTInterface{
 	protected:
 		FileWriter * filewriter;
@@ -26,8 +24,8 @@ class UARTInterface{
 		std::string deviceName;
 		int baudRate;
 
-		Controller * controller_x;
-		Controller * controller_y;
+		Regulator * regulator_x;
+		Regulator * regulator_y;
 
 		float xForce;
 		float yForce;
@@ -47,7 +45,7 @@ class UARTInterface{
 		char xIMUChar[8], yIMUChar[8], zIMUChar[8], xLIDARFilteredChar[4], yLIDARFilteredChar[4], xLIDARRawChar[4], yLIDARRawChar[4];
 
 	public:
-		UARTInterface(FileWriter * filewriter,Controller * controller_x, Controller * controller_y, std::string deviceName, int baudRate);
+		UARTInterface(FileWriter * filewriter,Regulator * regulator_x, Regulator * regulator_y, std::string deviceName, int baudRate);
 		UARTInterface(std::string deviceName, int baudRate);
 		~UARTInterface();
 

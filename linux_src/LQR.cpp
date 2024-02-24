@@ -1,15 +1,10 @@
 #include "LQR.h"
 
 #define g 9.81 
-#define pi 3.1415
+#define pi 3.1415 //wieso
 
-LQR::LQR(FileWriter * filewriter,Filter * filter, Identifier axis, bool is_demo/*, Eigen::Matrix<4,1> desired state*/){
+LQR::LQR(){
 
-    Controller::filter = filter;
-    Controller::is_demo = is_demo;
-	Controller::axis = axis;
-	Controller::filewriter = filewriter;
-	Controller::acceleration = 0;
 
     double L = 0.3; //Length of the pencils lever to it's center of Mass
 
@@ -36,8 +31,6 @@ LQR::LQR(FileWriter * filewriter,Filter * filter, Identifier axis, bool is_demo/
     LQR::desired_state << 0, 0, pi, 0;
 
     set_K();
-
-    Controller::acceleration = 0;
 }
 
 
@@ -56,8 +49,5 @@ void LQR::fancify(){
 }
 
 void LQR::recieve_data(){
-    Controller::acceleration = 0;
-    for(int i = 0;i<4;++i)
-        Controller::acceleration -= LQR::K(i)*filtered_state[i];
-    Controller::PublishValues();;
+    // didnt work ):
 }

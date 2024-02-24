@@ -1,0 +1,405 @@
+#T: 1.46###	new_angle: -0.81	state: 2.86,	-19.86,	0.00,	0.00
+phi buffer: value: -0.810866 time: 1.4559
+#T: 1.49###	new_angle: -0.80	state: 2.70,	-17.47,	4.24,	3.44
+phi buffer: value: -0.801523 time: 1.48799,value: -0.810866 time: 1.4559
+#T: 1.52###	new_angle: -0.79	state: 2.70,	-17.47,	3.69,	2.75
+phi buffer: value: -0.787857 time: 1.51993,value: -0.801523 time: 1.48799,value: -0.810866 time: 1.4559
+#T: 1.55###	new_angle: -0.78	state: 2.33,	-12.46,	3.95,	3.08
+phi buffer: value: -0.782791 time: 1.54795,value: -0.787857 time: 1.51993,value: -0.801523 time: 1.48799,value: -0.810866 time: 1.4559
+#T: 1.58###	new_angle: -0.76	state: 2.35,	-12.45,	3.66,	2.71
+phi buffer: value: -0.764543 time: 1.58051,value: -0.782791 time: 1.54795,value: -0.787857 time: 1.51993,value: -0.801523 time: 1.48799,value: -0.810866 time: 1.4559
+#T: 1.61###	new_angle: -0.73	state: 2.47,	-13.60,	3.07,	1.96
+phi buffer: value: -0.731612 time: 1.61245,value: -0.764543 time: 1.58051,value: -0.782791 time: 1.54795,value: -0.787857 time: 1.51993,value: -0.801523 time: 1.48799,value: -0.810866 time: 1.4559
+#T: 1.64###	new_angle: -0.72	state: 2.47,	-13.60,	3.05,	1.94
+phi buffer: value: -0.722095 time: 1.64487,value: -0.731612 time: 1.61245,value: -0.764543 time: 1.58051,value: -0.782791 time: 1.54795,value: -0.787857 time: 1.51993,value: -0.801523 time: 1.48799,value: -0.810866 time: 1.4559
+#T: 2.60###	new_angle: -0.81	state: 3.68,	-6.75,	-0.41,	-2.69
+phi buffer: value: -0.810544 time: 2.59665,value: -0.722095 time: 1.64487,value: -0.731612 time: 1.61245,value: -0.764543 time: 1.58051,value: -0.782791 time: 1.54795,value: -0.787857 time: 1.51993,value: -0.801523 time: 1.48799,value: -0.810866 time: 1.4559
+#T: 2.63###	new_angle: -0.84	state: 3.70,	-6.75,	-3.20,	-6.36
+phi buffer: value: -0.837165 time: 2.62868,value: -0.810544 time: 2.59665,value: -0.722095 time: 1.64487,value: -0.731612 time: 1.61245,value: -0.764543 time: 1.58051,value: -0.782791 time: 1.54795,value: -0.787857 time: 1.51993,value: -0.801523 time: 1.48799,value: -0.810866 time: 1.4559
+#T: 2.66###	new_angle: -0.85	state: 3.71,	-6.63,	-4.49,	-8.06
+phi buffer: value: -0.853338 time: 2.66041,value: -0.837165 time: 2.62868,value: -0.810544 time: 2.59665,value: -0.722095 time: 1.64487,value: -0.731612 time: 1.61245,value: -0.764543 time: 1.58051,value: -0.782791 time: 1.54795,value: -0.787857 time: 1.51993,value: -0.801523 time: 1.48799,value: -0.810866 time: 1.4559
+#T: 2.70###	new_angle: -0.87	state: 3.71,	-6.63,	-5.27,	-9.13
+phi buffer: value: -0.867974 time: 2.69643,value: -0.853338 time: 2.66041,value: -0.837165 time: 2.62868,value: -0.810544 time: 2.59665,value: -0.722095 time: 1.64487,value: -0.731612 time: 1.61245,value: -0.764543 time: 1.58051,value: -0.782791 time: 1.54795,value: -0.787857 time: 1.51993,value: -0.801523 time: 1.48799
+#T: 2.73###	new_angle: -0.88	state: 3.74,	-6.70,	-5.04,	-8.91
+phi buffer: value: -0.88268 time: 2.72835,value: -0.867974 time: 2.69643,value: -0.853338 time: 2.66041,value: -0.837165 time: 2.62868,value: -0.810544 time: 2.59665,value: -0.722095 time: 1.64487,value: -0.731612 time: 1.61245,value: -0.764543 time: 1.58051,value: -0.782791 time: 1.54795,value: -0.787857 time: 1.51993
+#T: 2.76###	new_angle: -0.91	state: 3.70,	-6.34,	-4.08,	-7.74
+phi buffer: value: -0.912279 time: 2.76044,value: -0.88268 time: 2.72835,value: -0.867974 time: 2.69643,value: -0.853338 time: 2.66041,value: -0.837165 time: 2.62868,value: -0.810544 time: 2.59665,value: -0.722095 time: 1.64487,value: -0.731612 time: 1.61245,value: -0.764543 time: 1.58051,value: -0.782791 time: 1.54795
+#T: 2.82###	new_angle: -0.91	state: 7.89,	-29.96,	-3.41,	-6.98
+phi buffer: value: -0.912462 time: 2.82335,value: -0.912279 time: 2.76044,value: -0.88268 time: 2.72835,value: -0.867974 time: 2.69643,value: -0.853338 time: 2.66041,value: -0.837165 time: 2.62868,value: -0.810544 time: 2.59665,value: -0.722095 time: 1.64487,value: -0.731612 time: 1.61245,value: -0.764543 time: 1.58051
+#T: 2.84###	new_angle: -0.91	state: 5.86,	-18.22,	-2.74,	-6.20
+phi buffer: value: -0.912462 time: 2.83926,value: -0.912462 time: 2.82335,value: -0.912279 time: 2.76044,value: -0.88268 time: 2.72835,value: -0.867974 time: 2.69643,value: -0.853338 time: 2.66041,value: -0.837165 time: 2.62868,value: -0.810544 time: 2.59665,value: -0.722095 time: 1.64487,value: -0.731612 time: 1.61245
+#T: 2.86###	new_angle: -0.89	state: 5.86,	-18.22,	-2.11,	-5.51
+phi buffer: value: -0.891293 time: 2.86045,value: -0.912462 time: 2.83926,value: -0.912462 time: 2.82335,value: -0.912279 time: 2.76044,value: -0.88268 time: 2.72835,value: -0.867974 time: 2.69643,value: -0.853338 time: 2.66041,value: -0.837165 time: 2.62868,value: -0.810544 time: 2.59665,value: -0.722095 time: 1.64487
+#T: 2.90###	new_angle: -0.76	state: 3.84,	-6.58,	2.40,	-0.40
+phi buffer: value: -0.76499 time: 2.89657,value: -0.891293 time: 2.86045,value: -0.912462 time: 2.83926,value: -0.912462 time: 2.82335,value: -0.912279 time: 2.76044,value: -0.88268 time: 2.72835,value: -0.867974 time: 2.69643,value: -0.853338 time: 2.66041,value: -0.837165 time: 2.62868,value: -0.810544 time: 2.59665
+#T: 2.93###	new_angle: -0.43	state: 5.86,	-17.89,	3.06,	0.34
+phi buffer: value: -0.429163 time: 2.92887,value: -0.76499 time: 2.89657,value: -0.891293 time: 2.86045,value: -0.912462 time: 2.83926,value: -0.912462 time: 2.82335,value: -0.912279 time: 2.76044,value: -0.88268 time: 2.72835,value: -0.867974 time: 2.69643,value: -0.853338 time: 2.66041,value: -0.837165 time: 2.62868
+#T: 3.26###	new_angle: 0.15	state: 3.30,	-1.89,	3.17,	0.45
+phi buffer: value: 0.147269 time: 3.26038,value: -0.429163 time: 2.92887,value: -0.76499 time: 2.89657,value: -0.891293 time: 2.86045,value: -0.912462 time: 2.83926,value: -0.912462 time: 2.82335,value: -0.912279 time: 2.76044,value: -0.88268 time: 2.72835,value: -0.867974 time: 2.69643,value: -0.853338 time: 2.66041
+#T: 3.30###	new_angle: 0.19	state: 3.32,	-1.85,	3.19,	0.45
+phi buffer: value: 0.187089 time: 3.29748,value: 0.147269 time: 3.26038,value: -0.429163 time: 2.92887,value: -0.76499 time: 2.89657,value: -0.891293 time: 2.86045,value: -0.912462 time: 2.83926,value: -0.912462 time: 2.82335,value: -0.912279 time: 2.76044,value: -0.88268 time: 2.72835,value: -0.867974 time: 2.69643
+#T: 3.33###	new_angle: 0.21	state: 3.32,	-1.85,	3.20,	0.45
+phi buffer: value: 0.208763 time: 3.32865,value: 0.187089 time: 3.29748,value: 0.147269 time: 3.26038,value: -0.429163 time: 2.92887,value: -0.76499 time: 2.89657,value: -0.891293 time: 2.86045,value: -0.912462 time: 2.83926,value: -0.912462 time: 2.82335,value: -0.912279 time: 2.76044,value: -0.88268 time: 2.72835
+#T: 3.36###	new_angle: 0.28	state: 3.34,	-1.76,	3.21,	0.44
+phi buffer: value: 0.280258 time: 3.36047,value: 0.208763 time: 3.32865,value: 0.187089 time: 3.29748,value: 0.147269 time: 3.26038,value: -0.429163 time: 2.92887,value: -0.76499 time: 2.89657,value: -0.891293 time: 2.86045,value: -0.912462 time: 2.83926,value: -0.912462 time: 2.82335,value: -0.912279 time: 2.76044
+#T: 3.40###	new_angle: 0.30	state: 3.34,	-1.53,	3.22,	0.44
+phi buffer: value: 0.30196 time: 3.39593,value: 0.280258 time: 3.36047,value: 0.208763 time: 3.32865,value: 0.187089 time: 3.29748,value: 0.147269 time: 3.26038,value: -0.429163 time: 2.92887,value: -0.76499 time: 2.89657,value: -0.891293 time: 2.86045,value: -0.912462 time: 2.83926,value: -0.912462 time: 2.82335
+#T: 3.43###	new_angle: 0.23	state: -0.52,	42.09,	3.24,	0.46
+phi buffer: value: 0.226264 time: 3.42826,value: 0.30196 time: 3.39593,value: 0.280258 time: 3.36047,value: 0.208763 time: 3.32865,value: 0.187089 time: 3.29748,value: 0.147269 time: 3.26038,value: -0.429163 time: 2.92887,value: -0.76499 time: 2.89657,value: -0.891293 time: 2.86045,value: -0.912462 time: 2.83926
+#T: 3.46###	new_angle: 0.17	state: -0.52,	42.09,	3.25,	0.49
+phi buffer: value: 0.166592 time: 3.45969,value: 0.226264 time: 3.42826,value: 0.30196 time: 3.39593,value: 0.280258 time: 3.36047,value: 0.208763 time: 3.32865,value: 0.187089 time: 3.29748,value: 0.147269 time: 3.26038,value: -0.429163 time: 2.92887,value: -0.76499 time: 2.89657,value: -0.891293 time: 2.86045
+#T: 3.50###	new_angle: 0.03	state: 3.03,	2.47,	3.27,	0.52
+phi buffer: value: 0.0274738 time: 3.49612,value: 0.166592 time: 3.45969,value: 0.226264 time: 3.42826,value: 0.30196 time: 3.39593,value: 0.280258 time: 3.36047,value: 0.208763 time: 3.32865,value: 0.187089 time: 3.29748,value: 0.147269 time: 3.26038,value: -0.429163 time: 2.92887,value: -0.76499 time: 2.89657
+#T: 3.53###	new_angle: -0.16	state: 3.06,	2.37,	3.31,	0.39
+phi buffer: value: -0.164712 time: 3.5277,value: 0.0274738 time: 3.49612,value: 0.166592 time: 3.45969,value: 0.226264 time: 3.42826,value: 0.30196 time: 3.39593,value: 0.280258 time: 3.36047,value: 0.208763 time: 3.32865,value: 0.187089 time: 3.29748,value: 0.147269 time: 3.26038,value: -0.429163 time: 2.92887
+#T: 3.63###	new_angle: -0.87	state: 3.11,	2.32,	3.43,	-0.25
+phi buffer: value: -0.873434 time: 3.62732,value: -0.164712 time: 3.5277,value: 0.0274738 time: 3.49612,value: 0.166592 time: 3.45969,value: 0.226264 time: 3.42826,value: 0.30196 time: 3.39593,value: 0.280258 time: 3.36047,value: 0.208763 time: 3.32865,value: 0.187089 time: 3.29748,value: 0.147269 time: 3.26038
+#T: 3.66###	new_angle: -0.99	state: 3.13,	2.31,	3.44,	-0.23
+phi buffer: value: -0.985762 time: 3.66049,value: -0.873434 time: 3.62732,value: -0.164712 time: 3.5277,value: 0.0274738 time: 3.49612,value: 0.166592 time: 3.45969,value: 0.226264 time: 3.42826,value: 0.30196 time: 3.39593,value: 0.280258 time: 3.36047,value: 0.208763 time: 3.32865,value: 0.187089 time: 3.29748
+#T: 3.70###	new_angle: -1.01	state: 3.15,	2.31,	3.46,	-0.22
+phi buffer: value: -1.00774 time: 3.69673,value: -0.985762 time: 3.66049,value: -0.873434 time: 3.62732,value: -0.164712 time: 3.5277,value: 0.0274738 time: 3.49612,value: 0.166592 time: 3.45969,value: 0.226264 time: 3.42826,value: 0.30196 time: 3.39593,value: 0.280258 time: 3.36047,value: 0.208763 time: 3.32865
+#T: 3.73###	new_angle: -1.02	state: 3.17,	2.28,	3.47,	-0.22
+phi buffer: value: -1.02317 time: 3.72862,value: -1.00774 time: 3.69673,value: -0.985762 time: 3.66049,value: -0.873434 time: 3.62732,value: -0.164712 time: 3.5277,value: 0.0274738 time: 3.49612,value: 0.166592 time: 3.45969,value: 0.226264 time: 3.42826,value: 0.30196 time: 3.39593,value: 0.280258 time: 3.36047
+#T: 3.76###	new_angle: -1.06	state: 3.20,	2.24,	3.48,	-0.22
+phi buffer: value: -1.05951 time: 3.76046,value: -1.02317 time: 3.72862,value: -1.00774 time: 3.69673,value: -0.985762 time: 3.66049,value: -0.873434 time: 3.62732,value: -0.164712 time: 3.5277,value: 0.0274738 time: 3.49612,value: 0.166592 time: 3.45969,value: 0.226264 time: 3.42826,value: 0.30196 time: 3.39593
+#T: 3.80###	new_angle: -1.06	state: 3.20,	2.24,	3.49,	-0.23
+phi buffer: value: -1.06233 time: 3.79631,value: -1.05951 time: 3.76046,value: -1.02317 time: 3.72862,value: -1.00774 time: 3.69673,value: -0.985762 time: 3.66049,value: -0.873434 time: 3.62732,value: -0.164712 time: 3.5277,value: 0.0274738 time: 3.49612,value: 0.166592 time: 3.45969,value: 0.226264 time: 3.42826
+#T: 3.83###	new_angle: -1.04	state: 3.27,	1.97,	3.49,	-0.24
+phi buffer: value: -1.04414 time: 3.82856,value: -1.06233 time: 3.79631,value: -1.05951 time: 3.76046,value: -1.02317 time: 3.72862,value: -1.00774 time: 3.69673,value: -0.985762 time: 3.66049,value: -0.873434 time: 3.62732,value: -0.164712 time: 3.5277,value: 0.0274738 time: 3.49612,value: 0.166592 time: 3.45969
+#T: 3.86###	new_angle: -1.04	state: 8.38,	-26.45,	3.48,	-0.26
+phi buffer: value: -1.04105 time: 3.86052,value: -1.04414 time: 3.82856,value: -1.06233 time: 3.79631,value: -1.05951 time: 3.76046,value: -1.02317 time: 3.72862,value: -1.00774 time: 3.69673,value: -0.985762 time: 3.66049,value: -0.873434 time: 3.62732,value: -0.164712 time: 3.5277,value: 0.0274738 time: 3.49612
+#T: 3.90###	new_angle: -1.03	state: 8.42,	-26.53,	3.45,	-0.31
+phi buffer: value: -1.03218 time: 3.89635,value: -1.04105 time: 3.86052,value: -1.04414 time: 3.82856,value: -1.06233 time: 3.79631,value: -1.05951 time: 3.76046,value: -1.02317 time: 3.72862,value: -1.00774 time: 3.69673,value: -0.985762 time: 3.66049,value: -0.873434 time: 3.62732,value: -0.164712 time: 3.5277
+#T: 3.93###	new_angle: -1.03	state: 8.43,	-26.49,	2.57,	-1.19
+phi buffer: value: -1.02625 time: 3.92848,value: -1.03218 time: 3.89635,value: -1.04105 time: 3.86052,value: -1.04414 time: 3.82856,value: -1.06233 time: 3.79631,value: -1.05951 time: 3.76046,value: -1.02317 time: 3.72862,value: -1.00774 time: 3.69673,value: -0.985762 time: 3.66049,value: -0.873434 time: 3.62732
+#T: 3.96###	new_angle: -1.02	state: 8.43,	-26.49,	2.24,	-1.53
+phi buffer: value: -1.02326 time: 3.9605,value: -1.02625 time: 3.92848,value: -1.03218 time: 3.89635,value: -1.04105 time: 3.86052,value: -1.04414 time: 3.82856,value: -1.06233 time: 3.79631,value: -1.05951 time: 3.76046,value: -1.02317 time: 3.72862,value: -1.00774 time: 3.69673,value: -0.985762 time: 3.66049
+#T: 4.00###	new_angle: -1.02	state: 3.40,	2.12,	4.77,	0.89
+phi buffer: value: -1.02036 time: 3.99635,value: -1.02326 time: 3.9605,value: -1.02625 time: 3.92848,value: -1.03218 time: 3.89635,value: -1.04105 time: 3.86052,value: -1.04414 time: 3.82856,value: -1.06233 time: 3.79631,value: -1.05951 time: 3.76046,value: -1.02317 time: 3.72862,value: -1.00774 time: 3.69673
+#T: 4.03###	new_angle: -1.00	state: 2.71,	6.14,	7.90,	3.89
+phi buffer: value: -1.00251 time: 4.02838,value: -1.02036 time: 3.99635,value: -1.02326 time: 3.9605,value: -1.02625 time: 3.92848,value: -1.03218 time: 3.89635,value: -1.04105 time: 3.86052,value: -1.04414 time: 3.82856,value: -1.06233 time: 3.79631,value: -1.05951 time: 3.76046,value: -1.02317 time: 3.72862
+#T: 4.06###	new_angle: -1.00	state: 2.47,	7.65,	8.60,	4.55
+phi buffer: value: -0.99668 time: 4.06049,value: -1.00251 time: 4.02838,value: -1.02036 time: 3.99635,value: -1.02326 time: 3.9605,value: -1.02625 time: 3.92848,value: -1.03218 time: 3.89635,value: -1.04105 time: 3.86052,value: -1.04414 time: 3.82856,value: -1.06233 time: 3.79631,value: -1.05951 time: 3.76046
+#T: 4.10###	new_angle: -0.97	state: 2.35,	8.44,	7.59,	3.57
+phi buffer: value: -0.967162 time: 4.09653,value: -0.99668 time: 4.06049,value: -1.00251 time: 4.02838,value: -1.02036 time: 3.99635,value: -1.02326 time: 3.9605,value: -1.02625 time: 3.92848,value: -1.03218 time: 3.89635,value: -1.04105 time: 3.86052,value: -1.04414 time: 3.82856,value: -1.06233 time: 3.79631
+#T: 4.13###	new_angle: -0.94	state: 2.35,	8.44,	6.81,	2.81
+phi buffer: value: -0.939899 time: 4.12845,value: -0.967162 time: 4.09653,value: -0.99668 time: 4.06049,value: -1.00251 time: 4.02838,value: -1.02036 time: 3.99635,value: -1.02326 time: 3.9605,value: -1.02625 time: 3.92848,value: -1.03218 time: 3.89635,value: -1.04105 time: 3.86052,value: -1.04414 time: 3.82856
+#T: 4.16###	new_angle: -0.88	state: 2.37,	8.43,	5.81,	1.81
+phi buffer: value: -0.881053 time: 4.1607,value: -0.939899 time: 4.12845,value: -0.967162 time: 4.09653,value: -0.99668 time: 4.06049,value: -1.00251 time: 4.02838,value: -1.02036 time: 3.99635,value: -1.02326 time: 3.9605,value: -1.02625 time: 3.92848,value: -1.03218 time: 3.89635,value: -1.04105 time: 3.86052
+#T: 4.20###	new_angle: -0.80	state: 2.39,	8.44,	5.18,	1.17
+phi buffer: value: -0.796429 time: 4.19639,value: -0.881053 time: 4.1607,value: -0.939899 time: 4.12845,value: -0.967162 time: 4.09653,value: -0.99668 time: 4.06049,value: -1.00251 time: 4.02838,value: -1.02036 time: 3.99635,value: -1.02326 time: 3.9605,value: -1.02625 time: 3.92848,value: -1.03218 time: 3.89635
+#T: 4.23###	new_angle: -0.75	state: 2.60,	7.50,	4.97,	0.95
+phi buffer: value: -0.754597 time: 4.22865,value: -0.796429 time: 4.19639,value: -0.881053 time: 4.1607,value: -0.939899 time: 4.12845,value: -0.967162 time: 4.09653,value: -0.99668 time: 4.06049,value: -1.00251 time: 4.02838,value: -1.02036 time: 3.99635,value: -1.02326 time: 3.9605,value: -1.02625 time: 3.92848
+#T: 4.26###	new_angle: -0.73	state: 2.60,	7.50,	4.89,	0.85
+phi buffer: value: -0.730932 time: 4.26002,value: -0.754597 time: 4.22865,value: -0.796429 time: 4.19639,value: -0.881053 time: 4.1607,value: -0.939899 time: 4.12845,value: -0.967162 time: 4.09653,value: -0.99668 time: 4.06049,value: -1.00251 time: 4.02838,value: -1.02036 time: 3.99635,value: -1.02326 time: 3.9605
+#T: 4.30###	new_angle: -0.71	state: 2.98,	5.69,	4.86,	0.81
+phi buffer: value: -0.712293 time: 4.29639,value: -0.730932 time: 4.26002,value: -0.754597 time: 4.22865,value: -0.796429 time: 4.19639,value: -0.881053 time: 4.1607,value: -0.939899 time: 4.12845,value: -0.967162 time: 4.09653,value: -0.99668 time: 4.06049,value: -1.00251 time: 4.02838,value: -1.02036 time: 3.99635
+#T: 4.33###	new_angle: -0.67	state: 4.05,	0.33,	4.84,	0.79
+phi buffer: value: -0.67265 time: 4.32866,value: -0.712293 time: 4.29639,value: -0.730932 time: 4.26002,value: -0.754597 time: 4.22865,value: -0.796429 time: 4.19639,value: -0.881053 time: 4.1607,value: -0.939899 time: 4.12845,value: -0.967162 time: 4.09653,value: -0.99668 time: 4.06049,value: -1.00251 time: 4.02838
+#T: 4.36###	new_angle: -0.66	state: 8.11,	-20.31,	4.85,	0.79
+phi buffer: value: -0.657 time: 4.36054,value: -0.67265 time: 4.32866,value: -0.712293 time: 4.29639,value: -0.730932 time: 4.26002,value: -0.754597 time: 4.22865,value: -0.796429 time: 4.19639,value: -0.881053 time: 4.1607,value: -0.939899 time: 4.12845,value: -0.967162 time: 4.09653,value: -0.99668 time: 4.06049
+#T: 4.40###	new_angle: -0.67	state: 8.10,	-20.13,	4.90,	0.85
+phi buffer: value: -0.66708 time: 4.39661,value: -0.657 time: 4.36054,value: -0.67265 time: 4.32866,value: -0.712293 time: 4.29639,value: -0.730932 time: 4.26002,value: -0.754597 time: 4.22865,value: -0.796429 time: 4.19639,value: -0.881053 time: 4.1607,value: -0.939899 time: 4.12845,value: -0.967162 time: 4.09653
+#T: 4.46###	new_angle: -0.69	state: 6.48,	-11.54,	5.02,	0.98
+phi buffer: value: -0.687465 time: 4.46044,value: -0.66708 time: 4.39661,value: -0.657 time: 4.36054,value: -0.67265 time: 4.32866,value: -0.712293 time: 4.29639,value: -0.730932 time: 4.26002,value: -0.754597 time: 4.22865,value: -0.796429 time: 4.19639,value: -0.881053 time: 4.1607,value: -0.939899 time: 4.12845
+#T: 4.50###	new_angle: -0.70	state: 5.01,	-3.76,	5.22,	1.25
+phi buffer: value: -0.697562 time: 4.496,value: -0.687465 time: 4.46044,value: -0.66708 time: 4.39661,value: -0.657 time: 4.36054,value: -0.67265 time: 4.32866,value: -0.712293 time: 4.29639,value: -0.730932 time: 4.26002,value: -0.754597 time: 4.22865,value: -0.796429 time: 4.19639,value: -0.881053 time: 4.1607
+#T: 4.53###	new_angle: -0.72	state: 3.66,	3.44,	5.44,	1.53
+phi buffer: value: -0.717171 time: 4.52817,value: -0.697562 time: 4.496,value: -0.687465 time: 4.46044,value: -0.66708 time: 4.39661,value: -0.657 time: 4.36054,value: -0.67265 time: 4.32866,value: -0.712293 time: 4.29639,value: -0.730932 time: 4.26002,value: -0.754597 time: 4.22865,value: -0.796429 time: 4.19639
+#T: 4.56###	new_angle: -0.69	state: 2.42,	10.04,	5.34,	1.35
+phi buffer: value: -0.69297 time: 4.55978,value: -0.717171 time: 4.52817,value: -0.697562 time: 4.496,value: -0.687465 time: 4.46044,value: -0.66708 time: 4.39661,value: -0.657 time: 4.36054,value: -0.67265 time: 4.32866,value: -0.712293 time: 4.29639,value: -0.730932 time: 4.26002,value: -0.754597 time: 4.22865
+#T: 4.76###	new_angle: 0.17	state: 4.16,	1.95,	4.69,	0.41
+phi buffer: value: 0.165623 time: 4.76058,value: -0.69297 time: 4.55978,value: -0.717171 time: 4.52817,value: -0.697562 time: 4.496,value: -0.687465 time: 4.46044,value: -0.66708 time: 4.39661,value: -0.657 time: 4.36054,value: -0.67265 time: 4.32866,value: -0.712293 time: 4.29639,value: -0.730932 time: 4.26002
+#T: 4.80###	new_angle: 0.19	state: 5.72,	-5.95,	4.70,	0.40
+phi buffer: value: 0.188593 time: 4.79633,value: 0.165623 time: 4.76058,value: -0.69297 time: 4.55978,value: -0.717171 time: 4.52817,value: -0.697562 time: 4.496,value: -0.687465 time: 4.46044,value: -0.66708 time: 4.39661,value: -0.657 time: 4.36054,value: -0.67265 time: 4.32866,value: -0.712293 time: 4.29639
+#T: 4.83###	new_angle: 0.20	state: 6.00,	-7.29,	4.72,	0.39
+phi buffer: value: 0.203705 time: 4.82872,value: 0.188593 time: 4.79633,value: 0.165623 time: 4.76058,value: -0.69297 time: 4.55978,value: -0.717171 time: 4.52817,value: -0.697562 time: 4.496,value: -0.687465 time: 4.46044,value: -0.66708 time: 4.39661,value: -0.657 time: 4.36054,value: -0.67265 time: 4.32866
+#T: 4.86###	new_angle: 0.24	state: 5.98,	-7.08,	4.73,	0.39
+phi buffer: value: 0.235164 time: 4.86054,value: 0.203705 time: 4.82872,value: 0.188593 time: 4.79633,value: 0.165623 time: 4.76058,value: -0.69297 time: 4.55978,value: -0.717171 time: 4.52817,value: -0.697562 time: 4.496,value: -0.687465 time: 4.46044,value: -0.66708 time: 4.39661,value: -0.657 time: 4.36054
+#T: 4.90###	new_angle: 0.25	state: 5.98,	-6.98,	4.75,	0.38
+phi buffer: value: 0.25333 time: 4.89629,value: 0.235164 time: 4.86054,value: 0.203705 time: 4.82872,value: 0.188593 time: 4.79633,value: 0.165623 time: 4.76058,value: -0.69297 time: 4.55978,value: -0.717171 time: 4.52817,value: -0.697562 time: 4.496,value: -0.687465 time: 4.46044,value: -0.66708 time: 4.39661
+#T: 4.93###	new_angle: 0.28	state: 5.98,	-6.98,	4.77,	0.37
+phi buffer: value: 0.280258 time: 4.92925,value: 0.25333 time: 4.89629,value: 0.235164 time: 4.86054,value: 0.203705 time: 4.82872,value: 0.188593 time: 4.79633,value: 0.165623 time: 4.76058,value: -0.69297 time: 4.55978,value: -0.717171 time: 4.52817,value: -0.697562 time: 4.496,value: -0.687465 time: 4.46044
+#T: 4.96###	new_angle: 0.29	state: 5.91,	-6.47,	4.78,	0.37
+phi buffer: value: 0.285432 time: 4.96054,value: 0.280258 time: 4.92925,value: 0.25333 time: 4.89629,value: 0.235164 time: 4.86054,value: 0.203705 time: 4.82872,value: 0.188593 time: 4.79633,value: 0.165623 time: 4.76058,value: -0.69297 time: 4.55978,value: -0.717171 time: 4.52817,value: -0.697562 time: 4.496
+#T: 5.00###	new_angle: 0.29	state: 5.76,	-5.45,	4.79,	0.37
+phi buffer: value: 0.285432 time: 4.9969,value: 0.285432 time: 4.96054,value: 0.280258 time: 4.92925,value: 0.25333 time: 4.89629,value: 0.235164 time: 4.86054,value: 0.203705 time: 4.82872,value: 0.188593 time: 4.79633,value: 0.165623 time: 4.76058,value: -0.69297 time: 4.55978,value: -0.717171 time: 4.52817
+#T: 5.03###	new_angle: 0.27	state: 5.65,	-4.62,	4.80,	0.39
+phi buffer: value: 0.270332 time: 5.02884,value: 0.285432 time: 4.9969,value: 0.285432 time: 4.96054,value: 0.280258 time: 4.92925,value: 0.25333 time: 4.89629,value: 0.235164 time: 4.86054,value: 0.203705 time: 4.82872,value: 0.188593 time: 4.79633,value: 0.165623 time: 4.76058,value: -0.69297 time: 4.55978
+#T: 5.06###	new_angle: 0.27	state: 5.65,	-4.62,	4.41,	2.04
+phi buffer: value: 0.267924 time: 5.06056,value: 0.270332 time: 5.02884,value: 0.285432 time: 4.9969,value: 0.285432 time: 4.96054,value: 0.280258 time: 4.92925,value: 0.25333 time: 4.89629,value: 0.235164 time: 4.86054,value: 0.203705 time: 4.82872,value: 0.188593 time: 4.79633,value: 0.165623 time: 4.76058
+#T: 5.10###	new_angle: 0.23	state: 4.57,	1.66,	4.53,	1.68
+phi buffer: value: 0.228682 time: 5.09634,value: 0.267924 time: 5.06056,value: 0.270332 time: 5.02884,value: 0.285432 time: 4.9969,value: 0.285432 time: 4.96054,value: 0.280258 time: 4.92925,value: 0.25333 time: 4.89629,value: 0.235164 time: 4.86054,value: 0.203705 time: 4.82872,value: 0.188593 time: 4.79633
+#T: 5.13###	new_angle: 0.19	state: 4.19,	3.95,	5.04,	-0.23
+phi buffer: value: 0.187254 time: 5.12834,value: 0.228682 time: 5.09634,value: 0.267924 time: 5.06056,value: 0.270332 time: 5.02884,value: 0.285432 time: 4.9969,value: 0.285432 time: 4.96054,value: 0.280258 time: 4.92925,value: 0.25333 time: 4.89629,value: 0.235164 time: 4.86054,value: 0.203705 time: 4.82872
+#T: 5.16###	new_angle: 0.18	state: 4.01,	5.11,	5.40,	-1.56
+phi buffer: value: 0.178858 time: 5.16057,value: 0.187254 time: 5.12834,value: 0.228682 time: 5.09634,value: 0.267924 time: 5.06056,value: 0.270332 time: 5.02884,value: 0.285432 time: 4.9969,value: 0.285432 time: 4.96054,value: 0.280258 time: 4.92925,value: 0.25333 time: 4.89629,value: 0.235164 time: 4.86054
+#T: 5.20###	new_angle: 0.20	state: 4.23,	4.12,	5.52,	-1.95
+phi buffer: value: 0.195808 time: 5.19644,value: 0.178858 time: 5.16057,value: 0.187254 time: 5.12834,value: 0.228682 time: 5.09634,value: 0.267924 time: 5.06056,value: 0.270332 time: 5.02884,value: 0.285432 time: 4.9969,value: 0.285432 time: 4.96054,value: 0.280258 time: 4.92925,value: 0.25333 time: 4.89629
+#T: 5.23###	new_angle: 0.21	state: 4.23,	4.12,	5.57,	-2.04
+phi buffer: value: 0.214075 time: 5.22872,value: 0.195808 time: 5.19644,value: 0.178858 time: 5.16057,value: 0.187254 time: 5.12834,value: 0.228682 time: 5.09634,value: 0.267924 time: 5.06056,value: 0.270332 time: 5.02884,value: 0.285432 time: 4.9969,value: 0.285432 time: 4.96054,value: 0.280258 time: 4.92925
+#T: 5.26###	new_angle: 0.28	state: 4.51,	2.83,	5.41,	-1.26
+phi buffer: value: 0.278117 time: 5.26047,value: 0.214075 time: 5.22872,value: 0.195808 time: 5.19644,value: 0.178858 time: 5.16057,value: 0.187254 time: 5.12834,value: 0.228682 time: 5.09634,value: 0.267924 time: 5.06056,value: 0.270332 time: 5.02884,value: 0.285432 time: 4.9969,value: 0.285432 time: 4.96054
+#T: 5.30###	new_angle: 0.31	state: 4.86,	1.17,	5.16,	-0.06
+phi buffer: value: 0.312352 time: 5.29636,value: 0.278117 time: 5.26047,value: 0.214075 time: 5.22872,value: 0.195808 time: 5.19644,value: 0.178858 time: 5.16057,value: 0.187254 time: 5.12834,value: 0.228682 time: 5.09634,value: 0.267924 time: 5.06056,value: 0.270332 time: 5.02884,value: 0.285432 time: 4.9969
+#T: 5.33###	new_angle: 0.36	state: 4.87,	1.34,	4.98,	0.78
+phi buffer: value: 0.358236 time: 5.32831,value: 0.312352 time: 5.29636,value: 0.278117 time: 5.26047,value: 0.214075 time: 5.22872,value: 0.195808 time: 5.19644,value: 0.178858 time: 5.16057,value: 0.187254 time: 5.12834,value: 0.228682 time: 5.09634,value: 0.267924 time: 5.06056,value: 0.270332 time: 5.02884
+#T: 5.36###	new_angle: 0.37	state: 4.83,	1.69,	4.94,	1.04
+phi buffer: value: 0.373377 time: 5.36029,value: 0.358236 time: 5.32831,value: 0.312352 time: 5.29636,value: 0.278117 time: 5.26047,value: 0.214075 time: 5.22872,value: 0.195808 time: 5.19644,value: 0.178858 time: 5.16057,value: 0.187254 time: 5.12834,value: 0.228682 time: 5.09634,value: 0.267924 time: 5.06056
+#T: 5.40###	new_angle: 0.35	state: 4.83,	1.69,	4.93,	1.18
+phi buffer: value: 0.35445 time: 5.39635,value: 0.373377 time: 5.36029,value: 0.358236 time: 5.32831,value: 0.312352 time: 5.29636,value: 0.278117 time: 5.26047,value: 0.214075 time: 5.22872,value: 0.195808 time: 5.19644,value: 0.178858 time: 5.16057,value: 0.187254 time: 5.12834,value: 0.228682 time: 5.09634
+#T: 5.43###	new_angle: 0.34	state: 5.33,	-0.59,	4.95,	1.19
+phi buffer: value: 0.340931 time: 5.42802,value: 0.35445 time: 5.39635,value: 0.373377 time: 5.36029,value: 0.358236 time: 5.32831,value: 0.312352 time: 5.29636,value: 0.278117 time: 5.26047,value: 0.214075 time: 5.22872,value: 0.195808 time: 5.19644,value: 0.178858 time: 5.16057,value: 0.187254 time: 5.12834
+#T: 5.46###	new_angle: 0.31	state: 5.73,	-2.43,	4.97,	1.16
+phi buffer: value: 0.308338 time: 5.46021,value: 0.340931 time: 5.42802,value: 0.35445 time: 5.39635,value: 0.373377 time: 5.36029,value: 0.358236 time: 5.32831,value: 0.312352 time: 5.29636,value: 0.278117 time: 5.26047,value: 0.214075 time: 5.22872,value: 0.195808 time: 5.19644,value: 0.178858 time: 5.16057
+#T: 5.50###	new_angle: 0.28	state: 5.77,	-2.46,	5.06,	0.96
+phi buffer: value: 0.282357 time: 5.49642,value: 0.308338 time: 5.46021,value: 0.340931 time: 5.42802,value: 0.35445 time: 5.39635,value: 0.373377 time: 5.36029,value: 0.358236 time: 5.32831,value: 0.312352 time: 5.29636,value: 0.278117 time: 5.26047,value: 0.214075 time: 5.22872,value: 0.195808 time: 5.19644
+#T: 5.53###	new_angle: 0.25	state: 5.77,	-2.31,	5.32,	0.20
+phi buffer: value: 0.252608 time: 5.52832,value: 0.282357 time: 5.49642,value: 0.308338 time: 5.46021,value: 0.340931 time: 5.42802,value: 0.35445 time: 5.39635,value: 0.373377 time: 5.36029,value: 0.358236 time: 5.32831,value: 0.312352 time: 5.29636,value: 0.278117 time: 5.26047,value: 0.214075 time: 5.22872
+#T: 5.56###	new_angle: 0.18	state: 5.77,	-2.31,	5.72,	-1.02
+phi buffer: value: 0.182208 time: 5.56083,value: 0.252608 time: 5.52832,value: 0.282357 time: 5.49642,value: 0.308338 time: 5.46021,value: 0.340931 time: 5.42802,value: 0.35445 time: 5.39635,value: 0.373377 time: 5.36029,value: 0.358236 time: 5.32831,value: 0.312352 time: 5.29636,value: 0.278117 time: 5.26047
+#T: 5.60###	new_angle: 0.07	state: 5.72,	-1.87,	5.69,	-0.88
+phi buffer: value: 0.0668253 time: 5.59634,value: 0.182208 time: 5.56083,value: 0.252608 time: 5.52832,value: 0.282357 time: 5.49642,value: 0.308338 time: 5.46021,value: 0.340931 time: 5.42802,value: 0.35445 time: 5.39635,value: 0.373377 time: 5.36029,value: 0.358236 time: 5.32831,value: 0.312352 time: 5.29636
+#T: 5.63###	new_angle: -0.08	state: 5.91,	-2.70,	5.63,	-0.62
+phi buffer: value: -0.0763828 time: 5.62802,value: 0.0668253 time: 5.59634,value: 0.182208 time: 5.56083,value: 0.252608 time: 5.52832,value: 0.282357 time: 5.49642,value: 0.308338 time: 5.46021,value: 0.340931 time: 5.42802,value: 0.35445 time: 5.39635,value: 0.373377 time: 5.36029,value: 0.358236 time: 5.32831
+#T: 5.66###	new_angle: -0.19	state: 6.08,	-3.42,	5.60,	-0.48
+phi buffer: value: -0.187396 time: 5.66051,value: -0.0763828 time: 5.62802,value: 0.0668253 time: 5.59634,value: 0.182208 time: 5.56083,value: 0.252608 time: 5.52832,value: 0.282357 time: 5.49642,value: 0.308338 time: 5.46021,value: 0.340931 time: 5.42802,value: 0.35445 time: 5.39635,value: 0.373377 time: 5.36029
+#T: 5.70###	new_angle: -0.26	state: 6.23,	-4.04,	5.60,	-0.43
+phi buffer: value: -0.256393 time: 5.69695,value: -0.187396 time: 5.66051,value: -0.0763828 time: 5.62802,value: 0.0668253 time: 5.59634,value: 0.182208 time: 5.56083,value: 0.252608 time: 5.52832,value: 0.282357 time: 5.49642,value: 0.308338 time: 5.46021,value: 0.340931 time: 5.42802,value: 0.35445 time: 5.39635
+#T: 5.73###	new_angle: -0.30	state: 6.23,	-4.04,	5.60,	-0.40
+phi buffer: value: -0.298973 time: 5.72897,value: -0.256393 time: 5.69695,value: -0.187396 time: 5.66051,value: -0.0763828 time: 5.62802,value: 0.0668253 time: 5.59634,value: 0.182208 time: 5.56083,value: 0.252608 time: 5.52832,value: 0.282357 time: 5.49642,value: 0.308338 time: 5.46021,value: 0.340931 time: 5.42802
+#T: 5.76###	new_angle: -0.26	state: 6.25,	-4.02,	5.61,	-0.40
+phi buffer: value: -0.258739 time: 5.76005,value: -0.298973 time: 5.72897,value: -0.256393 time: 5.69695,value: -0.187396 time: 5.66051,value: -0.0763828 time: 5.62802,value: 0.0668253 time: 5.59634,value: 0.182208 time: 5.56083,value: 0.252608 time: 5.52832,value: 0.282357 time: 5.49642,value: 0.308338 time: 5.46021
+#T: 5.86###	new_angle: -0.40	state: 5.33,	10.67,	5.62,	-0.43
+phi buffer: value: -0.398531 time: 5.85949,value: -0.258739 time: 5.76005,value: -0.298973 time: 5.72897,value: -0.256393 time: 5.69695,value: -0.187396 time: 5.66051,value: -0.0763828 time: 5.62802,value: 0.0668253 time: 5.59634,value: 0.182208 time: 5.56083,value: 0.252608 time: 5.52832,value: 0.282357 time: 5.49642
+#T: 5.90###	new_angle: -0.46	state: 2.67,	21.33,	5.62,	-0.48
+phi buffer: value: -0.463678 time: 5.89607,value: -0.398531 time: 5.85949,value: -0.258739 time: 5.76005,value: -0.298973 time: 5.72897,value: -0.256393 time: 5.69695,value: -0.187396 time: 5.66051,value: -0.0763828 time: 5.62802,value: 0.0668253 time: 5.59634,value: 0.182208 time: 5.56083,value: 0.252608 time: 5.52832
+#T: 6.23###	new_angle: 0.10	state: 5.64,	1.99,	5.74,	-0.11
+phi buffer: value: 0.0992093 time: 6.22828,value: -0.463678 time: 5.89607,value: -0.398531 time: 5.85949,value: -0.258739 time: 5.76005,value: -0.298973 time: 5.72897,value: -0.256393 time: 5.69695,value: -0.187396 time: 5.66051,value: -0.0763828 time: 5.62802,value: 0.0668253 time: 5.59634,value: 0.182208 time: 5.56083
+#T: 6.26###	new_angle: 0.14	state: 6.24,	-1.00,	5.90,	0.43
+phi buffer: value: 0.141232 time: 6.26008,value: 0.0992093 time: 6.22828,value: -0.463678 time: 5.89607,value: -0.398531 time: 5.85949,value: -0.258739 time: 5.76005,value: -0.298973 time: 5.72897,value: -0.256393 time: 5.69695,value: -0.187396 time: 5.66051,value: -0.0763828 time: 5.62802,value: 0.0668253 time: 5.59634
+#T: 6.30###	new_angle: 0.16	state: 6.66,	-3.05,	6.03,	0.82
+phi buffer: value: 0.163441 time: 6.30036,value: 0.141232 time: 6.26008,value: 0.0992093 time: 6.22828,value: -0.463678 time: 5.89607,value: -0.398531 time: 5.85949,value: -0.258739 time: 5.76005,value: -0.298973 time: 5.72897,value: -0.256393 time: 5.69695,value: -0.187396 time: 5.66051,value: -0.0763828 time: 5.62802
+#T: 6.33###	new_angle: 0.16	state: 6.89,	-4.04,	6.09,	0.94
+phi buffer: value: 0.164674 time: 6.33233,value: 0.163441 time: 6.30036,value: 0.141232 time: 6.26008,value: 0.0992093 time: 6.22828,value: -0.463678 time: 5.89607,value: -0.398531 time: 5.85949,value: -0.258739 time: 5.76005,value: -0.298973 time: 5.72897,value: -0.256393 time: 5.69695,value: -0.187396 time: 5.66051
+#T: 6.37###	new_angle: 0.19	state: 6.85,	-3.60,	6.13,	0.95
+phi buffer: value: 0.190243 time: 6.36832,value: 0.164674 time: 6.33233,value: 0.163441 time: 6.30036,value: 0.141232 time: 6.26008,value: 0.0992093 time: 6.22828,value: -0.463678 time: 5.89607,value: -0.398531 time: 5.85949,value: -0.258739 time: 5.76005,value: -0.298973 time: 5.72897,value: -0.256393 time: 5.69695
+#T: 6.40###	new_angle: 0.23	state: 6.85,	-3.60,	6.15,	0.91
+phi buffer: value: 0.226441 time: 6.40032,value: 0.190243 time: 6.36832,value: 0.164674 time: 6.33233,value: 0.163441 time: 6.30036,value: 0.141232 time: 6.26008,value: 0.0992093 time: 6.22828,value: -0.463678 time: 5.89607,value: -0.398531 time: 5.85949,value: -0.258739 time: 5.76005,value: -0.298973 time: 5.72897
+#T: 6.43###	new_angle: 0.26	state: 6.74,	-2.79,	6.17,	0.86
+phi buffer: value: 0.256346 time: 6.43238,value: 0.226441 time: 6.40032,value: 0.190243 time: 6.36832,value: 0.164674 time: 6.33233,value: 0.163441 time: 6.30036,value: 0.141232 time: 6.26008,value: 0.0992093 time: 6.22828,value: -0.463678 time: 5.89607,value: -0.398531 time: 5.85949,value: -0.258739 time: 5.76005
+#T: 6.47###	new_angle: 0.27	state: 6.73,	-2.55,	6.20,	0.78
+phi buffer: value: 0.268859 time: 6.46843,value: 0.256346 time: 6.43238,value: 0.226441 time: 6.40032,value: 0.190243 time: 6.36832,value: 0.164674 time: 6.33233,value: 0.163441 time: 6.30036,value: 0.141232 time: 6.26008,value: 0.0992093 time: 6.22828,value: -0.463678 time: 5.89607,value: -0.398531 time: 5.85949
+#T: 6.50###	new_angle: 0.28	state: 6.66,	-2.02,	6.22,	0.76
+phi buffer: value: 0.281954 time: 6.5004,value: 0.268859 time: 6.46843,value: 0.256346 time: 6.43238,value: 0.226441 time: 6.40032,value: 0.190243 time: 6.36832,value: 0.164674 time: 6.33233,value: 0.163441 time: 6.30036,value: 0.141232 time: 6.26008,value: 0.0992093 time: 6.22828,value: -0.463678 time: 5.89607
+#T: 6.53###	new_angle: 0.30	state: 6.66,	-2.02,	6.07,	1.51
+phi buffer: value: 0.300285 time: 6.53244,value: 0.281954 time: 6.5004,value: 0.268859 time: 6.46843,value: 0.256346 time: 6.43238,value: 0.226441 time: 6.40032,value: 0.190243 time: 6.36832,value: 0.164674 time: 6.33233,value: 0.163441 time: 6.30036,value: 0.141232 time: 6.26008,value: 0.0992093 time: 6.22828
+#T: 6.57###	new_angle: 0.31	state: 6.47,	-0.73,	6.04,	1.63
+phi buffer: value: 0.310493 time: 6.56851,value: 0.300285 time: 6.53244,value: 0.281954 time: 6.5004,value: 0.268859 time: 6.46843,value: 0.256346 time: 6.43238,value: 0.226441 time: 6.40032,value: 0.190243 time: 6.36832,value: 0.164674 time: 6.33233,value: 0.163441 time: 6.30036,value: 0.141232 time: 6.26008
+#T: 6.60###	new_angle: 0.30	state: 5.96,	2.52,	6.03,	1.72
+phi buffer: value: 0.302171 time: 6.5998,value: 0.310493 time: 6.56851,value: 0.300285 time: 6.53244,value: 0.281954 time: 6.5004,value: 0.268859 time: 6.46843,value: 0.256346 time: 6.43238,value: 0.226441 time: 6.40032,value: 0.190243 time: 6.36832,value: 0.164674 time: 6.33233,value: 0.163441 time: 6.30036
+#T: 6.63###	new_angle: 0.28	state: 6.49,	-0.35,	6.01,	1.82
+phi buffer: value: 0.281954 time: 6.63173,value: 0.302171 time: 6.5998,value: 0.310493 time: 6.56851,value: 0.300285 time: 6.53244,value: 0.281954 time: 6.5004,value: 0.268859 time: 6.46843,value: 0.256346 time: 6.43238,value: 0.226441 time: 6.40032,value: 0.190243 time: 6.36832,value: 0.164674 time: 6.33233
+#T: 6.66###	new_angle: 0.28	state: 7.27,	-4.62,	5.95,	2.11
+phi buffer: value: 0.281954 time: 6.66376,value: 0.281954 time: 6.63173,value: 0.302171 time: 6.5998,value: 0.310493 time: 6.56851,value: 0.300285 time: 6.53244,value: 0.281954 time: 6.5004,value: 0.268859 time: 6.46843,value: 0.256346 time: 6.43238,value: 0.226441 time: 6.40032,value: 0.190243 time: 6.36832
+#T: 6.70###	new_angle: 0.29	state: 7.27,	-4.62,	5.80,	2.69
+phi buffer: value: 0.290206 time: 6.6958,value: 0.281954 time: 6.66376,value: 0.281954 time: 6.63173,value: 0.302171 time: 6.5998,value: 0.310493 time: 6.56851,value: 0.300285 time: 6.53244,value: 0.281954 time: 6.5004,value: 0.268859 time: 6.46843,value: 0.256346 time: 6.43238,value: 0.226441 time: 6.40032
+#T: 6.73###	new_angle: 0.28	state: 8.48,	-11.37,	5.93,	2.29
+phi buffer: value: 0.281954 time: 6.7282,value: 0.290206 time: 6.6958,value: 0.281954 time: 6.66376,value: 0.281954 time: 6.63173,value: 0.302171 time: 6.5998,value: 0.310493 time: 6.56851,value: 0.300285 time: 6.53244,value: 0.281954 time: 6.5004,value: 0.268859 time: 6.46843,value: 0.256346 time: 6.43238
+#T: 6.76###	new_angle: 0.29	state: 6.45,	0.62,	6.48,	0.47
+phi buffer: value: 0.290206 time: 6.7603,value: 0.281954 time: 6.7282,value: 0.290206 time: 6.6958,value: 0.281954 time: 6.66376,value: 0.281954 time: 6.63173,value: 0.302171 time: 6.5998,value: 0.310493 time: 6.56851,value: 0.300285 time: 6.53244,value: 0.281954 time: 6.5004,value: 0.268859 time: 6.46843
+#T: 6.80###	new_angle: 0.27	state: 6.02,	3.24,	7.92,	-4.39
+phi buffer: value: 0.272042 time: 6.79645,value: 0.290206 time: 6.7603,value: 0.281954 time: 6.7282,value: 0.290206 time: 6.6958,value: 0.281954 time: 6.66376,value: 0.281954 time: 6.63173,value: 0.302171 time: 6.5998,value: 0.310493 time: 6.56851,value: 0.300285 time: 6.53244,value: 0.281954 time: 6.5004
+#T: 6.83###	new_angle: 0.27	state: 6.02,	3.24,	8.50,	-6.31
+phi buffer: value: 0.272042 time: 6.82824,value: 0.272042 time: 6.79645,value: 0.290206 time: 6.7603,value: 0.281954 time: 6.7282,value: 0.290206 time: 6.6958,value: 0.281954 time: 6.66376,value: 0.281954 time: 6.63173,value: 0.302171 time: 6.5998,value: 0.310493 time: 6.56851,value: 0.300285 time: 6.53244
+#T: 6.86###	new_angle: 0.26	state: 5.84,	4.40,	8.28,	-5.53
+phi buffer: value: 0.257031 time: 6.86018,value: 0.272042 time: 6.82824,value: 0.272042 time: 6.79645,value: 0.290206 time: 6.7603,value: 0.281954 time: 6.7282,value: 0.290206 time: 6.6958,value: 0.281954 time: 6.66376,value: 0.281954 time: 6.63173,value: 0.302171 time: 6.5998,value: 0.310493 time: 6.56851
+#T: 6.90###	new_angle: 0.22	state: 6.05,	3.49,	7.69,	-3.42
+phi buffer: value: 0.217376 time: 6.89645,value: 0.257031 time: 6.86018,value: 0.272042 time: 6.82824,value: 0.272042 time: 6.79645,value: 0.290206 time: 6.7603,value: 0.281954 time: 6.7282,value: 0.290206 time: 6.6958,value: 0.281954 time: 6.66376,value: 0.281954 time: 6.63173,value: 0.302171 time: 6.5998
+#T: 6.93###	new_angle: 0.17	state: 6.27,	2.51,	7.33,	-2.12
+phi buffer: value: 0.173298 time: 6.92808,value: 0.217376 time: 6.89645,value: 0.257031 time: 6.86018,value: 0.272042 time: 6.82824,value: 0.272042 time: 6.79645,value: 0.290206 time: 6.7603,value: 0.281954 time: 6.7282,value: 0.290206 time: 6.6958,value: 0.281954 time: 6.66376,value: 0.281954 time: 6.63173
+#T: 6.96###	new_angle: 0.16	state: 6.50,	1.45,	7.26,	-1.80
+phi buffer: value: 0.157414 time: 6.96009,value: 0.173298 time: 6.92808,value: 0.217376 time: 6.89645,value: 0.257031 time: 6.86018,value: 0.272042 time: 6.82824,value: 0.272042 time: 6.79645,value: 0.290206 time: 6.7603,value: 0.281954 time: 6.7282,value: 0.290206 time: 6.6958,value: 0.281954 time: 6.66376
+#T: 7.00###	new_angle: 0.17	state: 6.50,	1.45,	7.26,	-1.74
+phi buffer: value: 0.166986 time: 6.99618,value: 0.157414 time: 6.96009,value: 0.173298 time: 6.92808,value: 0.217376 time: 6.89645,value: 0.257031 time: 6.86018,value: 0.272042 time: 6.82824,value: 0.272042 time: 6.79645,value: 0.290206 time: 6.7603,value: 0.281954 time: 6.7282,value: 0.290206 time: 6.6958
+#T: 7.03###	new_angle: 0.17	state: 6.57,	1.31,	7.27,	-1.74
+phi buffer: value: 0.167783 time: 7.02827,value: 0.166986 time: 6.99618,value: 0.157414 time: 6.96009,value: 0.173298 time: 6.92808,value: 0.217376 time: 6.89645,value: 0.257031 time: 6.86018,value: 0.272042 time: 6.82824,value: 0.272042 time: 6.79645,value: 0.290206 time: 6.7603,value: 0.281954 time: 6.7282
+#T: 7.06###	new_angle: 0.18	state: 6.69,	0.85,	7.29,	-1.74
+phi buffer: value: 0.177605 time: 7.05984,value: 0.167783 time: 7.02827,value: 0.166986 time: 6.99618,value: 0.157414 time: 6.96009,value: 0.173298 time: 6.92808,value: 0.217376 time: 6.89645,value: 0.257031 time: 6.86018,value: 0.272042 time: 6.82824,value: 0.272042 time: 6.79645,value: 0.290206 time: 6.7603
+#T: 7.10###	new_angle: 0.18	state: 6.92,	-0.12,	7.32,	-1.82
+phi buffer: value: 0.177605 time: 7.09639,value: 0.177605 time: 7.05984,value: 0.167783 time: 7.02827,value: 0.166986 time: 6.99618,value: 0.157414 time: 6.96009,value: 0.173298 time: 6.92808,value: 0.217376 time: 6.89645,value: 0.257031 time: 6.86018,value: 0.272042 time: 6.82824,value: 0.272042 time: 6.79645
+#T: 7.13###	new_angle: 0.17	state: 6.92,	-0.12,	7.34,	-1.87
+phi buffer: value: 0.171123 time: 7.12739,value: 0.177605 time: 7.09639,value: 0.177605 time: 7.05984,value: 0.167783 time: 7.02827,value: 0.166986 time: 6.99618,value: 0.157414 time: 6.96009,value: 0.173298 time: 6.92808,value: 0.217376 time: 6.89645,value: 0.257031 time: 6.86018,value: 0.272042 time: 6.82824
+#T: 7.16###	new_angle: 0.15	state: 7.59,	-3.40,	7.41,	-2.18
+phi buffer: value: 0.151875 time: 7.15936,value: 0.171123 time: 7.12739,value: 0.177605 time: 7.09639,value: 0.177605 time: 7.05984,value: 0.167783 time: 7.02827,value: 0.166986 time: 6.99618,value: 0.157414 time: 6.96009,value: 0.173298 time: 6.92808,value: 0.217376 time: 6.89645,value: 0.257031 time: 6.86018
+#T: 7.20###	new_angle: 0.14	state: 7.43,	-2.37,	7.60,	-3.24
+phi buffer: value: 0.141487 time: 7.19557,value: 0.151875 time: 7.15936,value: 0.171123 time: 7.12739,value: 0.177605 time: 7.09639,value: 0.177605 time: 7.05984,value: 0.167783 time: 7.02827,value: 0.166986 time: 6.99618,value: 0.157414 time: 6.96009,value: 0.173298 time: 6.92808,value: 0.217376 time: 6.89645
+#T: 7.23###	new_angle: 0.10	state: 7.07,	-0.25,	7.54,	-2.93
+phi buffer: value: 0.104246 time: 7.22799,value: 0.141487 time: 7.19557,value: 0.151875 time: 7.15936,value: 0.171123 time: 7.12739,value: 0.177605 time: 7.09639,value: 0.177605 time: 7.05984,value: 0.167783 time: 7.02827,value: 0.166986 time: 6.99618,value: 0.157414 time: 6.96009,value: 0.173298 time: 6.92808
+#T: 7.26###	new_angle: 0.09	state: 6.09,	5.25,	7.48,	-2.43
+phi buffer: value: 0.0866314 time: 7.25968,value: 0.104246 time: 7.22799,value: 0.141487 time: 7.19557,value: 0.151875 time: 7.15936,value: 0.171123 time: 7.12739,value: 0.177605 time: 7.09639,value: 0.177605 time: 7.05984,value: 0.167783 time: 7.02827,value: 0.166986 time: 6.99618,value: 0.157414 time: 6.96009
+#T: 7.30###	new_angle: 0.09	state: 6.78,	1.74,	7.49,	-2.41
+phi buffer: value: 0.0867076 time: 7.29572,value: 0.0866314 time: 7.25968,value: 0.104246 time: 7.22799,value: 0.141487 time: 7.19557,value: 0.151875 time: 7.15936,value: 0.171123 time: 7.12739,value: 0.177605 time: 7.09639,value: 0.177605 time: 7.05984,value: 0.167783 time: 7.02827,value: 0.166986 time: 6.99618
+#T: 7.33###	new_angle: 0.07	state: 6.78,	1.74,	7.48,	-2.24
+phi buffer: value: 0.0693155 time: 7.32736,value: 0.0867076 time: 7.29572,value: 0.0866314 time: 7.25968,value: 0.104246 time: 7.22799,value: 0.141487 time: 7.19557,value: 0.151875 time: 7.15936,value: 0.171123 time: 7.12739,value: 0.177605 time: 7.09639,value: 0.177605 time: 7.05984,value: 0.167783 time: 7.02827
+#T: 7.36###	new_angle: 0.06	state: 7.76,	-3.30,	7.47,	-2.14
+phi buffer: value: 0.0606963 time: 7.36011,value: 0.0693155 time: 7.32736,value: 0.0867076 time: 7.29572,value: 0.0866314 time: 7.25968,value: 0.104246 time: 7.22799,value: 0.141487 time: 7.19557,value: 0.151875 time: 7.15936,value: 0.171123 time: 7.12739,value: 0.177605 time: 7.09639,value: 0.177605 time: 7.05984
+#T: 7.40###	new_angle: 0.08	state: 8.04,	-4.49,	7.49,	-2.19
+phi buffer: value: 0.0779359 time: 7.39603,value: 0.0606963 time: 7.36011,value: 0.0693155 time: 7.32736,value: 0.0867076 time: 7.29572,value: 0.0866314 time: 7.25968,value: 0.104246 time: 7.22799,value: 0.141487 time: 7.19557,value: 0.151875 time: 7.15936,value: 0.171123 time: 7.12739,value: 0.177605 time: 7.09639
+#T: 7.43###	new_angle: 0.10	state: 7.03,	1.07,	7.51,	-2.17
+phi buffer: value: 0.104017 time: 7.4284,value: 0.0779359 time: 7.39603,value: 0.0606963 time: 7.36011,value: 0.0693155 time: 7.32736,value: 0.0867076 time: 7.29572,value: 0.0866314 time: 7.25968,value: 0.104246 time: 7.22799,value: 0.141487 time: 7.19557,value: 0.151875 time: 7.15936,value: 0.171123 time: 7.12739
+#T: 7.46###	new_angle: 0.10	state: 7.03,	1.07,	7.52,	-2.15
+phi buffer: value: 0.0951756 time: 7.46031,value: 0.104017 time: 7.4284,value: 0.0779359 time: 7.39603,value: 0.0606963 time: 7.36011,value: 0.0693155 time: 7.32736,value: 0.0867076 time: 7.29572,value: 0.0866314 time: 7.25968,value: 0.104246 time: 7.22799,value: 0.141487 time: 7.19557,value: 0.151875 time: 7.15936
+#T: 7.50###	new_angle: 0.14	state: 7.29,	-0.08,	7.36,	-0.11
+phi buffer: value: 0.137189 time: 7.49619,value: 0.0951756 time: 7.46031,value: 0.104017 time: 7.4284,value: 0.0779359 time: 7.39603,value: 0.0606963 time: 7.36011,value: 0.0693155 time: 7.32736,value: 0.0867076 time: 7.29572,value: 0.0866314 time: 7.25968,value: 0.104246 time: 7.22799,value: 0.141487 time: 7.19557
+#T: 7.53###	new_angle: 0.20	state: 7.30,	0.07,	7.21,	1.61
+phi buffer: value: 0.196028 time: 7.52827,value: 0.137189 time: 7.49619,value: 0.0951756 time: 7.46031,value: 0.104017 time: 7.4284,value: 0.0779359 time: 7.39603,value: 0.0606963 time: 7.36011,value: 0.0693155 time: 7.32736,value: 0.0867076 time: 7.29572,value: 0.0866314 time: 7.25968,value: 0.104246 time: 7.22799
+#T: 7.56###	new_angle: 0.20	state: 8.23,	-4.70,	7.23,	1.64
+phi buffer: value: 0.202291 time: 7.56004,value: 0.196028 time: 7.52827,value: 0.137189 time: 7.49619,value: 0.0951756 time: 7.46031,value: 0.104017 time: 7.4284,value: 0.0779359 time: 7.39603,value: 0.0606963 time: 7.36011,value: 0.0693155 time: 7.32736,value: 0.0867076 time: 7.29572,value: 0.0866314 time: 7.25968
+#T: 7.60###	new_angle: 0.19	state: 7.36,	0.23,	7.24,	1.65
+phi buffer: value: 0.186748 time: 7.59651,value: 0.202291 time: 7.56004,value: 0.196028 time: 7.52827,value: 0.137189 time: 7.49619,value: 0.0951756 time: 7.46031,value: 0.104017 time: 7.4284,value: 0.0779359 time: 7.39603,value: 0.0606963 time: 7.36011,value: 0.0693155 time: 7.32736,value: 0.0867076 time: 7.29572
+#T: 7.63###	new_angle: 0.17	state: 7.36,	0.23,	7.26,	1.65
+phi buffer: value: 0.170111 time: 7.62771,value: 0.186748 time: 7.59651,value: 0.202291 time: 7.56004,value: 0.196028 time: 7.52827,value: 0.137189 time: 7.49619,value: 0.0951756 time: 7.46031,value: 0.104017 time: 7.4284,value: 0.0779359 time: 7.39603,value: 0.0606963 time: 7.36011,value: 0.0693155 time: 7.32736
+#T: 7.66###	new_angle: 0.18	state: 6.92,	2.75,	7.28,	1.67
+phi buffer: value: 0.184963 time: 7.65936,value: 0.170111 time: 7.62771,value: 0.186748 time: 7.59651,value: 0.202291 time: 7.56004,value: 0.196028 time: 7.52827,value: 0.137189 time: 7.49619,value: 0.0951756 time: 7.46031,value: 0.104017 time: 7.4284,value: 0.0779359 time: 7.39603,value: 0.0606963 time: 7.36011
+#T: 7.70###	new_angle: 0.20	state: 6.68,	4.20,	7.27,	1.78
+phi buffer: value: 0.200273 time: 7.69618,value: 0.184963 time: 7.65936,value: 0.170111 time: 7.62771,value: 0.186748 time: 7.59651,value: 0.202291 time: 7.56004,value: 0.196028 time: 7.52827,value: 0.137189 time: 7.49619,value: 0.0951756 time: 7.46031,value: 0.104017 time: 7.4284,value: 0.0779359 time: 7.39603
+#T: 7.73###	new_angle: 0.19	state: 6.70,	4.27,	7.26,	1.92
+phi buffer: value: 0.19219 time: 7.72782,value: 0.200273 time: 7.69618,value: 0.184963 time: 7.65936,value: 0.170111 time: 7.62771,value: 0.186748 time: 7.59651,value: 0.202291 time: 7.56004,value: 0.196028 time: 7.52827,value: 0.137189 time: 7.49619,value: 0.0951756 time: 7.46031,value: 0.104017 time: 7.4284
+#T: 7.76###	new_angle: 0.18	state: 6.70,	4.27,	7.29,	1.84
+phi buffer: value: 0.183236 time: 7.75963,value: 0.19219 time: 7.72782,value: 0.200273 time: 7.69618,value: 0.184963 time: 7.65936,value: 0.170111 time: 7.62771,value: 0.186748 time: 7.59651,value: 0.202291 time: 7.56004,value: 0.196028 time: 7.52827,value: 0.137189 time: 7.49619,value: 0.0951756 time: 7.46031
+#T: 7.80###	new_angle: 0.18	state: 7.58,	-0.04,	7.32,	1.78
+phi buffer: value: 0.184963 time: 7.79657,value: 0.183236 time: 7.75963,value: 0.19219 time: 7.72782,value: 0.200273 time: 7.69618,value: 0.184963 time: 7.65936,value: 0.170111 time: 7.62771,value: 0.186748 time: 7.59651,value: 0.202291 time: 7.56004,value: 0.196028 time: 7.52827,value: 0.137189 time: 7.49619
+#T: 7.83###	new_angle: 0.17	state: 7.26,	1.81,	8.49,	-4.33
+phi buffer: value: 0.168596 time: 7.8274,value: 0.184963 time: 7.79657,value: 0.183236 time: 7.75963,value: 0.19219 time: 7.72782,value: 0.200273 time: 7.69618,value: 0.184963 time: 7.65936,value: 0.170111 time: 7.62771,value: 0.186748 time: 7.59651,value: 0.202291 time: 7.56004,value: 0.196028 time: 7.52827
+#T: 7.86###	new_angle: 0.16	state: 6.93,	3.76,	8.52,	-4.39
+phi buffer: value: 0.15972 time: 7.85986,value: 0.168596 time: 7.8274,value: 0.184963 time: 7.79657,value: 0.183236 time: 7.75963,value: 0.19219 time: 7.72782,value: 0.200273 time: 7.69618,value: 0.184963 time: 7.65936,value: 0.170111 time: 7.62771,value: 0.186748 time: 7.59651,value: 0.202291 time: 7.56004
+#T: 7.90###	new_angle: 0.16	state: 7.10,	3.05,	8.53,	-4.40
+phi buffer: value: 0.160393 time: 7.89611,value: 0.15972 time: 7.85986,value: 0.168596 time: 7.8274,value: 0.184963 time: 7.79657,value: 0.183236 time: 7.75963,value: 0.19219 time: 7.72782,value: 0.200273 time: 7.69618,value: 0.184963 time: 7.65936,value: 0.170111 time: 7.62771,value: 0.186748 time: 7.59651
+#T: 7.93###	new_angle: 0.15	state: 7.44,	1.49,	8.58,	-4.55
+phi buffer: value: 0.153422 time: 7.92803,value: 0.160393 time: 7.89611,value: 0.15972 time: 7.85986,value: 0.168596 time: 7.8274,value: 0.184963 time: 7.79657,value: 0.183236 time: 7.75963,value: 0.19219 time: 7.72782,value: 0.200273 time: 7.69618,value: 0.184963 time: 7.65936,value: 0.170111 time: 7.62771
+#T: 7.96###	new_angle: 0.15	state: 7.44,	1.49,	8.76,	-5.43
+phi buffer: value: 0.152796 time: 7.9594,value: 0.153422 time: 7.92803,value: 0.160393 time: 7.89611,value: 0.15972 time: 7.85986,value: 0.168596 time: 7.8274,value: 0.184963 time: 7.79657,value: 0.183236 time: 7.75963,value: 0.19219 time: 7.72782,value: 0.200273 time: 7.69618,value: 0.184963 time: 7.65936
+#T: 8.00###	new_angle: 0.16	state: 8.74,	-4.90,	8.78,	-5.42
+phi buffer: value: 0.161077 time: 7.99615,value: 0.152796 time: 7.9594,value: 0.153422 time: 7.92803,value: 0.160393 time: 7.89611,value: 0.15972 time: 7.85986,value: 0.168596 time: 7.8274,value: 0.184963 time: 7.79657,value: 0.183236 time: 7.75963,value: 0.19219 time: 7.72782,value: 0.200273 time: 7.69618
+#T: 8.03###	new_angle: 0.17	state: 8.39,	-2.89,	8.81,	-5.54
+phi buffer: value: 0.168596 time: 8.02819,value: 0.161077 time: 7.99615,value: 0.152796 time: 7.9594,value: 0.153422 time: 7.92803,value: 0.160393 time: 7.89611,value: 0.15972 time: 7.85986,value: 0.168596 time: 7.8274,value: 0.184963 time: 7.79657,value: 0.183236 time: 7.75963,value: 0.19219 time: 7.72782
+#T: 8.06###	new_angle: 0.14	state: 7.97,	-0.55,	8.84,	-5.68
+phi buffer: value: 0.142363 time: 8.05943,value: 0.168596 time: 8.02819,value: 0.161077 time: 7.99615,value: 0.152796 time: 7.9594,value: 0.153422 time: 7.92803,value: 0.160393 time: 7.89611,value: 0.15972 time: 7.85986,value: 0.168596 time: 7.8274,value: 0.184963 time: 7.79657,value: 0.183236 time: 7.75963
+#T: 8.10###	new_angle: 0.06	state: 7.97,	-0.55,	8.26,	-2.09
+phi buffer: value: 0.0627856 time: 8.09629,value: 0.142363 time: 8.05943,value: 0.168596 time: 8.02819,value: 0.161077 time: 7.99615,value: 0.152796 time: 7.9594,value: 0.153422 time: 7.92803,value: 0.160393 time: 7.89611,value: 0.15972 time: 7.85986,value: 0.168596 time: 7.8274,value: 0.184963 time: 7.79657
+#T: 8.36###	new_angle: 0.29	state: 8.69,	-2.92,	7.78,	1.34
+phi buffer: value: 0.291305 time: 8.3602,value: 0.0627856 time: 8.09629,value: 0.142363 time: 8.05943,value: 0.168596 time: 8.02819,value: 0.161077 time: 7.99615,value: 0.152796 time: 7.9594,value: 0.153422 time: 7.92803,value: 0.160393 time: 7.89611,value: 0.15972 time: 7.85986,value: 0.168596 time: 7.8274
+#T: 8.40###	new_angle: 0.54	state: 8.89,	-3.81,	7.85,	1.06
+phi buffer: value: 0.541584 time: 8.39627,value: 0.291305 time: 8.3602,value: 0.0627856 time: 8.09629,value: 0.142363 time: 8.05943,value: 0.168596 time: 8.02819,value: 0.161077 time: 7.99615,value: 0.152796 time: 7.9594,value: 0.153422 time: 7.92803,value: 0.160393 time: 7.89611,value: 0.15972 time: 7.85986
+#T: 8.43###	new_angle: 0.79	state: 8.89,	-3.81,	7.92,	0.74
+phi buffer: value: 0.78577 time: 8.42822,value: 0.541584 time: 8.39627,value: 0.291305 time: 8.3602,value: 0.0627856 time: 8.09629,value: 0.142363 time: 8.05943,value: 0.168596 time: 8.02819,value: 0.161077 time: 7.99615,value: 0.152796 time: 7.9594,value: 0.153422 time: 7.92803,value: 0.160393 time: 7.89611
+#T: 8.46###	new_angle: 0.88	state: 8.78,	-3.04,	7.96,	0.63
+phi buffer: value: 0.878561 time: 8.46003,value: 0.78577 time: 8.42822,value: 0.541584 time: 8.39627,value: 0.291305 time: 8.3602,value: 0.0627856 time: 8.09629,value: 0.142363 time: 8.05943,value: 0.168596 time: 8.02819,value: 0.161077 time: 7.99615,value: 0.152796 time: 7.9594,value: 0.153422 time: 7.92803
+#T: 8.50###	new_angle: 0.94	state: 8.41,	-0.71,	7.99,	0.57
+phi buffer: value: 0.943967 time: 8.49641,value: 0.878561 time: 8.46003,value: 0.78577 time: 8.42822,value: 0.541584 time: 8.39627,value: 0.291305 time: 8.3602,value: 0.0627856 time: 8.09629,value: 0.142363 time: 8.05943,value: 0.168596 time: 8.02819,value: 0.161077 time: 7.99615,value: 0.152796 time: 7.9594
+#T: 8.53###	new_angle: 0.94	state: 8.86,	-3.07,	8.02,	0.53
+phi buffer: value: 0.938569 time: 8.52842,value: 0.943967 time: 8.49641,value: 0.878561 time: 8.46003,value: 0.78577 time: 8.42822,value: 0.541584 time: 8.39627,value: 0.291305 time: 8.3602,value: 0.0627856 time: 8.09629,value: 0.142363 time: 8.05943,value: 0.168596 time: 8.02819,value: 0.161077 time: 7.99615
+#T: 8.56###	new_angle: 0.93	state: 9.37,	-5.76,	8.05,	0.51
+phi buffer: value: 0.929902 time: 8.56029,value: 0.938569 time: 8.52842,value: 0.943967 time: 8.49641,value: 0.878561 time: 8.46003,value: 0.78577 time: 8.42822,value: 0.541584 time: 8.39627,value: 0.291305 time: 8.3602,value: 0.0627856 time: 8.09629,value: 0.142363 time: 8.05943,value: 0.168596 time: 8.02819
+#T: 8.60###	new_angle: 0.91	state: 9.37,	-5.76,	8.09,	0.48
+phi buffer: value: 0.91431 time: 8.59645,value: 0.929902 time: 8.56029,value: 0.938569 time: 8.52842,value: 0.943967 time: 8.49641,value: 0.878561 time: 8.46003,value: 0.78577 time: 8.42822,value: 0.541584 time: 8.39627,value: 0.291305 time: 8.3602,value: 0.0627856 time: 8.09629,value: 0.142363 time: 8.05943
+#T: 8.63###	new_angle: 0.92	state: 9.94,	-8.79,	8.14,	0.44
+phi buffer: value: 0.923866 time: 8.6284,value: 0.91431 time: 8.59645,value: 0.929902 time: 8.56029,value: 0.938569 time: 8.52842,value: 0.943967 time: 8.49641,value: 0.878561 time: 8.46003,value: 0.78577 time: 8.42822,value: 0.541584 time: 8.39627,value: 0.291305 time: 8.3602,value: 0.0627856 time: 8.09629
+#T: 8.66###	new_angle: 0.90	state: 8.27,	1.07,	8.23,	0.35
+phi buffer: value: 0.904128 time: 8.6602,value: 0.923866 time: 8.6284,value: 0.91431 time: 8.59645,value: 0.929902 time: 8.56029,value: 0.938569 time: 8.52842,value: 0.943967 time: 8.49641,value: 0.878561 time: 8.46003,value: 0.78577 time: 8.42822,value: 0.541584 time: 8.39627,value: 0.291305 time: 8.3602
+#T: 8.70###	new_angle: 0.88	state: 7.31,	6.78,	8.12,	0.50
+phi buffer: value: 0.883331 time: 8.69659,value: 0.904128 time: 8.6602,value: 0.923866 time: 8.6284,value: 0.91431 time: 8.59645,value: 0.929902 time: 8.56029,value: 0.938569 time: 8.52842,value: 0.943967 time: 8.49641,value: 0.878561 time: 8.46003,value: 0.78577 time: 8.42822,value: 0.541584 time: 8.39627
+#T: 8.73###	new_angle: 0.91	state: 7.31,	6.78,	7.88,	0.78
+phi buffer: value: 0.908988 time: 8.72815,value: 0.883331 time: 8.69659,value: 0.904128 time: 8.6602,value: 0.923866 time: 8.6284,value: 0.91431 time: 8.59645,value: 0.929902 time: 8.56029,value: 0.938569 time: 8.52842,value: 0.943967 time: 8.49641,value: 0.878561 time: 8.46003,value: 0.78577 time: 8.42822
+#T: 8.76###	new_angle: 0.90	state: 7.37,	6.65,	9.89,	-1.40
+phi buffer: value: 0.903716 time: 8.76038,value: 0.908988 time: 8.72815,value: 0.883331 time: 8.69659,value: 0.904128 time: 8.6602,value: 0.923866 time: 8.6284,value: 0.91431 time: 8.59645,value: 0.929902 time: 8.56029,value: 0.938569 time: 8.52842,value: 0.943967 time: 8.49641,value: 0.878561 time: 8.46003
+#T: 8.80###	new_angle: 0.91	state: 7.46,	6.30,	12.41,	-4.10
+phi buffer: value: 0.91431 time: 8.79624,value: 0.903716 time: 8.76038,value: 0.908988 time: 8.72815,value: 0.883331 time: 8.69659,value: 0.904128 time: 8.6602,value: 0.923866 time: 8.6284,value: 0.91431 time: 8.59645,value: 0.929902 time: 8.56029,value: 0.938569 time: 8.52842,value: 0.943967 time: 8.49641
+#T: 8.83###	new_angle: 0.90	state: 7.61,	5.69,	12.40,	-4.08
+phi buffer: value: 0.904548 time: 8.8282,value: 0.91431 time: 8.79624,value: 0.903716 time: 8.76038,value: 0.908988 time: 8.72815,value: 0.883331 time: 8.69659,value: 0.904128 time: 8.6602,value: 0.923866 time: 8.6284,value: 0.91431 time: 8.59645,value: 0.929902 time: 8.56029,value: 0.938569 time: 8.52842
+#T: 8.86###	new_angle: 0.91	state: 7.82,	4.72,	11.68,	-3.26
+phi buffer: value: 0.908988 time: 8.86002,value: 0.904548 time: 8.8282,value: 0.91431 time: 8.79624,value: 0.903716 time: 8.76038,value: 0.908988 time: 8.72815,value: 0.883331 time: 8.69659,value: 0.904128 time: 8.6602,value: 0.923866 time: 8.6284,value: 0.91431 time: 8.59645,value: 0.929902 time: 8.56029
+#T: 8.90###	new_angle: 0.91	state: 7.82,	4.85,	8.96,	-0.24
+phi buffer: value: 0.91431 time: 8.89557,value: 0.908988 time: 8.86002,value: 0.904548 time: 8.8282,value: 0.91431 time: 8.79624,value: 0.903716 time: 8.76038,value: 0.908988 time: 8.72815,value: 0.883331 time: 8.69659,value: 0.904128 time: 8.6602,value: 0.923866 time: 8.6284,value: 0.91431 time: 8.59645
+#T: 8.93###	new_angle: 0.90	state: 7.82,	4.85,	9.24,	-0.51
+phi buffer: value: 0.898495 time: 8.92785,value: 0.91431 time: 8.89557,value: 0.908988 time: 8.86002,value: 0.904548 time: 8.8282,value: 0.91431 time: 8.79624,value: 0.903716 time: 8.76038,value: 0.908988 time: 8.72815,value: 0.883331 time: 8.69659,value: 0.904128 time: 8.6602,value: 0.923866 time: 8.6284
+#T: 8.96###	new_angle: 0.92	state: 7.98,	4.11,	4.30,	4.97
+phi buffer: value: 0.919114 time: 8.95988,value: 0.898495 time: 8.92785,value: 0.91431 time: 8.89557,value: 0.908988 time: 8.86002,value: 0.904548 time: 8.8282,value: 0.91431 time: 8.79624,value: 0.903716 time: 8.76038,value: 0.908988 time: 8.72815,value: 0.883331 time: 8.69659,value: 0.904128 time: 8.6602
+#T: 9.00###	new_angle: 0.89	state: 8.30,	2.62,	6.75,	2.32
+phi buffer: value: 0.894252 time: 8.99641,value: 0.919114 time: 8.95988,value: 0.898495 time: 8.92785,value: 0.91431 time: 8.89557,value: 0.908988 time: 8.86002,value: 0.904548 time: 8.8282,value: 0.91431 time: 8.79624,value: 0.903716 time: 8.76038,value: 0.908988 time: 8.72815,value: 0.883331 time: 8.69659
+#T: 9.03###	new_angle: 0.76	state: 8.99,	-0.80,	9.95,	-1.20
+phi buffer: value: 0.764184 time: 9.02821,value: 0.894252 time: 8.99641,value: 0.919114 time: 8.95988,value: 0.898495 time: 8.92785,value: 0.91431 time: 8.89557,value: 0.908988 time: 8.86002,value: 0.904548 time: 8.8282,value: 0.91431 time: 8.79624,value: 0.903716 time: 8.76038,value: 0.908988 time: 8.72815
+#T: 9.06###	new_angle: 0.49	state: 8.99,	-0.80,	9.32,	-0.48
+phi buffer: value: 0.487764 time: 9.05998,value: 0.764184 time: 9.02821,value: 0.894252 time: 8.99641,value: 0.919114 time: 8.95988,value: 0.898495 time: 8.92785,value: 0.91431 time: 8.89557,value: 0.908988 time: 8.86002,value: 0.904548 time: 8.8282,value: 0.91431 time: 8.79624,value: 0.903716 time: 8.76038
+#T: 9.10###	new_angle: 0.10	state: 8.13,	3.94,	9.16,	-0.28
+phi buffer: value: 0.101554 time: 9.0961,value: 0.487764 time: 9.05998,value: 0.764184 time: 9.02821,value: 0.894252 time: 8.99641,value: 0.919114 time: 8.95988,value: 0.898495 time: 8.92785,value: 0.91431 time: 8.89557,value: 0.908988 time: 8.86002,value: 0.904548 time: 8.8282,value: 0.91431 time: 8.79624
+#T: 9.13###	new_angle: -0.31	state: 7.32,	8.38,	9.10,	-0.19
+phi buffer: value: -0.310044 time: 9.12854,value: 0.101554 time: 9.0961,value: 0.487764 time: 9.05998,value: 0.764184 time: 9.02821,value: 0.894252 time: 8.99641,value: 0.919114 time: 8.95988,value: 0.898495 time: 8.92785,value: 0.91431 time: 8.89557,value: 0.908988 time: 8.86002,value: 0.904548 time: 8.8282
+#T: 9.16###	new_angle: -0.60	state: 7.35,	8.36,	9.09,	-0.16
+phi buffer: value: -0.601973 time: 9.15975,value: -0.310044 time: 9.12854,value: 0.101554 time: 9.0961,value: 0.487764 time: 9.05998,value: 0.764184 time: 9.02821,value: 0.894252 time: 8.99641,value: 0.919114 time: 8.95988,value: 0.898495 time: 8.92785,value: 0.91431 time: 8.89557,value: 0.908988 time: 8.86002
+#T: 9.20###	new_angle: -0.61	state: 9.02,	-0.09,	9.10,	-0.15
+phi buffer: value: -0.612511 time: 9.19572,value: -0.601973 time: 9.15975,value: -0.310044 time: 9.12854,value: 0.101554 time: 9.0961,value: 0.487764 time: 9.05998,value: 0.764184 time: 9.02821,value: 0.894252 time: 8.99641,value: 0.919114 time: 8.95988,value: 0.898495 time: 8.92785,value: 0.91431 time: 8.89557
+#T: 9.23###	new_angle: -0.60	state: 9.02,	-0.09,	9.11,	-0.14
+phi buffer: value: -0.603191 time: 9.22797,value: -0.612511 time: 9.19572,value: -0.601973 time: 9.15975,value: -0.310044 time: 9.12854,value: 0.101554 time: 9.0961,value: 0.487764 time: 9.05998,value: 0.764184 time: 9.02821,value: 0.894252 time: 8.99641,value: 0.919114 time: 8.95988,value: 0.898495 time: 8.92785
+#T: 9.26###	new_angle: -0.65	state: 9.74,	-3.69,	9.12,	-0.14
+phi buffer: value: -0.650705 time: 9.2602,value: -0.603191 time: 9.22797,value: -0.612511 time: 9.19572,value: -0.601973 time: 9.15975,value: -0.310044 time: 9.12854,value: 0.101554 time: 9.0961,value: 0.487764 time: 9.05998,value: 0.764184 time: 9.02821,value: 0.894252 time: 8.99641,value: 0.919114 time: 8.95988
+#T: 9.30###	new_angle: -0.67	state: 10.14,	-5.63,	9.13,	-0.15
+phi buffer: value: -0.667484 time: 9.29621,value: -0.650705 time: 9.2602,value: -0.603191 time: 9.22797,value: -0.612511 time: 9.19572,value: -0.601973 time: 9.15975,value: -0.310044 time: 9.12854,value: 0.101554 time: 9.0961,value: 0.487764 time: 9.05998,value: 0.764184 time: 9.02821,value: 0.894252 time: 8.99641
+#T: 9.33###	new_angle: -0.64	state: 9.86,	-3.94,	9.13,	-0.17
+phi buffer: value: -0.643223 time: 9.32821,value: -0.667484 time: 9.29621,value: -0.650705 time: 9.2602,value: -0.603191 time: 9.22797,value: -0.612511 time: 9.19572,value: -0.601973 time: 9.15975,value: -0.310044 time: 9.12854,value: 0.101554 time: 9.0961,value: 0.487764 time: 9.05998,value: 0.764184 time: 9.02821
+#T: 9.36###	new_angle: -0.63	state: 9.86,	-3.94,	9.13,	-0.20
+phi buffer: value: -0.629775 time: 9.35997,value: -0.643223 time: 9.32821,value: -0.667484 time: 9.29621,value: -0.650705 time: 9.2602,value: -0.603191 time: 9.22797,value: -0.612511 time: 9.19572,value: -0.601973 time: 9.15975,value: -0.310044 time: 9.12854,value: 0.101554 time: 9.0961,value: 0.487764 time: 9.05998
+#T: 9.40###	new_angle: -0.58	state: 9.70,	-2.84,	9.10,	-0.28
+phi buffer: value: -0.583107 time: 9.39644,value: -0.629775 time: 9.35997,value: -0.643223 time: 9.32821,value: -0.667484 time: 9.29621,value: -0.650705 time: 9.2602,value: -0.603191 time: 9.22797,value: -0.612511 time: 9.19572,value: -0.601973 time: 9.15975,value: -0.310044 time: 9.12854,value: 0.101554 time: 9.0961
+#T: 9.43###	new_angle: -0.35	state: 9.72,	-2.72,	9.25,	-0.05
+phi buffer: value: -0.347104 time: 9.4283,value: -0.583107 time: 9.39644,value: -0.629775 time: 9.35997,value: -0.643223 time: 9.32821,value: -0.667484 time: 9.29621,value: -0.650705 time: 9.2602,value: -0.603191 time: 9.22797,value: -0.612511 time: 9.19572,value: -0.601973 time: 9.15975,value: -0.310044 time: 9.12854
+#T: 9.46###	new_angle: 0.06	state: 9.72,	-2.49,	9.47,	0.29
+phi buffer: value: 0.0579386 time: 9.46045,value: -0.347104 time: 9.4283,value: -0.583107 time: 9.39644,value: -0.629775 time: 9.35997,value: -0.643223 time: 9.32821,value: -0.667484 time: 9.29621,value: -0.650705 time: 9.2602,value: -0.603191 time: 9.22797,value: -0.612511 time: 9.19572,value: -0.601973 time: 9.15975
+#T: 9.50###	new_angle: 0.39	state: 9.47,	-0.95,	9.44,	0.22
+phi buffer: value: 0.389978 time: 9.49617,value: 0.0579386 time: 9.46045,value: -0.347104 time: 9.4283,value: -0.583107 time: 9.39644,value: -0.629775 time: 9.35997,value: -0.643223 time: 9.32821,value: -0.667484 time: 9.29621,value: -0.650705 time: 9.2602,value: -0.603191 time: 9.22797,value: -0.612511 time: 9.19572
+#T: 9.53###	new_angle: 0.49	state: 9.01,	1.78,	9.44,	0.19
+phi buffer: value: 0.488493 time: 9.52831,value: 0.389978 time: 9.49617,value: 0.0579386 time: 9.46045,value: -0.347104 time: 9.4283,value: -0.583107 time: 9.39644,value: -0.629775 time: 9.35997,value: -0.643223 time: 9.32821,value: -0.667484 time: 9.29621,value: -0.650705 time: 9.2602,value: -0.603191 time: 9.22797
+#T: 9.56###	new_angle: 0.51	state: 9.01,	1.78,	9.45,	0.18
+phi buffer: value: 0.511889 time: 9.56028,value: 0.488493 time: 9.52831,value: 0.389978 time: 9.49617,value: 0.0579386 time: 9.46045,value: -0.347104 time: 9.4283,value: -0.583107 time: 9.39644,value: -0.629775 time: 9.35997,value: -0.643223 time: 9.32821,value: -0.667484 time: 9.29621,value: -0.650705 time: 9.2602
+#T: 9.60###	new_angle: 0.52	state: 8.09,	7.15,	9.46,	0.18
+phi buffer: value: 0.520861 time: 9.59638,value: 0.511889 time: 9.56028,value: 0.488493 time: 9.52831,value: 0.389978 time: 9.49617,value: 0.0579386 time: 9.46045,value: -0.347104 time: 9.4283,value: -0.583107 time: 9.39644,value: -0.629775 time: 9.35997,value: -0.643223 time: 9.32821,value: -0.667484 time: 9.29621
+#T: 9.63###	new_angle: 0.53	state: 8.28,	6.25,	9.47,	0.18
+phi buffer: value: 0.530714 time: 9.62839,value: 0.520861 time: 9.59638,value: 0.511889 time: 9.56028,value: 0.488493 time: 9.52831,value: 0.389978 time: 9.49617,value: 0.0579386 time: 9.46045,value: -0.347104 time: 9.4283,value: -0.583107 time: 9.39644,value: -0.629775 time: 9.35997,value: -0.643223 time: 9.32821
+#T: 9.66###	new_angle: 0.52	state: 8.76,	3.80,	9.48,	0.19
+phi buffer: value: 0.519115 time: 9.66039,value: 0.530714 time: 9.62839,value: 0.520861 time: 9.59638,value: 0.511889 time: 9.56028,value: 0.488493 time: 9.52831,value: 0.389978 time: 9.49617,value: 0.0579386 time: 9.46045,value: -0.347104 time: 9.4283,value: -0.583107 time: 9.39644,value: -0.629775 time: 9.35997
+#T: 9.70###	new_angle: 0.54	state: 8.76,	3.80,	9.49,	0.20
+phi buffer: value: 0.541584 time: 9.6964,value: 0.519115 time: 9.66039,value: 0.530714 time: 9.62839,value: 0.520861 time: 9.59638,value: 0.511889 time: 9.56028,value: 0.488493 time: 9.52831,value: 0.389978 time: 9.49617,value: 0.0579386 time: 9.46045,value: -0.347104 time: 9.4283,value: -0.583107 time: 9.39644
+ê  tâ  ê  tâ                  : 9.6964,value: 0.519115 time: 9.66039,value: 0.530714 time: 9.62839,value: 0.520861 time: 9.59638,value: 0.511889 time: 9.56028,value: 0.488493 time: 9.52831,value: 0.389978 time: 9.49617,value: 0.0579386 time: 9.46045,value: -0.347104 time: 9.4283,value: -0.583107 time: 9.39644
+#T: 9.73###	new_angle: 0.50	state: 12.93,	-18.34,	9.48,	0.26
+phi buffer: value: 0.502497 time: 9.7284,value: 0.541584 time: 9.6964,value: 0.519115 time: 9.66039,value: 0.530714 time: 9.62839,value: 0.520861 time: 9.59638,value: 0.511889 time: 9.56028,value: 0.488493 time: 9.52831,value: 0.389978 time: 9.49617,value: 0.0579386 time: 9.46045,value: -0.347104 time: 9.4283
+#T: 9.76###	new_angle: 0.49	state: 11.40,	-9.97,	9.41,	0.44
+phi buffer: value: 0.491065 time: 9.76106,value: 0.502497 time: 9.7284,value: 0.541584 time: 9.6964,value: 0.519115 time: 9.66039,value: 0.530714 time: 9.62839,value: 0.520861 time: 9.59638,value: 0.511889 time: 9.56028,value: 0.488493 time: 9.52831,value: 0.389978 time: 9.49617,value: 0.0579386 time: 9.46045
+#T: 9.80###	new_angle: 0.48	state: -9.96,	105.67,	9.22,	0.86
+phi buffer: value: 0.481217 time: 9.79654,value: 0.491065 time: 9.76106,value: 0.502497 time: 9.7284,value: 0.541584 time: 9.6964,value: 0.519115 time: 9.66039,value: 0.530714 time: 9.62839,value: 0.520861 time: 9.59638,value: 0.511889 time: 9.56028,value: 0.488493 time: 9.52831,value: 0.389978 time: 9.49617
+#T: 9.86###	new_angle: 0.44	state: 11.53,	-10.33,	10.78,	-2.18
+phi buffer: value: 0.442462 time: 9.86384,value: 0.481217 time: 9.79654,value: 0.491065 time: 9.76106,value: 0.502497 time: 9.7284,value: 0.541584 time: 9.6964,value: 0.519115 time: 9.66039,value: 0.530714 time: 9.62839,value: 0.520861 time: 9.59638,value: 0.511889 time: 9.56028,value: 0.488493 time: 9.52831
+#T: 9.88###	new_angle: 0.42	state: 12.28,	-14.27,	10.89,	-2.37
+phi buffer: value: 0.419292 time: 9.87983,value: 0.442462 time: 9.86384,value: 0.481217 time: 9.79654,value: 0.491065 time: 9.76106,value: 0.502497 time: 9.7284,value: 0.541584 time: 9.6964,value: 0.519115 time: 9.66039,value: 0.530714 time: 9.62839,value: 0.520861 time: 9.59638,value: 0.511889 time: 9.56028
+#T: 9.90###	new_angle: 0.38	state: 12.28,	-14.27,	10.66,	-1.87
+phi buffer: value: 0.383815 time: 9.89634,value: 0.419292 time: 9.87983,value: 0.442462 time: 9.86384,value: 0.481217 time: 9.79654,value: 0.491065 time: 9.76106,value: 0.502497 time: 9.7284,value: 0.541584 time: 9.6964,value: 0.519115 time: 9.66039,value: 0.530714 time: 9.62839,value: 0.520861 time: 9.59638
+#T: 9.93###	new_angle: 0.41	state: 12.52,	-15.43,	10.64,	-1.81
+phi buffer: value: 0.40756 time: 9.92895,value: 0.383815 time: 9.89634,value: 0.419292 time: 9.87983,value: 0.442462 time: 9.86384,value: 0.481217 time: 9.79654,value: 0.491065 time: 9.76106,value: 0.502497 time: 9.7284,value: 0.541584 time: 9.6964,value: 0.519115 time: 9.66039,value: 0.530714 time: 9.62839
+#T: 9.96###	new_angle: 0.42	state: 12.03,	-12.47,	10.65,	-1.80
+phi buffer: value: 0.415189 time: 9.96015,value: 0.40756 time: 9.92895,value: 0.383815 time: 9.89634,value: 0.419292 time: 9.87983,value: 0.442462 time: 9.86384,value: 0.481217 time: 9.79654,value: 0.491065 time: 9.76106,value: 0.502497 time: 9.7284,value: 0.541584 time: 9.6964,value: 0.519115 time: 9.66039
+#T: 10.00###	new_angle: 0.43	state: 11.53,	-9.54,	10.65,	-1.76
+phi buffer: value: 0.433894 time: 9.9968,value: 0.415189 time: 9.96015,value: 0.40756 time: 9.92895,value: 0.383815 time: 9.89634,value: 0.419292 time: 9.87983,value: 0.442462 time: 9.86384,value: 0.481217 time: 9.79654,value: 0.491065 time: 9.76106,value: 0.502497 time: 9.7284,value: 0.541584 time: 9.6964
+#T: 10.03###	new_angle: 0.45	state: 11.53,	-9.54,	10.62,	-1.66
+phi buffer: value: 0.451878 time: 10.0284,value: 0.433894 time: 9.9968,value: 0.415189 time: 9.96015,value: 0.40756 time: 9.92895,value: 0.383815 time: 9.89634,value: 0.419292 time: 9.87983,value: 0.442462 time: 9.86384,value: 0.481217 time: 9.79654,value: 0.491065 time: 9.76106,value: 0.502497 time: 9.7284
+#T: 10.06###	new_angle: 0.46	state: 11.64,	-9.96,	10.31,	-0.90
+phi buffer: value: 0.458442 time: 10.0604,value: 0.451878 time: 10.0284,value: 0.433894 time: 9.9968,value: 0.415189 time: 9.96015,value: 0.40756 time: 9.92895,value: 0.383815 time: 9.89634,value: 0.419292 time: 9.87983,value: 0.442462 time: 9.86384,value: 0.481217 time: 9.79654,value: 0.491065 time: 9.76106
+#T: 10.10###	new_angle: 0.45	state: 11.64,	-9.75,	9.78,	0.39
+phi buffer: value: 0.45227 time: 10.0963,value: 0.458442 time: 10.0604,value: 0.451878 time: 10.0284,value: 0.433894 time: 9.9968,value: 0.415189 time: 9.96015,value: 0.40756 time: 9.92895,value: 0.383815 time: 9.89634,value: 0.419292 time: 9.87983,value: 0.442462 time: 9.86384,value: 0.481217 time: 9.79654
+#T: 10.13###	new_angle: 0.39	state: 11.47,	-8.66,	9.68,	0.72
+phi buffer: value: 0.386867 time: 10.1283,value: 0.45227 time: 10.0963,value: 0.458442 time: 10.0604,value: 0.451878 time: 10.0284,value: 0.433894 time: 9.9968,value: 0.415189 time: 9.96015,value: 0.40756 time: 9.92895,value: 0.383815 time: 9.89634,value: 0.419292 time: 9.87983,value: 0.442462 time: 9.86384
+#T: 10.16###	new_angle: 0.26	state: 9.34,	3.43,	10.24,	-0.56
+phi buffer: value: 0.263284 time: 10.16,value: 0.386867 time: 10.1283,value: 0.45227 time: 10.0963,value: 0.458442 time: 10.0604,value: 0.451878 time: 10.0284,value: 0.433894 time: 9.9968,value: 0.415189 time: 9.96015,value: 0.40756 time: 9.92895,value: 0.383815 time: 9.89634,value: 0.419292 time: 9.87983
+#T: 10.20###	new_angle: 0.09	state: 9.34,	3.43,	10.24,	-0.53
+phi buffer: value: 0.0938076 time: 10.1965,value: 0.263284 time: 10.16,value: 0.386867 time: 10.1283,value: 0.45227 time: 10.0963,value: 0.458442 time: 10.0604,value: 0.451878 time: 10.0284,value: 0.433894 time: 9.9968,value: 0.415189 time: 9.96015,value: 0.40756 time: 9.92895,value: 0.383815 time: 9.89634
+#T: 10.26###	new_angle: -0.05	state: 9.35,	3.80,	10.24,	-0.49
+phi buffer: value: -0.0506608 time: 10.2603,value: 0.0938076 time: 10.1965,value: 0.263284 time: 10.16,value: 0.386867 time: 10.1283,value: 0.45227 time: 10.0963,value: 0.458442 time: 10.0604,value: 0.451878 time: 10.0284,value: 0.433894 time: 9.9968,value: 0.415189 time: 9.96015,value: 0.40756 time: 9.92895

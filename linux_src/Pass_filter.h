@@ -3,20 +3,16 @@
 
 #include "Filter.h"
 
-
 class Pass_filter : public Filter{
 
-    private:
+    double last_p_update;
+    double last_theta_update;
+    bool first_p = true;
+    bool first_theta = true;
 
     public:
-        Pass_filter(Controller * controller);
-
-        void update_pos(uint16_t pos_uint);
-
-        void update_angle(double phi);
-
-        void recieve_velo(double velo);
-
+    void recieve_p(double p, double u);
+    void recieve_theta(double theta, double u);
 };
 
 #endif

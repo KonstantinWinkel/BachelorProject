@@ -40,7 +40,7 @@ void PID_Controller::update_accel(){
 }
 
 void PID_Controller::update_state(){
-	state[0] = filtered_state[0] - axis == Identifier::X ? 0.173169:0.0873933;
+	state[0] = filtered_state[0] - (axis == Identifier::X ? 0.173169:0.0873933);
 	state[1] = filtered_state[1];
 	state[2] = x_integrator.get_sum();
 	state[3] = filtered_state[2];
@@ -53,10 +53,12 @@ void PID_Controller::recieve_data(){
 	velocity = filtered_state[1];
 	x_integrator.set(filtered_state[0] - axis == Identifier::X ? 0.173169:0.0873933);
 	phi_integrator.set(filtered_state[2]);
+
 	update_state();
 	update_accel();
-	
 	PublishValues();
+
+	print_controller_state();
 	_debug_print_controller_("Controller recieved data");
 	std::this_thread::sleep_for(std::chrono::milliseconds(10));
 }

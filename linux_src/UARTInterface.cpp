@@ -7,10 +7,10 @@
 //required header files
 #include "UARTInterface.h"
 
-UARTInterface::UARTInterface(FileWriter * filewriter,Controller * controller_x, Controller * controller_y, std::string deviceName, int baudRate){
+UARTInterface::UARTInterface(FileWriter * filewriter,Regulator * regulator_x, Regulator * regulator_y, std::string deviceName, int baudRate){
 	UARTInterface::filewriter = filewriter;
-	UARTInterface::controller_x = controller_x;
-	UARTInterface::controller_y = controller_y;
+	UARTInterface::regulator_x = regulator_x;
+	UARTInterface::regulator_x = regulator_y;
 	UARTInterface::baudRate = baudRate;
 	UARTInterface::deviceName = deviceName;
 
@@ -37,8 +37,8 @@ UARTInterface::~UARTInterface(){
 void UARTInterface::PublishValues(){
 	//pass calculated values to the filewriter
 	filewriter->writeUARTInfo(xForce, yForce, xLidarFiltered, yLidarFiltered, xLidarRaw, yLidarRaw);
-	controller_x->recieve_pos(xLidarRaw);
-	controller_y->recieve_pos(yLidarRaw);
+	regulator_x->recieve_pos(xLidarRaw/1000.0);
+	regulator_y->recieve_pos(yLidarRaw/1000.0);
 }
 
 //
@@ -81,11 +81,11 @@ void UARTInterface::ReceiveValues(){
 	serial.close();	
 
 	if(response[19] != '#'){
-		std::cout << "message dropped: " << response << std::endl;
+		//std::cout << "message dropped: " << response << std::endl;
 		return;
 	}
 
-	std::cout << "message accepted: " << response << std::endl;
+	//std::cout << "message accepted: " << response << std::endl;
 
 	char xResponse[8], yResponse[8];
 

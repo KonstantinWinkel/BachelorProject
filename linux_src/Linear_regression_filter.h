@@ -3,34 +3,24 @@
 
 #include "DataPuffer.h"
 #include "Filter.h"
+#include <chrono>
+#include <fstream>
 
 class Linear_regression_filter : public Filter{
 
 private:
     double camera_latency;
     double lidar_latency;
-    double time_now;
     linear_regression lr_x;
-    linear_regression lr_phi;
-    std::chrono::_V2::system_clock::time_point start_time;
-    std::string path;
-    std::fstream file;
-
-double time_since_start(std::chrono::_V2::system_clock::time_point time);
+    linear_regression lr_theta;
 
 public:
 
-Linear_regression_filter(Identifier axis, double camera_latency = 0.133, double lidar_latency = 0.1, size_t size_x = 10, size_t size_phi = 10);
+    Linear_regression_filter(size_t size_x = 10, size_t size_theta = 10, double camera_latency = 0.133, double lidar_latency = 0);
 
-void write_to_file(double new_value, std::array<double,4> state);
+    void recieve_p(double p, double u);
 
-void update_angle();
-
-void update_pos();
-
-void update_pos(uint16_t pos_uint, double u, double state[4]);
-
-void update_angle(double phi, double u, double state[4]);
+    void recieve_theta(double theta, double u);
 };
 
 #endif //LINEAR_REGRESSION_FILTER_H

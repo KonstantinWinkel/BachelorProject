@@ -13,6 +13,7 @@
 #include "PID_Controller.h"
 #include "Weighted_median_filter.h"
 #include "Linear_regression_filter.h"
+#include "KF.h"
 #include "DemoProgram.h"
 
 #include "Pass_filter.h"
@@ -48,8 +49,8 @@ int main(int argc, char** argv){
 	FileWriter filewriter;
 	filewriter_reference = &filewriter;
 
-	Linear_regression_filter filterX(Identifier::X);
-	Linear_regression_filter filterY(Identifier::Y);
+	Kalman_Filter filterX(Identifier::X);
+	Kalman_Filter filterY(Identifier::Y);
 
 	PID_Controller controllerX(&filewriter, &filterX, Identifier::X, is_demo);
 	PID_Controller controllerY(&filewriter, &filterY, Identifier::Y, is_demo);

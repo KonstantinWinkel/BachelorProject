@@ -2,7 +2,6 @@
 #define FILTER_H
 
 #include "DataPuffer.h"
-#include "FileWriter.h"
 
 #include "bachelor_debug.h"
 
@@ -12,33 +11,35 @@
 #define _debug_print_filter_(x)
 #endif
 
-#define toradiants 0.01745329251
-
-using namespace je;
-
 class Filter
 {
 protected:
-    Identifier axis;
-    std::array<double,4> state;
+    double x_hat[4] = {0,0,0,0};
+    std::chrono::_V2::system_clock::time_point beginning_timestamp = std::chrono::high_resolution_clock::now();
 
-public:
-    ~Filter(){};
-
-    inline double to_m(uint16_t lidar_data){
-        return lidar_data/1000.0;
+    virtual double get_time(){
+        return (beginning_timestamp-std::chrono::high_resolution_clock::now()).count()*1000;
     }
 
-    std::string state_str(std::array<double,4> state){
+public:
+    std::string state_str(double x_hat[4]){
         std::stringstream s;
-        for(int i = 0; i<3;i++) s<< state[i] << ',';
-        s<<state[3];
+        s<<x_hat[0];
+        for(int i = 1; i<4;i++) s << ',' << x_hat[i];
         return s.str();
     }
 
-    virtual void update_pos(uint16_t pos,double last_u, double state[4]) = 0;
+    void get_state(double x_hat[4]){
+        for(int i = 0;i<4;i++){
+            x_hat[i] = this->x_hat[i];
+        }
+    }
 
-    virtual void update_angle(double phi,double last_u, double state[4]) = 0;
+    virtual void recieve_p(double p, double last_u) = 0;
+
+    virtual void recieve_theta(double theta, double last_u) = 0;
+
+    //virtual void recieve_y(double p, double theta, double u) = 0;
 };
 
 

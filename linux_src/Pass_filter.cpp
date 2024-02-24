@@ -1,19 +1,27 @@
 #include "Pass_filter.h"
 
-Pass_filter::Pass_filter(Controller * controller){
-    Filter::controller = controller;
+void Pass_filter::recieve_p(double p, double u){
+    double now = get_time();
+    double dt = now-last_p_update;
+    last_p_update = now;
+    if(!first_p)
+        Pass_filter::x_hat[1] = (p - Pass_filter::x_hat[0])/dt;
+    else{
+        Pass_filter::x_hat[1] = 0;
+        first_p = false;
+    }
+    Pass_filter::x_hat[0] = p;
 }
 
-void Pass_filter::update_pos(uint16_t pos_uint, double u, double state[4]){
-    
-}
-
-void Pass_filter::update_angle(double phi, double u, double state[4]){
-    Filter::state[0] = phi;
-    Filter::publish();
-}
-
-void Pass_filter::recieve_velo(double velo){
-    Filter::state[1] = velo;
-    Filter::publish();
+void Pass_filter::recieve_theta(double theta, double u){
+    double now = get_time();
+    double dt = now-last_theta_update;
+    last_theta_update = now;
+    if(!first_theta)
+        Pass_filter::x_hat[3] = (theta - Pass_filter::x_hat[2])/dt;
+    else{
+        Pass_filter::x_hat[3] = 0;
+        first_theta = false;
+    }
+    Pass_filter::x_hat[2] = theta;
 }
